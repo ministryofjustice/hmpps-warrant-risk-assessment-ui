@@ -73,7 +73,11 @@ export default {
       enabled: get('TOKEN_VERIFICATION_ENABLED', 'false') === 'true',
     },
     warrantRiskAssessment: {
-      url: get('WARRANT_RISK_ASSESSMENT_API', 'http://localhost:9091/warrant-risk-assessment-api', requiredInProduction),
+      url: get(
+        'WARRANT_RISK_ASSESSMENT_API',
+        'http://localhost:9091/warrant-risk-assessment-api',
+        requiredInProduction,
+      ),
       healthPath: '/health/ping',
       timeout: {
         response: Number(get('WARRANT_RISK_ASSESSMENT_API_TIMEOUT_RESPONSE', 5000)),

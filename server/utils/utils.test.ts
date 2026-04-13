@@ -9,7 +9,7 @@ import {
 } from './utils'
 import { ErrorMessages } from '../data/uiModels'
 import { DeliusAddress, Name } from '../data/ndeliusIntegrationApiClient'
-import {WarrantRiskAssessment, WarrantRiskAssessmentAddress} from '../data/warrantRiskAssessmentApiClient'
+import { WarrantRiskAssessmentAddress } from '../data/warrantRiskAssessmentApiClient'
 
 describe('convert to title case', () => {
   it.each([
@@ -153,7 +153,7 @@ describe('formatTitleAndFullName', () => {
     ['Missing surname', 'Mrs', { forename: 'Jane', middleName: 'Middle' }, 'Mrs Jane Middle'],
     ['All name fields missing', 'Mr', {}, 'Mr'],
     ['Empty title', '', { forename: 'Jane', middleName: 'Middle', surname: 'Doe' }, 'Jane Middle Doe'],
-    ['Title and forename only', 'Dr', { forename: 'John' }, 'Dr John'],
+    ['Title and WarrantRiskAssessment only', 'Dr', { forename: 'John' }, 'Dr John'],
   ])('%s', (_: string, title: string, name: Name, expected: string) => {
     expect(formatTitleAndFullName(title, name)).toEqual(expected)
   })

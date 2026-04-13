@@ -4,5 +4,4 @@ context('Basic Details page', () => {
     cy.get('#page-title').should('contain.text', 'Warrant Risk Assessment - Basic Details')
     cy.get('#crn').should('contain.text', 'X000001')
   })
-
 })

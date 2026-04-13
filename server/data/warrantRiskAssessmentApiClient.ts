@@ -18,7 +18,11 @@ export default class WarrantRiskAssessmentApiClient extends RestClient {
     )
   }
 
-  async updateWarrantRiskAssessment(id: string, warrantRiskAssessment: WarrantRiskAssessment, username: string): Promise<WarrantRiskAssessment> {
+  async updateWarrantRiskAssessment(
+    id: string,
+    warrantRiskAssessment: WarrantRiskAssessment,
+    username: string,
+  ): Promise<WarrantRiskAssessment> {
     return this.put(
       {
         path: `/warrant-risk-assessment/${id}`,
@@ -46,7 +50,6 @@ export default class WarrantRiskAssessmentApiClient extends RestClient {
       asSystem(username),
     )
   }
-
 }
 
 export interface WarrantRiskAssessment {
