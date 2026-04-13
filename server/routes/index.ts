@@ -19,7 +19,7 @@ export default function routes({ auditService, hmppsAuthClient, commonUtils }: S
     )
   })
 
-  basicDetailsRoutes(router, auditService, hmppsAuthClient, commonUtils)
+  basicDetailsRoutes(router, auditService, hmppsAuthClient)
 
   return router
 }
