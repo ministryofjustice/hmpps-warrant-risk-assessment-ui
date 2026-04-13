@@ -3,9 +3,10 @@ import path from 'path'
 import nunjucks from 'nunjucks'
 import express from 'express'
 import fs from 'fs'
-import { initialiseName } from './utils'
+import { initialiseName, toDayMonthYearDateFormat } from './utils'
 import config from '../config'
 import logger from '../../logger'
+import { toUserDate, toUserDateTimeFromString } from './dateUtils'
 
 export default function nunjucksSetup(app: express.Express): void {
   app.set('view engine', 'njk')
@@ -38,6 +39,9 @@ export default function nunjucksSetup(app: express.Express): void {
     },
   )
 
+  njkEnv.addFilter('dayMonthYear', toDayMonthYearDateFormat)
   njkEnv.addFilter('initialiseName', initialiseName)
   njkEnv.addFilter('assetMap', (url: string) => assetManifest[url] || url)
+  njkEnv.addFilter('toUserDate', toUserDate)
+  njkEnv.addFilter('toUserDateTimeFromString', toUserDateTimeFromString)
 }

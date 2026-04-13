@@ -1,0 +1,40 @@
+<nav class="moj-side-navigation" aria-label="Side navigation">
+    <ul class="moj-side-navigation__list">
+
+        <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "basic-details" }}">
+            <a id="nav-basic-details" href="/basic-details/{{ warrantRiskAssessmentId }}" aria-current="location">Basic details</a>
+        </li>
+
+        <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "risk-assessment" }}">
+            {% if warrantRiskAssessment.basicDetailsSaved %}
+                <a id="nav-risk-assessment" href="/risk-assessment/{{ warrantRiskAssessmentId }}" aria-current="location">Risk Assessment</a>
+            {% else %}
+                <a id="nav-risk-assessment-disabled" href="#" aria-current="location" class=disabled-nav>Risk Assessment</a>
+            {% endif %}
+        </li>
+
+        <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "risk-summary" }}">
+            {% if warrantRiskAssessment.riskAssessmentSaved %}
+                <a id="nav-risk-summary" href="/risk-summary/{{ warrantRiskAssessmentId }}" aria-current="location">Risk Summary</a>
+            {% else %}
+                <a id="nav-risk-summary-disabled" href="#" aria-current="location" class=disabled-nav>Risk Summary</a>
+            {% endif %}
+        </li>
+
+        <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "warrant-execution" }}">
+            {% if warrantRiskAssessment.riskSummarySaved %}
+                <a id="nav-warrant-execution" href="/warrant-execution/{{ warrantRiskAssessmentId }}" aria-current="location">Warrant Execution and sign off</a>
+            {% else %}
+                <a id="nav-warrant-execution-disabled" href="#" aria-current="location" class=disabled-nav>Warrant Execution and sign off</a>
+            {% endif %}
+        </li>
+
+      <li class="moj-side-navigation__item {{ "moj-side-navigation__item--active" if currentPage == "check-your-answers" }}">
+        {% if warrantRiskAssessment.basicDetailsSaved %}
+          <a id="nav-check-your-answers" href="/check-your-answers/{{ warrantRiskAssessmentId }}" aria-current="location">Check your answers</a>
+        {% else %}
+          <a id="nav-check-your-answers-disabled" href="#" class="disabled-nav" aria-current="location">Check your answers</a>
+        {% endif %}
+      </li>
+    </ul>
+</nav>

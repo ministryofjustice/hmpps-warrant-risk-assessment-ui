@@ -9,8 +9,15 @@ generic-service:
     INGRESS_URL: "https://warrant-risk-assessment-ui.hmpps.service.justice.gov.uk"
     HMPPS_AUTH_URL: "https://sign-in.hmpps.service.justice.gov.uk/auth"
     TOKEN_VERIFICATION_API_URL: "https://token-verification-api.prison.service.justice.gov.uk"
-    EXAMPLE_API_URL: 'https://template-kotlin.hmpps.service.justice.gov.uk'
-    AUDIT_ENABLED: "false"
+    NDELIUS_DEEPLINK_URL: "https://ndelius.probation.service.justice.gov.uk/NDelius-war/delius/JSP/deeplink.xhtml"
+    WARRANT_RISK_ASSESSMENT_URL: 'https://warrant-risk-assesssment-api.hmpps.service.justice.gov.uk'
+    NDELIUS_INTEGRATION_URL: "https://warrant-risk-assessment-and-delius.hmpps.service.justice.gov.uk"
+
+  allowlist:
+    groups:
+      - digital_staff_and_mojo
+      - unilink_staff
+      - probation # for production staff
 
 generic-prometheus-alerts:
   alertSeverity: hmpps-warrant-risk-assessment-notifications
