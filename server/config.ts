@@ -74,7 +74,7 @@ export default {
     },
     warrantRiskAssessment: {
       url: get(
-        'WARRANT_RISK_ASSESSMENT_API',
+        'WARRANT_RISK_ASSESSMENT_API_URL',
         'http://localhost:9091/warrant-risk-assessment-api',
         requiredInProduction,
       ),

@@ -10,7 +10,7 @@ generic-service:
     HMPPS_AUTH_URL: "https://sign-in.hmpps.service.justice.gov.uk/auth"
     TOKEN_VERIFICATION_API_URL: "https://token-verification-api.prison.service.justice.gov.uk"
     NDELIUS_DEEPLINK_URL: "https://ndelius.probation.service.justice.gov.uk/NDelius-war/delius/JSP/deeplink.xhtml"
-    WARRANT_RISK_ASSESSMENT_URL: 'https://warrant-risk-assesssment-api.hmpps.service.justice.gov.uk'
+    WARRANT_RISK_ASSESSMENT_API_URL: 'https://warrant-risk-assesssment-api.hmpps.service.justice.gov.uk'
     NDELIUS_INTEGRATION_URL: "https://warrant-risk-assessment-and-delius.hmpps.service.justice.gov.uk"
 
   allowlist:
