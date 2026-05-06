@@ -4,11 +4,13 @@ import AuditService, { Page } from '../services/auditService'
 
 import WarrantRiskAssessmentApiClient, { WarrantRiskAssessment } from '../data/warrantRiskAssessmentApiClient'
 import { BasicDetails } from '../data/ndeliusIntegrationApiClient'
+import CommonUtils from '../services/commonUtils'
 
 export default function basicDetailsRoutes(
   router: Router,
   auditService: AuditService,
   authenticationClient: AuthenticationClient,
+  commonUtils: CommonUtils,
 ): Router {
   const currentPage = 'basic-details'
 
@@ -24,6 +26,8 @@ export default function basicDetailsRoutes(
       warrantRiskAssessmentId,
       res.locals.user.username,
     )
+
+    if (await commonUtils.redirectRequired(warrantRiskAssessment, warrantRiskAssessmentId, res, authenticationClient)) return
 
     res.render('pages/basic-details', {
       warrantRiskAssessment,

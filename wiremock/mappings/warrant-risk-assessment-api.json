@@ -34,6 +34,41 @@
         },
         "transformers": ["response-template"]
       }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/00000000-0000-0000-0000-600000000007",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "00000000-0000-0000-0000-600000000007",
+          "crn": "X600007",
+          "titleAndFullName": "Mr Grayson Vale",
+          "postalAddress": {
+            "id": "10000001",
+            "addressId": "60000001",
+            "status": "active",
+            "officeDescription": "Descriptive Name",
+            "buildingName": "Descriptive Tower",
+            "buildingNumber": "33",
+            "streetName": "Descriptive Street",
+            "townCity": "Descriptive Town",
+            "district": "Descriptive District",
+            "county": "Descriptive County",
+            "postcode": "DE5 41BE"
+          },
+          "basicDetailsSaved": true,
+          "signAndSendSaved": true,
+          "contactSaved": true,
+          "completedDate": "2025-01-01T12:34:56"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
     }
   ]
 }
