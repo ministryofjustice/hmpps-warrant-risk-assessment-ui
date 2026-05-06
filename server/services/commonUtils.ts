@@ -4,7 +4,6 @@ import { WarrantRiskAssessment } from '../data/warrantRiskAssessmentApiClient'
 import NDeliusIntegrationApiClient, { LimitedAccessCheck } from '../data/ndeliusIntegrationApiClient'
 
 export default class CommonUtils {
-  constructor() {}
 
   async redirectRequired(
     warrantRiskAssessment: WarrantRiskAssessment,

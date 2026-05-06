@@ -8,11 +8,11 @@ export default function reportCompletedRoutes(
   auditService: AuditService,
   authenticationClient: AuthenticationClient,
 ): Router {
-  router.get('/report-completed/:id', async (req, res, next) => {
+  router.get('/report-completed/:id', async (req, res) => {
     await auditService.logPageView(Page.REPORT_COMPLETED, { who: res.locals.user.username, correlationId: req.id })
     const warrantRiskAssessmentId: string = req.params.id
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
-    const warrantRisk = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(req.params.id as string, res.locals.user.username)
+    const warrantRisk = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(req.params.id, res.locals.user.username)
 
     res.render('pages/report-completed', {
       warrantRisk,
