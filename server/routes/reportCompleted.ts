@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
-import WarrantRiskAssessmentApiClient from "../data/warrantRiskAssessmentApiClient";
+import WarrantRiskAssessmentApiClient from '../data/warrantRiskAssessmentApiClient'
 
 export default function reportCompletedRoutes(
   router: Router,
@@ -12,7 +12,10 @@ export default function reportCompletedRoutes(
     await auditService.logPageView(Page.REPORT_COMPLETED, { who: res.locals.user.username, correlationId: req.id })
     const warrantRiskAssessmentId: string = req.params.id
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
-    const warrantRisk = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(req.params.id, res.locals.user.username)
+    const warrantRisk = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(
+      req.params.id,
+      res.locals.user.username,
+    )
 
     res.render('pages/report-completed', {
       warrantRisk,

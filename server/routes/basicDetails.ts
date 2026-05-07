@@ -27,7 +27,8 @@ export default function basicDetailsRoutes(
       res.locals.user.username,
     )
 
-    if (await commonUtils.redirectRequired(warrantRiskAssessment, warrantRiskAssessmentId, res, authenticationClient)) return
+    if (await commonUtils.redirectRequired(warrantRiskAssessment, warrantRiskAssessmentId, res, authenticationClient))
+      return
 
     res.render('pages/basic-details', {
       warrantRiskAssessment,
