@@ -45,13 +45,6 @@ export function toUserTime(str: string): string {
   return ''
 }
 
-export function toUserTimeFromDateTime(str: string): string {
-  if (str) {
-    return DateTimeFormatter.ofPattern('HH:mm').format(DateTimeFormatter.ISO_LOCAL_DATE_TIME.parse(str))
-  }
-  return ''
-}
-
 export function toUserDateFromDateTime(str: string): string {
   if (str) {
     return DateTimeFormatter.ofPattern('d/M/yyyy').format(DateTimeFormatter.ISO_LOCAL_DATE_TIME.parse(str))
