@@ -53,6 +53,22 @@
     },
     {
       "request": {
+        "urlPattern": "/ndelius/users/USER1/access/(.*?)",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "userExcluded": false,
+          "userRestricted": false
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
         "urlPattern": "/ndelius/users/(.*?)/access/X100501",
         "method": "GET"
       },

@@ -2,10 +2,10 @@ import { Router } from 'express'
 import type { Services } from '../services'
 import basicDetailsRoutes from './basicDetails'
 import reportCompletedRoutes from './reportCompleted'
-import checkYourAnswersRoutes from "./checkYourAnswers";
-import riskAssessmentRoutes from "./riskAssessment";
-import riskSummaryRoutes from "./riskSummary";
-import warrantExecutionRoutes from "./warrantExecution";
+import checkYourAnswersRoutes from './checkYourAnswers'
+import riskAssessmentRoutes from './riskAssessment'
+import riskSummaryRoutes from './riskSummary'
+import warrantExecutionRoutes from './warrantExecution'
 
 export default function routes({ auditService, hmppsAuthClient, commonUtils }: Services): Router {
   const router = Router()
