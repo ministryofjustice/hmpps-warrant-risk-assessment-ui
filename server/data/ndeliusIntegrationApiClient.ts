@@ -47,6 +47,12 @@ export interface BasicDetails {
   addresses: DeliusAddress[]
   dateOfBirth: string
   nomsNumber: string
+  lastHomeVisitDate: string
+  nationalInsuranceNumber: string
+  emailAddress: string
+  mobileNumber: string
+  telephoneNumber: string
+  employerAddresses: EmployerAddress
 }
 
 export interface DeliusAddress {
@@ -61,6 +67,21 @@ export interface DeliusAddress {
   county: string
   postcode: string
   startDate: string
+}
+
+export interface EmployerAddress {
+  id: number
+  officeDescription: string
+  employerName: Name
+  status: string
+  buildingName: string
+  buildingNumber: string
+  streetName: string
+  townCity: string
+  district: string
+  county: string
+  postcode: string
+  telephoneNumber: string
 }
 
 export interface SignAndSendDetails {

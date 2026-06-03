@@ -1,0 +1,30 @@
+{%- from "moj/components/alert/macro.njk" import mojAlert -%}
+
+{% if warrantRiskAssessment.reviewRequiredDate != null %}
+
+  {% set messageHtml %}
+    {% if warrantRiskAssessment.reviewEvent == 'MERGE' %}
+      A Merge occurred on {{ warrantRiskAssessment.reviewRequiredDate | toUserDate() }} in NDelius and important details have changed. This form should be reviewed before proceeding. Please confirm all information or discard this form.
+    {% endif %}
+    {% if warrantRiskAssessment.reviewEvent == 'UNMERGE' %}
+      An Unmerge occurred on {{ warrantRiskAssessment.reviewRequiredDate | toUserDate() }} in NDelius and important details have changed. This form should be reviewed before proceeding. Please confirm all information or discard this form.
+    {% endif %}
+    {% if warrantRiskAssessment.reviewEvent == 'EVENT_MOVE' %}
+      A Move Event occurred on {{ warrantRiskAssessment.reviewRequiredDate | toUserDate() }} in NDelius and important details have changed. This form should be reviewed before proceeding. Please confirm all information or discard this form.
+    {% endif %}
+    {% if warrantRiskAssessment.reviewEvent == 'MOVE_NSI' %}
+      A Move NSI Event occurred on {{ warrantRiskAssessment.reviewRequiredDate | toUserDate() }} in NDelius and important details have changed. This form should be reviewed before proceeding. Please confirm all information or discard this form.
+    {% endif %}
+  {% endset -%}
+
+  {{ mojAlert({
+    variant: "warning",
+    title: "Review Required",
+    showTitleAsHeading: true,
+    dismissible: false,
+    html: messageHtml,
+    attributes: {
+      id: "reviewAlert"
+    }
+  }) }}
+{% endif %}

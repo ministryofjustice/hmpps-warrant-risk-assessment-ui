@@ -6,8 +6,18 @@
 {% block content %}
 
   {% from "moj/components/side-navigation/macro.njk" import mojSideNavigation %}
+  {% from "govuk/components/button/macro.njk" import govukButton %}
 
   <form method="post">
+
+    {% set errorList =[
+      { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None
+    ] | reject("undefined") %}
+
+    {% if errorMessages | length > 0 %}
+      {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+      {{ govukErrorSummary({ titleText: "There is a problem", errorList: errorList }) }}
+    {% endif %}
 
     <input type="hidden" name="_csrf" value="{{ csrfToken }}">
 
@@ -16,11 +26,164 @@
         {% include "pages/side-nav.njk" %}
       </div>
       <div class="govuk-grid-column-two-thirds">
+        {% include "partials/review-required.njk" %}
+        {% if not showEmbeddedError %}
 
-        <h1 id="page-title" class="govuk-heading-l">Warrant Risk Assessment - Basic Details</h1>
+          <h1 id="page-title" class="govuk-heading-l">Warrant Risk Assessment - Basic Details</h1>
 
-        <p id="crn">{{ warrantRiskAssessment.crn }}</p>
+          <h2 class="govuk-heading-m">Title and Full Name</h2>
+          <p id="name">{{ titleAndFullName }}</p>
 
+          <h2 class="govuk-heading-m">Date of Birth</h2>
+          <p id="date-of-birth">{{ formattedDob }}</p>
+
+          <h2 class="govuk-heading-m">Main Address</h2>
+          {% if defaultAddress %}
+            <p id="address">
+              {% if defaultAddress.buildingName %} {{ defaultAddress.buildingName }}
+                <br />{% endif %}
+              {% if defaultAddress.buildingName or defaultAddress.streetName %} {{ defaultAddress.buildingNumber }} {{ defaultAddress.streetName }}
+                <br />{% endif %}
+              {% if defaultAddress.district %} {{ defaultAddress.district }}
+                <br />{% endif %}
+              {% if defaultAddress.townCity %} {{ defaultAddress.townCity }}
+                <br />{% endif %}
+              {% if defaultAddress.county %} {{ defaultAddress.county }}
+                <br />{% endif %}
+              {% if defaultAddress.postcode %} {{ defaultAddress.postcode }}
+                <br />{% endif %}
+            </p>
+          {% else %}
+            <p id="no-address-found"> No Postal Address found in National Delius <br />
+              In order to complete a Warrant Risk Assessment you must add an address to Delius <br />
+              Please use the below link to add an address <br />
+              <a href="{{ addAddressDeeplink }}" id="add-address--deeplink"
+                 target="_blank" class="govuk-link">
+                Click this hyperlink to open a new tab to add an address to Delius
+              </a><br />
+              Once this is completed, click the Refresh from Delius button </p>
+          {% endif %}
+
+          <h2 class="govuk-heading-m">Date of Last Home Visit</h2>
+          <p id="date-of-home-visit">{{ formattedHomeVisit }}</p>
+
+          <h2 class="govuk-heading-m">Any other known addresses</h2>
+          {% for address in otherAddresses %}
+            <p id="other-address-{{ loop.index }}">
+              {% if address.buildingName %} {{ address.buildingName }}
+                <br />{% endif %}
+              {% if address.buildingName or address.streetName %} {{ address.buildingNumber }} {{ address.streetName }}
+                <br />{% endif %}
+              {% if address.district %} {{ address.district }}
+                <br />{% endif %}
+              {% if address.townCity %} {{ address.townCity }}
+                <br />{% endif %}
+              {% if address.county %} {{ address.county }}
+                <br />{% endif %}
+              {% if address.postcode %} {{ address.postcode }}
+                <br />{% endif %}
+            </p>
+          {% endfor %}
+
+          <h2 class="govuk-heading-m">Phone Number</h2>
+          <p id="phone-number">{{ telephoneNumber }}</p>
+
+          <h2 class="govuk-heading-m">Mobile Number</h2>
+          <p id="mobile-number">{{ mobileNumber }}</p>
+
+          <h2 class="govuk-heading-m">Email Address</h2>
+          <p id="email-address">{{ emailAddress }}</p>
+
+          <h2 class="govuk-heading-m">Current Employer</h2>
+          {% if employerAddresses %}
+            <p id="employer-address">
+              {{ employerName }} <br />
+              {% if employerAddresses.buildingName %} {{ employerAddresses.buildingName }}
+                <br />{% endif %}
+              {% if employerAddresses.buildingName or employerAddresses.streetName %} {{ employerAddresses.buildingNumber }} {{ employerAddresses.streetName }}
+                <br />{% endif %}
+              {% if employerAddresses.district %} {{ employerAddresses.district }}
+                <br />{% endif %}
+              {% if employerAddresses.townCity %} {{ employerAddresses.townCity }}
+                <br />{% endif %}
+              {% if employerAddresses.county %} {{ employerAddresses.county }}
+                <br />{% endif %}
+              {% if employerAddresses.postcode %} {{ employerAddresses.postcode }}
+                <br />{% endif %}
+              {{ employerAddresses.telephoneNumber }}
+            </p>
+          {% endif %}
+
+          <h2 class="govuk-heading-m">DWP Signing on office</h2>
+          {% if warrantRiskAssessment.signOnOffice %}
+            <p id="dwp-address">
+              {% if warrantRiskAssessment.signOnOffice.buildingName %} {{ warrantRiskAssessment.signOnOffice.buildingName }}
+                <br />{% endif %}
+              {% if warrantRiskAssessment.signOnOffice.buildingName or warrantRiskAssessment.signOnOffice.streetName %} {{ warrantRiskAssessment.signOnOffice.buildingNumber }} {{ warrantRiskAssessment.signOnOffice.streetName }}
+                <br />{% endif %}
+              {% if warrantRiskAssessment.signOnOffice.district %} {{ warrantRiskAssessment.signOnOffice.district }}
+                <br />{% endif %}
+              {% if warrantRiskAssessment.signOnOffice.townCity %} {{ warrantRiskAssessment.signOnOffice.townCity }}
+                <br />{% endif %}
+              {% if warrantRiskAssessment.signOnOffice.county %} {{ warrantRiskAssessment.signOnOffice.county }}
+                <br />{% endif %}
+              {% if warrantRiskAssessment.signOnOffice.postcode %} {{ warrantRiskAssessment.signOnOffice.postcode }}
+                <br />{% endif %}
+            </p>
+            {{ govukButton({
+              text: "Update Address",
+              href: '/add-dwp-address/'+warrantRiskAssessmentId,
+              preventDoubleClick: "true",
+              attributes: {
+                id: "update-address-button"
+              }
+            }) }}
+            {% else %}
+              {{ govukButton({
+                text: "Add Address",
+                href: '/add-dwp-address/'+warrantRiskAssessmentId,
+                preventDoubleClick: "true",
+                attributes: {
+                  id: "add-address-button"
+                }
+              }) }}
+          {% endif %}
+
+          <h2 class="govuk-heading-m">National Insurance Number</h2>
+          <p id="ni-number">{{ nationalInsuranceNumber }}</p>
+
+          <div class="moj-button-group">
+            {{ govukButton({
+              text: "Continue",
+              preventDoubleClick: "true",
+              type: "submit",
+              attributes: {
+                id: "continue-button"
+              }
+            }) }}
+            {{ govukButton({
+              text: "Save Progress and Close",
+              type: "submit",
+              name: "action",
+              value: "saveProgressAndClose",
+              classes: "govuk-button--secondary",
+              attributes: {
+                id: "close-button"
+              }
+            }) }}
+            {{ govukButton({
+              text: "Refresh from Delius",
+              preventDoubleClick: "true",
+              type: "submit",
+              name: "action",
+              value: "refreshFromNdelius",
+              classes: "govuk-button--secondary",
+              attributes: {
+                id: "refresh-from-ndelius--button"
+              }
+            }) }}
+          </div>
+        {% endif %}
       </div>
     </div>
 

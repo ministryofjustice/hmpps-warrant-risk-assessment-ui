@@ -105,7 +105,7 @@ export function toWarrantRiskAssessmentAddress(deliusAddress: DeliusAddress): Wa
     return null
   }
   return {
-    addressId: deliusAddress.id,
+    deliusAddressId: deliusAddress.id,
     status: deliusAddress.status,
     officeDescription: deliusAddress.officeDescription,
     buildingName: deliusAddress.buildingName,
@@ -153,4 +153,14 @@ export function removeDeliusAddressFromDeliusAddressList(
     return deliusAddressList.filter(obj => obj.id !== defaultAddress.id)
   }
   return deliusAddressList
+}
+
+export function findMainOrPostalAddressInAddressList(addressList: Array<DeliusAddress>): DeliusAddress {
+  if (!Array.isArray(addressList) || addressList.length === 0) {
+    return null
+  }
+
+  addressList.sort((a, b) => a.startDate && a.startDate.localeCompare(b.startDate)).reverse()
+
+  return addressList.find(a => a.status === 'Postal') ?? addressList.find(a => a.status === 'Main') ?? null
 }
