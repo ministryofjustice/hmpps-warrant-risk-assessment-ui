@@ -60,24 +60,47 @@
               "postcode": "MA30 3IN"
             }
           ],
-          "employerAddresses":  {
-            "id": 5,
-            "officeDescription": null,
-            "employerName": {
-              "forename": "Not",
-              "middleName": "Nice",
-              "surname": "Officer"
+          "employers": [
+            {
+              "employerName": {
+                "forename": "Billy",
+                "middleName": "The",
+                "surname": "Kid"
+              },
+              "employerAddress":
+                {
+                  "id": 1,
+                  "status": "Postal",
+                  "buildingName": null,
+                  "buildingNumber": "281",
+                  "streetName": "Postal Default Street",
+                  "townCity": "Postinton",
+                  "district": "Postrict",
+                  "county": "County Post",
+                  "postcode": "NE30 3ZZ"
+                }
+
             },
-            "status": "Main",
-            "buildingName": null,
-            "buildingNumber": "19",
-            "streetName": "Employer Street",
-            "townCity": "Employer City",
-            "district": "Emptrict",
-            "county": "Emplounty",
-            "postcode": "EM07 YER",
-            "telephoneNumber": "01332453294"
-          }
+            {
+              "employerName": {
+                "forename": "John",
+                "middleName": "Dun",
+                "surname": "Dee"
+              },
+              "employerAddress":
+                {
+                  "id": 2,
+                  "status": "Main",
+                  "buildingName": "MainName",
+                  "buildingNumber": "396",
+                  "streetName": "Main Default Street",
+                  "townCity": "Test City",
+                  "district": "Test District",
+                  "county": "County County",
+                  "postcode": "NE31 3YY"
+                }
+            }
+          ]
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"

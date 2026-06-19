@@ -52,7 +52,12 @@ export interface BasicDetails {
   emailAddress: string
   mobileNumber: string
   telephoneNumber: string
-  employerAddresses: EmployerAddress
+  employers: Employer[]
+}
+
+export interface Employer {
+  employerName: Name
+  employerAddress: DeliusAddress
 }
 
 export interface DeliusAddress {

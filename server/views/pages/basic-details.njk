@@ -95,23 +95,29 @@
           <p id="email-address">{{ emailAddress }}</p>
 
           <h2 class="govuk-heading-m">Current Employer</h2>
-          {% if employerAddresses %}
-            <p id="employer-address">
-              {{ employerName }} <br />
-              {% if employerAddresses.buildingName %} {{ employerAddresses.buildingName }}
-                <br />{% endif %}
-              {% if employerAddresses.buildingName or employerAddresses.streetName %} {{ employerAddresses.buildingNumber }} {{ employerAddresses.streetName }}
-                <br />{% endif %}
-              {% if employerAddresses.district %} {{ employerAddresses.district }}
-                <br />{% endif %}
-              {% if employerAddresses.townCity %} {{ employerAddresses.townCity }}
-                <br />{% endif %}
-              {% if employerAddresses.county %} {{ employerAddresses.county }}
-                <br />{% endif %}
-              {% if employerAddresses.postcode %} {{ employerAddresses.postcode }}
-                <br />{% endif %}
-              {{ employerAddresses.telephoneNumber }}
-            </p>
+          {% if employers | length > 0 %}
+            {% for employer in employers %}
+              <p id="employer-address-{{ loop.index }}">
+                {{ employer.employerName.forename }} {{ employer.employerName.middleName }} {{ employer.employerName.surname }}
+                <br />
+                {% if employer.employerAddress.buildingName %} {{ employer.employerAddress.buildingName }}
+                  <br />{% endif %}
+                {% if employer.employerAddress.buildingName or employer.employerAddress.streetName %} {{ employer.employerAddress.buildingNumber }} {{ employer.employerAddress.streetName }}
+                  <br />{% endif %}
+                {% if employer.employerAddress.district %} {{ employer.employerAddress.district }}
+                  <br />{% endif %}
+                {% if employer.employerAddress.townCity %} {{ employer.employerAddress.townCity }}
+                  <br />{% endif %}
+                {% if employer.employerAddress.county %} {{ employer.employerAddress.county }}
+                  <br />{% endif %}
+                {% if employer.employerAddress.postcode %} {{ employer.employerAddress.postcode }}
+                  {% endif %}
+              </p>
+              {% if not loop.last %}
+                <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+              {% endif %}
+
+            {% endfor %}
           {% endif %}
 
           <h2 class="govuk-heading-m">DWP Signing on office</h2>

@@ -30,6 +30,7 @@ export default function basicDetailsRoutes(
     const warrantRiskAssessmentId: string = req.params.id
     let warrantRiskAssessment: WarrantRiskAssessment = null
     let basicDetails: BasicDetails = null
+    const callingScreen: string = req.query.returnTo as string
 
     try {
       warrantRiskAssessment = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(
@@ -104,8 +105,7 @@ export default function basicDetailsRoutes(
     const defaultAddress: DeliusAddress = findMainOrPostalAddressInAddressList(basicDetails.addresses)
     const otherAddresses: DeliusAddress[] = basicDetails.addresses.filter(a => a.id !== defaultAddress.id)
     const titleAndFullName: string = formatTitleAndFullName(basicDetails.title, basicDetails.name)
-    const employerName: string = formatTitleAndFullName(null, basicDetails.employerAddresses?.employerName)
-    const { mobileNumber, telephoneNumber, emailAddress, nationalInsuranceNumber, employerAddresses } = basicDetails
+    const { mobileNumber, telephoneNumber, emailAddress, nationalInsuranceNumber, employers } = basicDetails
     const addAddressDeeplink = `${config.ndeliusDeeplink.url}?component=AddressandAccommodation&CRN=${warrantRiskAssessment.crn}`
 
     if (await commonUtils.redirectRequired(warrantRiskAssessment, warrantRiskAssessmentId, res, authenticationClient))
@@ -126,9 +126,8 @@ export default function basicDetailsRoutes(
       formattedHomeVisit,
       nationalInsuranceNumber,
       otherAddresses,
-      employerAddresses,
-      employerName,
-      // callingScreen,
+      employers,
+      callingScreen,
     })
   })
 
