@@ -47,6 +47,17 @@ export interface BasicDetails {
   addresses: DeliusAddress[]
   dateOfBirth: string
   nomsNumber: string
+  lastHomeVisitDate: string
+  nationalInsuranceNumber: string
+  emailAddress: string
+  mobileNumber: string
+  telephoneNumber: string
+  employers: Employer[]
+}
+
+export interface Employer {
+  employerName: Name
+  employerAddress: DeliusAddress
 }
 
 export interface DeliusAddress {

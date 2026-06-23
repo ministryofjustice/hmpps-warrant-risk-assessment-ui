@@ -2,6 +2,22 @@
   "mappings": [
     {
       "request": {
+        "urlPattern": "/ndelius/users/(.*?)/access/(.*?)",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "userExcluded": false,
+          "userRestricted": false
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
         "urlPattern": "/ndelius/basic-details/X000001",
         "method": "GET"
       },
@@ -9,26 +25,157 @@
         "status": 200,
         "jsonBody": {
           "title": "Mr",
+          "nationalInsuranceNumber": "XX000000X",
+          "emailAddress": "test@test.com",
+          "mobileNumber": "07707123456",
+          "telephoneNumber": "01912525252",
           "name": {
             "forename": "Billy",
             "middleName": "The",
             "surname": "Kid"
           },
-          "nomsNumber": "1234567",
+          "lastHomeVisitDate": "2025-03-17",
           "dateOfBirth": "1980-03-17",
           "addresses": [
             {
               "id": 1,
-              "status": "Previous",
+              "status": "Postal",
               "buildingName": null,
-              "buildingNumber": "6543",
-              "streetName": "Previous Street",
-              "townCity": "Prevtown",
-              "district": "PrevDistrict",
-              "county": "Prevcounty",
-              "postcode": "PR11 1EV"
+              "buildingNumber": "281",
+              "streetName": "Postal Default Street",
+              "townCity": "Postinton",
+              "district": "Postrict",
+              "county": "County Post",
+              "postcode": "NE30 3ZZ"
+            },
+            {
+              "id": 2,
+              "status": "Main",
+              "buildingName": null,
+              "buildingNumber": "2789",
+              "streetName": "Main Street",
+              "townCity": "Maintown",
+              "district": "MainDistrict",
+              "county": "Maincounty",
+              "postcode": "MA30 3IN"
+            }
+          ],
+          "employers": [
+            {
+              "employerName": {
+                "forename": "Billy",
+                "middleName": "The",
+                "surname": "Kid"
+              },
+              "employerAddress":
+                {
+                  "id": 1,
+                  "status": "Postal",
+                  "buildingName": null,
+                  "buildingNumber": "281",
+                  "streetName": "Postal Default Street",
+                  "townCity": "Postinton",
+                  "district": "Postrict",
+                  "county": "County Post",
+                  "postcode": "NE30 3ZZ"
+                }
+
+            },
+            {
+              "employerName": {
+                "forename": "John",
+                "middleName": "Dun",
+                "surname": "Dee"
+              },
+              "employerAddress":
+                {
+                  "id": 2,
+                  "status": "Main",
+                  "buildingName": "MainName",
+                  "buildingNumber": "396",
+                  "streetName": "Main Default Street",
+                  "townCity": "Test City",
+                  "district": "Test District",
+                  "county": "County County",
+                  "postcode": "NE31 3YY"
+                }
             }
           ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/basic-details/X000002",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "title": "Mr",
+          "nationalInsuranceNumber": "XX000000X",
+          "emailAddress": "test@test.com",
+          "mobileNumber": "07707123456",
+          "telephoneNumber": "01912525252",
+          "name": {
+            "forename": "Billy",
+            "middleName": "The",
+            "surname": "Kid"
+          },
+          "lastHomeVisitDate": "2025-03-17",
+          "dateOfBirth": "1980-03-17",
+          "addresses": [],
+          "employerAddresses": {
+            "id": 5,
+            "officeDescription": null,
+            "employerName": {
+              "forename": "Not",
+              "middleName": "Nice",
+              "surname": "Officer"
+            },
+            "status": "Main",
+            "buildingName": null,
+            "buildingNumber": "19",
+            "streetName": "Employer Street",
+            "townCity": "Employer City",
+            "district": "Emptrict",
+            "county": "Emplounty",
+            "postcode": "EM07 YER",
+            "telephoneNumber": "01332453294"
+          }
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/basic-details/Z000001",
+        "method": "GET"
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/basic-details/Z000002",
+        "method": "GET"
+      },
+      "response": {
+        "status": 400,
+        "jsonBody": {
+          "message": "CRN not found"
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"

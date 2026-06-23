@@ -179,7 +179,7 @@ describe('toWarrantRiskAssessmentAddress', () => {
       'Maps valid Delius Address correctly',
       input,
       {
-        addressId: 42,
+        deliusAddressId: 42,
         status: 'Postal',
         officeDescription: 'Test Office',
         buildingName: 'Test Building',
