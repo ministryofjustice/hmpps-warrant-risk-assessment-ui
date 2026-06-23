@@ -55,11 +55,42 @@ export default class WarrantRiskAssessmentApiClient extends RestClient {
 export interface WarrantRiskAssessment {
   crn: string
   completedDate: ZonedDateTime
+  signOnOffice: WarrantRiskAssessmentAddress
+  titleAndFullName: string
+  dateOfLetter: string
+  sheetSentBy: string
+  telephoneNumber: string
+  signature: string
+  nationalInsuranceNumber: string
+  probationArea: string
+  riskToPublicLevel: string
+  riskToEnforcementOfficers: string
+  riskToPolice: string
+  warrantExecutedBy: string
+  subjectOfMappaProcedures: boolean
+  highRiskOfSelfHarm: boolean
+  highRiskOfAbsconding: boolean
+  vulnerable: boolean
+  carryOrUseWeapons: boolean
+  assaultingPolice: boolean
+  misuseDrugsAndAlcohol: boolean
+  postalAddress: WarrantRiskAssessmentAddress
+  dateOfBirth: string
+  prisonNumber: string
+  workAddress: WarrantRiskAssessmentAddress
+  basicDetailsSaved: boolean
+  signAndSendSaved: boolean
+  contactSaved: boolean
+  reviewRequiredDate: ZonedDateTime
+  reviewEvent: string
+  mobileNumber: string
+  emailAddress: string
+  lastHomeVisitDate: string
 }
 
 export interface WarrantRiskAssessmentAddress {
   id?: string
-  addressId: number
+  deliusAddressId: number
   status: string
   officeDescription?: string
   buildingName: string
