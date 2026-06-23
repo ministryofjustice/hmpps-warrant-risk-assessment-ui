@@ -2,7 +2,7 @@
   "mappings": [
     {
       "request": {
-        "urlPattern": "/ndelius/users/(.*?)/access/(.*?)",
+        "urlPattern": "/ndelius/users/AUTH_USER/access/(.*?)",
         "method": "GET"
       },
       "response": {
@@ -10,6 +10,77 @@
         "jsonBody": {
           "userExcluded": false,
           "userRestricted": false
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/users/USER1/access/(.*?)",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "userExcluded": false,
+          "userRestricted": false
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/users/(.*?)/access/X100501",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "crn": "X100501",
+          "userExcluded": true,
+          "exclusionMessage": "If you believe you should be able to access this record please contact [whoever]",
+          "userRestricted": false
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/users/(.*?)/access/X100502",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "crn": "X100502",
+          "userExcluded": false,
+          "userRestricted": true,
+          "restrictionMessage": "If you believe you should be able to access this record please contact [whoever]"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/users/(.*?)/access/X100503",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "crn": "X100503",
+          "userExcluded": true,
+          "exclusionMessage": "If you believe you should be able to access this record please contact [whoever]",
+          "userRestricted": true,
+          "restrictionMessage": "If you believe you should be able to access this record please contact [whoever]"
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
@@ -67,19 +138,17 @@
                 "middleName": "The",
                 "surname": "Kid"
               },
-              "employerAddress":
-                {
-                  "id": 1,
-                  "status": "Postal",
-                  "buildingName": null,
-                  "buildingNumber": "281",
-                  "streetName": "Postal Default Street",
-                  "townCity": "Postinton",
-                  "district": "Postrict",
-                  "county": "County Post",
-                  "postcode": "NE30 3ZZ"
-                }
-
+              "employerAddress": {
+                "id": 1,
+                "status": "Postal",
+                "buildingName": null,
+                "buildingNumber": "281",
+                "streetName": "Postal Default Street",
+                "townCity": "Postinton",
+                "district": "Postrict",
+                "county": "County Post",
+                "postcode": "NE30 3ZZ"
+              }
             },
             {
               "employerName": {
@@ -87,18 +156,17 @@
                 "middleName": "Dun",
                 "surname": "Dee"
               },
-              "employerAddress":
-                {
-                  "id": 2,
-                  "status": "Main",
-                  "buildingName": "MainName",
-                  "buildingNumber": "396",
-                  "streetName": "Main Default Street",
-                  "townCity": "Test City",
-                  "district": "Test District",
-                  "county": "County County",
-                  "postcode": "NE31 3YY"
-                }
+              "employerAddress": {
+                "id": 2,
+                "status": "Main",
+                "buildingName": "MainName",
+                "buildingNumber": "396",
+                "streetName": "Main Default Street",
+                "townCity": "Test City",
+                "district": "Test District",
+                "county": "County County",
+                "postcode": "NE31 3YY"
+              }
             }
           ]
         },
