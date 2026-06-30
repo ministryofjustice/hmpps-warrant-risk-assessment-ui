@@ -5,7 +5,7 @@ import logger from '../../logger'
 
 export default class AssessRiskAndNeedsApiClient extends RestClient {
   constructor(authenticationClient: AuthenticationClient) {
-    super('NDelius Integration API', config.apis.assessRisksAndNeeds, logger, authenticationClient)
+    super('Assess Risks and Needs API', config.apis.assessRisksAndNeeds, logger, authenticationClient)
   }
 
   async getRisksFullText(crn: string, username: string): Promise<AllRoshRisk> {
