@@ -1,0 +1,412 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "GET",
+        "url": "/assess-risks-and-needs/risks/crn/X000001/fulltext"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "riskToSelf": {
+            "suicide": {
+              "risk": "Yes",
+              "previous": "No",
+              "previousConcernsText": "Risk of self harms concerns due to stuff",
+              "current": "Don't know",
+              "currentConcernsText": "Risk of self harms concerns due to me"
+            },
+            "selfHarm": {
+              "risk": "No",
+              "previous": "Don't know",
+              "previousConcernsText": "Risk of self harms concerns due to harm",
+              "current": "Yes",
+              "currentConcernsText": "Risk of self harms concerns due to self"
+            },
+            "custody": {
+              "risk": "No",
+              "previous": "No",
+              "previousConcernsText": "Risk of self harms concerns due to custody",
+              "current": "Don't know",
+              "currentConcernsText": "Risk of self harms concerns due to custody"
+            },
+            "hostelSetting": {
+              "risk": "Yes",
+              "previous": "Yes",
+              "previousConcernsText": "Risk of self harms concerns due to hostel",
+              "current": "Yes",
+              "currentConcernsText": "Risk of self harms concerns due to setting"
+            },
+            "vulnerability": {
+              "risk": "Don't know",
+              "previous": "No",
+              "previousConcernsText": "Risk of self harms concerns due to vulner",
+              "current": "Yes",
+              "currentConcernsText": "Risk of self harms concerns due to ability"
+            }
+          },
+          "otherRisks": {
+            "escapeOrAbscond": "YES",
+            "controlIssuesDisruptiveBehaviour": "YES",
+            "breachOfTrust": "YES",
+            "riskToOtherPrisoners": "YES"
+          },
+          "summary": {
+            "whoIsAtRisk": "X, Y and Z are at risk",
+            "natureOfRisk": "The nature of the risk is X",
+            "riskImminence": "the risk is imminent and more probably in X situation",
+            "riskIncreaseFactors": "If offender in situation X the risk can be higher",
+            "riskMitigationFactors": "Giving offender therapy in X will reduce the risk",
+            "analysisOfRiskFactors": "If offender in situation X the risk can be higher",
+            "riskInCommunity": {
+              "HIGH ": ["Children", "Public", "Know adult"],
+              "MEDIUM": ["Staff"],
+              "LOW": ["Prisoners"]
+            },
+            "riskInCustody": {
+              "HIGH ": ["Know adult"],
+              "VERY_HIGH": ["Staff", "Prisoners"],
+              "LOW": ["Children", "Public"]
+            },
+            "overallRiskLevel": "HIGH"
+          },
+          "assessedOn": "2026-06-04T08:33:39"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "/assess-risks-and-needs/assessments/crn/X000001/offence"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "crn": "X000001",
+          "limitedAccessOffender": false,
+          "assessments": [
+            {
+              "assessmentId": 0,
+              "assessmentType": "string",
+              "partcompStatus": "string",
+              "dateCompleted": "2026-06-04T08:33:39",
+              "initiationDate": "2026-06-04T08:33:39",
+              "assessorSignedDate": "2026-06-04T08:33:39",
+              "assessmentStatus": "string",
+              "superStatus": "string",
+              "offence": "string",
+              "disinhibitors": ["string"],
+              "patternOfOffending": "Pattern",
+              "offenceInvolved": ["WOUNDING"],
+              "specificWeapon": "BIG KNIVES",
+              "victimPerpetratorRelationship": "string",
+              "victimOtherInfo": "string",
+              "evidencedMotivations": ["string"],
+              "offenceDetails": [
+                {
+                  "type": "string",
+                  "offenceDate": "2026-06-04T08:33:39",
+                  "offenceCode": "string",
+                  "offenceSubCode": "string",
+                  "offence": "string",
+                  "subOffence": "string"
+                }
+              ],
+              "victimDetails": [
+                {
+                  "age": "string",
+                  "gender": "string",
+                  "ethnicCategory": "string",
+                  "victimRelation": "string"
+                }
+              ],
+              "laterWIPAssessmentExists": true,
+              "latestWIPDate": "2026-06-04T08:33:39",
+              "laterSignLockAssessmentExists": true,
+              "latestSignLockDate": "2026-06-04T08:33:39",
+              "laterPartCompUnsignedAssessmentExists": true,
+              "latestPartCompUnsignedDate": "2026-06-04T08:33:39",
+              "laterPartCompSignedAssessmentExists": true,
+              "latestPartCompSignedDate": "2026-06-04T08:33:39",
+              "laterCompleteAssessmentExists": true,
+              "latestCompleteDate": "2026-06-04T08:33:39"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "/assess-risks-and-needs/needs/crn/X000001"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "identifiedNeeds": [
+            {
+              "section": "DRUG_MISUSE",
+              "name": "Drug misuse",
+              "riskOfHarm": false,
+              "riskOfReoffending": false,
+              "severity": "SEVERE",
+              "score": 3,
+              "oasysThreshold": 3,
+              "tierThreshold": 3
+            }
+          ],
+          "notIdentifiedNeeds": [
+            {
+              "section": "DRUG_MISUSE",
+              "name": "Drug misuse",
+              "riskOfHarm": false,
+              "riskOfReoffending": false,
+              "severity": "SEVERE",
+              "score": 3,
+              "oasysThreshold": 3,
+              "tierThreshold": 3
+            }
+          ],
+          "unansweredNeeds": [
+            {
+              "section": "DRUG_MISUSE",
+              "name": "Drug misuse",
+              "riskOfHarm": false,
+              "riskOfReoffending": false,
+              "severity": "SEVERE",
+              "score": 3,
+              "oasysThreshold": 3,
+              "tierThreshold": 3
+            }
+          ],
+          "assessedOn": "2026-06-03T01:04:19"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "/assess-risks-and-needs/risks/crn/X000002/fulltext"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "riskToSelf": {
+            "suicide": null,
+            "selfHarm": null,
+            "custody": null,
+            "hostelSetting": null,
+            "vulnerability": null
+          },
+          "otherRisks": null,
+          "summary": {
+            "riskInCommunity": null,
+            "riskInCustody": null,
+            "overallRiskLevel": "LOW"
+          },
+          "assessedOn": "2026-06-04T08:33:39"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "/assess-risks-and-needs/assessments/crn/X000002/offence"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "crn": "X000002",
+          "limitedAccessOffender": false,
+          "assessments": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "/assess-risks-and-needs/needs/crn/X000002"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "identifiedNeeds": [],
+          "notIdentifiedNeeds": [],
+          "unansweredNeeds": [],
+          "assessedOn": "2026-06-03T01:04:19"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/assess-risks-and-needs/risks/crn/Z000003/fulltext",
+        "method": "GET"
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/assess-risks-and-needs/needs/crn/Z000003",
+        "method": "GET"
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/assess-risks-and-needs/assessments/crn/Z000003/offence",
+        "method": "GET"
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/assess-risks-and-needs/risks/crn/Z000002/fulltext",
+        "method": "GET"
+      },
+      "response": {
+        "status": 400,
+        "jsonBody": {
+          "message": "CRN not found"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/assess-risks-and-needs/needs/crn/Z000002",
+        "method": "GET"
+      },
+      "response": {
+        "status": 400,
+        "jsonBody": {
+          "message": "CRN not found"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/assess-risks-and-needs/assessments/crn/Z000002/offence",
+        "method": "GET"
+      },
+      "response": {
+        "status": 400,
+        "jsonBody": {
+          "message": "CRN not found"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "/assess-risks-and-needs/risks/crn/Z000001/fulltext"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "riskToSelf": {
+            "suicide": null,
+            "selfHarm": null,
+            "custody": null,
+            "hostelSetting": null,
+            "vulnerability": null
+          },
+          "otherRisks": null,
+          "summary": {
+            "riskInCommunity": null,
+            "riskInCustody": null,
+            "overallRiskLevel": "LOW"
+          },
+          "assessedOn": "2026-06-04T08:33:39"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "/assess-risks-and-needs/assessments/crn/Z000001/offence"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "crn": "X000002",
+          "limitedAccessOffender": false,
+          "assessments": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "/assess-risks-and-needs/needs/crn/Z000001"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "identifiedNeeds": [],
+          "notIdentifiedNeeds": [],
+          "unansweredNeeds": [],
+          "assessedOn": "2026-06-03T01:04:19"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    }
+  ]
+}

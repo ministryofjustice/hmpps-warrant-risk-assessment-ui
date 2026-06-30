@@ -94,6 +94,15 @@ export default {
       },
       agent: new AgentConfig(Number(get('NDELIUS_INTEGRATION_TIMEOUT_RESPONSE', 10000))),
     },
+    assessRisksAndNeeds: {
+      url: get('ASSESS_RISKS_AND_NEEDS_API_URL', 'http://localhost:9091/assess-risks-and-needs', requiredInProduction),
+      healthPath: '/health/ping',
+      timeout: {
+        response: Number(get('ASSESS_RISKS_AND_NEEDS_API_TIMEOUT_RESPONSE', 5000)),
+        deadline: Number(get('ASSESS_RISKS_AND_NEEDS_API_TIMEOUT_DEADLINE', 5000)),
+      },
+      agent: new AgentConfig(Number(get('ASSESS_RISKS_AND_NEEDS_API_TIMEOUT_RESPONSE', 5000))),
+    },
   },
   ndeliusDeeplink: {
     url: get(

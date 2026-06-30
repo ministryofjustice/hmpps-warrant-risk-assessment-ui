@@ -86,6 +86,8 @@ export interface WarrantRiskAssessment {
   mobileNumber: string
   emailAddress: string
   lastHomeVisitDate: string
+  riskAssessmentSaved: boolean
+  riskSummarySaved: boolean
 }
 
 export interface WarrantRiskAssessmentAddress {

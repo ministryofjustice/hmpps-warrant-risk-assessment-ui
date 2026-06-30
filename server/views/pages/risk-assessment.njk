@@ -6,21 +6,318 @@
 {% block content %}
 
   {% from "moj/components/side-navigation/macro.njk" import mojSideNavigation %}
-  {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
   {% from "govuk/components/button/macro.njk" import govukButton %}
+  {% from "govuk/components/radios/macro.njk" import govukRadios %}
+  {% from "govuk/components/details/macro.njk" import govukDetails %}
+
+
+  {% macro renderInfoList(items) %}
+    {% if items and items.length > 0 %}
+      {% for info in items %}
+        <p><strong>{{ info.label }}:</strong> {{ info.value }}</p>
+      {% endfor %}
+    {% else %}
+      <p>None Found</p>
+    {% endif %}
+  {% endmacro %}
+
 
   <form method="post">
+
+    {% set errorList =[
+      { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None
+    ] | reject("undefined") %}
+
+    {% if errorMessages | length > 0 %}
+      {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+      {{ govukErrorSummary({ titleText: "There is a problem", errorList: errorList }) }}
+    {% endif %}
+
     <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third">
         {% include "pages/side-nav.njk" %}
       </div>
       <div class="govuk-grid-column-two-thirds">
+        {% include "partials/review-required.njk" %}
+        {% if not showEmbeddedError %}
 
-        <h1 class="govuk-heading-l">Warrant Risk Assessment - Risk Assessment</h1>
+          <h1 id="page-title" class="govuk-heading-l">Warrant Risk Assessment - Risk Assessment</h1>
 
+          {% set mappaContent %}
+            {{ renderInfoList(mappaInfo) }}
+          {% endset %}
+
+          {{ govukDetails({
+            id: "mappaDetails",
+            summaryText: "Click here to view MAPPA information",
+            html: mappaContent
+          }) }}
+
+          {{ govukRadios({
+            name: "mappaRadio",
+            id: "mappaRadio",
+            fieldset: {
+              legend: {
+                text: "Is the offender subject to MAPPA procedures?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes",
+                checked: mappaSelection === true
+              },
+              {
+                value: "No",
+                text: "No",
+                checked: mappaSelection === false
+              }
+            ]
+          }) }}
+
+          {% set selfHarmContent %}
+            {{ renderInfoList(selfHarmInfo) }}
+          {% endset %}
+
+          {{ govukDetails({
+            id: "selfHarmDetails",
+            summaryText: "Click here to view Self Harm information",
+            html: selfHarmContent
+          }) }}
+
+          {{ govukRadios({
+            name: "selfHarmRadio",
+            id: "selfHarmRadio",
+            fieldset: {
+              legend: {
+                text: "Is the offender assessed as posing a high risk of self harm?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes",
+                checked: selfHarmSelection === true
+              },
+              {
+                value: "No",
+                text: "No",
+                checked: selfHarmSelection === false
+              }
+            ]
+          }) }}
+
+          {% set abscondingContent %}
+            {{ renderInfoList(abscondingInfo) }}
+          {% endset %}
+
+          {{ govukDetails({
+            id: "abscondingDetails",
+            summaryText: "Click here to view absconding information",
+            html: abscondingContent
+          }) }}
+
+          {{ govukRadios({
+            name: "abscondRadio",
+            id: "abscondRadio",
+            fieldset: {
+              legend: {
+                text: "Is the offender assessed as posing a high risk of absconding?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes",
+                checked: abscondingSelection === true
+              },
+              {
+                value: "No",
+                text: "No",
+                checked: abscondingSelection === false
+              }
+            ]
+          }) }}
+
+          {% set vulnerabilityContent %}
+            {{ renderInfoList(vulnerableInfo) }}
+          {% endset %}
+
+          {{ govukDetails({
+            id: "vulnerabilityDetails",
+            summaryText: "Click here to view Vulnerability information",
+            html: vulnerabilityContent
+          }) }}
+
+          {{ govukRadios({
+            id: "vulnerableDetails",
+            name: "vulnerableRadio",
+            id: "vulnerableRadio",
+            fieldset: {
+              legend: {
+                text: "Is the offender particularly vulnerable?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes",
+                checked: vulnerableSelection === true
+              },
+              {
+                value: "No",
+                text: "No",
+                checked: vulnerableSelection === false
+              }
+            ]
+          }) }}
+
+          {% set weaponContent %}
+            {{ renderInfoList(weaponInfo) }}
+          {% endset %}
+
+          {{ govukDetails({
+            id: "weaponDetails",
+            summaryText: "Click here to view relevant information",
+            html: weaponContent
+          }) }}
+
+          {{ govukRadios({
+            name: "weaponRadio",
+            id: "weaponRadio",
+            fieldset: {
+              legend: {
+                text: "Is the offender known to carry or use Weapons?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes",
+                checked: weaponSelection === true
+              },
+              {
+                value: "No",
+                text: "No",
+                checked: weaponSelection === false
+              }
+            ]
+          }) }}
+
+          {% set policeContent %}
+            {{ renderInfoList(policeInfo) }}
+          {% endset %}
+
+          {{ govukDetails({
+            id: "policeDetails",
+            summaryText: "Click here to view information",
+            html: policeContent
+          }) }}
+
+          {{ govukRadios({
+            name: "policeRadio",
+            id: "policeRadio",
+            fieldset: {
+              legend: {
+                text: "Does the offender have a history of assaulting police?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes",
+                checked: policeSelection === true
+              },
+              {
+                value: "No",
+                text: "No",
+                checked: policeSelection === false
+              }
+            ]
+          }) }}
+
+          {% set drugContent %}
+            {{ renderInfoList(drugInfo) }}
+          {% endset %}
+
+          {{ govukDetails({
+            id: "drugDetails",
+            summaryText: "Click here to view drug misuse information",
+            html: drugContent
+          }) }}
+
+          {{ govukRadios({
+            name: "drugMisuseRadio",
+            id: "drugMisuseRadio",
+            fieldset: {
+              legend: {
+                text: "Does the offender misuse drugs and/or alcohol?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes",
+                checked: drugSelection === true
+              },
+              {
+                value: "No",
+                text: "No",
+                checked: drugSelection === false
+              }
+            ]
+          }) }}
+
+          <div class="moj-button-group">
+            {{ govukButton({
+              text: "Continue",
+              preventDoubleClick: "true",
+              type: "submit",
+              attributes: {
+                id: "continue-button"
+              }
+            }) }}
+            {{ govukButton({
+              text: "Refresh from Delius and OASys",
+              preventDoubleClick: "true",
+              type: "submit",
+              name: "action",
+              value: "refreshFromNdelius",
+              classes: "govuk-button--secondary",
+              attributes: {
+                id: "refresh-from-ndelius--button"
+              }
+            }) }}
+            {{ govukButton({
+              text: "Save Progress and Close",
+              type: "submit",
+              name: "action",
+              value: "saveProgressAndClose",
+              classes: "govuk-button--secondary",
+              attributes: {
+                id: "close-button"
+              }
+            }) }}
+          </div>
+        {% endif %}
       </div>
     </div>
-  </form>
 
+  </form>
 {% endblock %}
