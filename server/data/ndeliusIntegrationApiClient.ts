@@ -17,6 +17,15 @@ export default class NDeliusIntegrationApiClient extends RestClient {
     )
   }
 
+  async getRiskAssessment(crn: string, username: string): Promise<RiskAssessment> {
+    return this.get(
+      {
+        path: `/wra-risk-assessment/${crn}`,
+      },
+      asSystem(username),
+    )
+  }
+
   async getLimitedAccessCheck(crn: string, username: string): Promise<LimitedAccessCheck> {
     return this.get(
       {
@@ -84,4 +93,16 @@ export interface SignAndSendDetails {
 export interface ReferenceData {
   code: string
   description: string
+}
+
+export interface RiskAssessment {
+  subjectOfMappaProcedures: boolean
+  mappaRegistration: Registration
+}
+
+export interface Registration {
+  id: number
+  type: ReferenceData
+  startDate: string
+  notes: string
 }
