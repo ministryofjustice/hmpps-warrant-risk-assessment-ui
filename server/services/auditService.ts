@@ -7,6 +7,7 @@ export enum Page {
   RISK_SUMMARY = 'RISK_SUMMARY',
   WARRANT_EXECUTION = 'WARRANT_EXECUTION',
   CHECK_YOUR_ANSWERS = 'CHECK_YOUR_ANSWERS',
+  ADD_DWP_ADDRESS = 'ADD_DWP_ADDRESS',
 }
 
 export interface PageViewEventDetails {

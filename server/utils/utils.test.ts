@@ -183,7 +183,7 @@ describe('toWarrantRiskAssessmentAddress', () => {
         status: 'Postal',
         officeDescription: 'Test Office',
         buildingName: 'Test Building',
-        buildingNumber: '1',
+        addressNumber: '1',
         streetName: 'Test Street',
         townCity: 'Test City',
         district: 'Test District',

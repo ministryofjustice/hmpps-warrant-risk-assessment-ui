@@ -96,7 +96,7 @@ export interface WarrantRiskAssessmentAddress {
   status: string
   officeDescription?: string
   buildingName: string
-  buildingNumber: string
+  addressNumber: string
   streetName: string
   townCity: string
   district: string
