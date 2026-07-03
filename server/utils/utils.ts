@@ -113,7 +113,7 @@ export function toWarrantRiskAssessmentAddress(deliusAddress: DeliusAddress): Wa
     status: deliusAddress.status,
     officeDescription: deliusAddress.officeDescription,
     buildingName: deliusAddress.buildingName,
-    buildingNumber: deliusAddress.buildingNumber,
+    addressNumber: deliusAddress.buildingNumber,
     streetName: deliusAddress.streetName,
     townCity: deliusAddress.townCity,
     district: deliusAddress.district,
