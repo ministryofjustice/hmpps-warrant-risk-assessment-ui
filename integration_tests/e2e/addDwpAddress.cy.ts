@@ -34,6 +34,13 @@ context('Add DWP Address page', () => {
     cy.url().should('include', '/basic-details')
   })
 
+  it('will return to address search when cancel is clicked', () => {
+    cy.visit('/add-dwp-address/ae7ee579-4f01-4b84-b19a-e24922cfc6dd')
+    cy.url().should('include', '/add-dwp-address')
+    cy.get('#address-search-button').should('exist').should('be.visible').click()
+    cy.url().should('include', '/address-search')
+  })
+
   it('validation will trigger when none of description, number or name is present', () => {
     cy.visit('/add-dwp-address/8f4d5c2e-1a9b-4c73-a2f6-7de31b8c9041')
     cy.url().should('include', '/add-dwp-address')

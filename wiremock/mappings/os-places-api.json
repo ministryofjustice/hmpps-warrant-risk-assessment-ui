@@ -1,0 +1,122 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "GET",
+        "urlPath": "/search/places/v1/find",
+        "queryParameters": {
+          "query": {
+            "equalTo": "jobcentre plus, ErrorTown"
+          },
+          "maxresults": {
+            "equalTo": "100"
+          }
+        }
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "urlPath": "/search/places/v1/find",
+        "queryParameters": {
+          "query": {
+            "equalTo": "jobcentre plus, Nowhere"
+          },
+          "maxresults": {
+            "equalTo": "100"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "results": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "urlPath": "/search/places/v1/find",
+        "queryParameters": {
+          "query": {
+            "matches": "jobcentre plus, Example"
+          },
+          "maxresults": {
+            "equalTo": "100"
+          },
+          "key": {
+            "equalTo": "test-api-key"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "results": [
+            {
+              "DPA": {
+                "UPRN": "100120345678",
+                "ADDRESS": "Jobcentre Plus, 1 Example Street, Leeds, LS1 1AA",
+                "BUILDING_NAME": "Jobcentre Plus",
+                "SUB_BUILDING_NAME": "",
+                "BUILDING_NUMBER": 1,
+                "THOROUGHFARE_NAME": "Example Street",
+                "POST_TOWN": "Leeds",
+                "LOCAL_CUSTODIAN_CODE_DESCRIPTION": "West Yorkshire",
+                "POSTCODE": "LS1 1AA",
+                "STATUS": "APPROVED",
+                "ORGANISATION_NAME": "JOBCENTRE PLUS"
+              }
+            },
+            {
+              "DPA": {
+                "UPRN": "100120345679",
+                "ADDRESS": "Jobcentre Plus, 20 Market Road, Bradford, BD1 1AA",
+                "BUILDING_NAME": "Britannia House",
+                "SUB_BUILDING_NAME": "",
+                "BUILDING_NUMBER": 20,
+                "THOROUGHFARE_NAME": "Market Road",
+                "POST_TOWN": "Bradford",
+                "LOCAL_CUSTODIAN_CODE_DESCRIPTION": "West Yorkshire",
+                "POSTCODE": "BD1 1AA",
+                "STATUS": "APPROVED",
+                "ORGANISATION_NAME": "JOBCENTRE PLUS"
+              }
+            },
+            {
+              "DPA": {
+                "UPRN": "100120345680",
+                "ADDRESS": "Other Office, 9 Example Street, Leeds, LS1 1AA",
+                "BUILDING_NAME": "Other Office",
+                "SUB_BUILDING_NAME": "",
+                "BUILDING_NUMBER": 9,
+                "THOROUGHFARE_NAME": "Example Street",
+                "POST_TOWN": "Leeds",
+                "LOCAL_CUSTODIAN_CODE_DESCRIPTION": "West Yorkshire",
+                "POSTCODE": "LS1 1AA",
+                "STATUS": "APPROVED",
+                "ORGANISATION_NAME": "OTHER OFFICE"
+              }
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    }
+  ]
+}

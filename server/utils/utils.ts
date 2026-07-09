@@ -54,6 +54,10 @@ export function handleIntegrationErrors(status: number, message: string, integra
     errorMessages.genericErrorMessage = {
       text: 'There has been a problem fetching information from Assess Risk and Needs Service. Please try again later.',
     }
+  } else if (integrationService === 'OS Places API') {
+    errorMessages.genericErrorMessage = {
+      text: 'There has been a problem fetching information from OS Places API. Please try again later.',
+    }
   } else {
     errorMessages.genericErrorMessage = {
       text: 'There has been a problem fetching information from the Warrant Risk Assessment Service. Please try again later.',

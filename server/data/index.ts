@@ -14,6 +14,7 @@ buildAppInsightsClient(applicationInfo)
 import { createRedisClient } from './redisClient'
 import config from '../config'
 import HmppsAuditClient from './hmppsAuditClient'
+import { OSPlacesAPIClient } from './osPlacesApiClient'
 import logger from '../../logger'
 
 export const dataAccess = () => {
@@ -27,6 +28,7 @@ export const dataAccess = () => {
     applicationInfo,
     hmppsAuthClient,
     hmppsAuditClient: new HmppsAuditClient(config.sqs.audit),
+    osPlacesApiClient: new OSPlacesAPIClient(config.apis.osPlaces.key as string),
   }
 }
 

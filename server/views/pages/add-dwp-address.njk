@@ -41,7 +41,20 @@
 
         {% if not showEmbeddedError %}
 
-          <h1 class="govuk-heading-l">Please enter an Address</h1>
+          <h1 class="govuk-heading-l">Add address details</h1>
+
+          <p>Please search for a DWP Signing on office using the button below or enter the address manually</p>
+          <div class="moj-button-group">
+            {{ govukButton({
+              text: "Search",
+              type: "submit",
+              href: '/address-search/'+warrantRiskAssessmentId,
+              attributes: {
+                id: "address-search-button"
+              }
+            }) }}
+          </div>
+
 
           {{ govukInput({
             label: {

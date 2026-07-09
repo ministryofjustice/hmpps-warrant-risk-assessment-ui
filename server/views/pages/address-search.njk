@@ -1,0 +1,111 @@
+{% extends "../partials/layout.njk" %}
+
+{% set pageTitle = applicationName + " - Search for a DWP Signing on Office" %}
+{% set mainClasses = "app-container govuk-body" %}
+
+{% block content %}
+
+  {% from "moj/components/side-navigation/macro.njk" import mojSideNavigation %}
+  {% from "govuk/components/button/macro.njk" import govukButton %}
+  {% from "govuk/components/input/macro.njk" import govukInput %}
+  {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+  <form method="post">
+
+    {% set errorList =[
+      { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None,
+      { text: errorMessages.searchTerm.text, href: "#searchTerm" } if errorMessages.searchTerm else None,
+      { text: errorMessages.addressRadio.text, href: "#addressRadio" } if errorMessages.addressRadio else None
+    ] | reject("undefined") %}
+
+    {% if errorMessages | length > 0 %}
+      {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+      {{ govukErrorSummary({ titleText: "There is a problem", errorList: errorList }) }}
+    {% endif %}
+
+    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-third">
+        {% include "pages/side-nav.njk" %}
+      </div>
+      <div class="govuk-grid-column-two-thirds">
+        {% include "partials/review-required.njk" %}
+        {% if not showEmbeddedError %}
+
+          <h1 id="page-title" class="govuk-heading-l">Search for a DWP Signing on Office</h1>
+
+          {{ govukInput({
+            label: {
+              text: "Please enter an area to search",
+              classes: "govuk-label--m",
+              isPageHeading: false
+            },
+            id: "searchTerm",
+            classes: "govuk-input--width-30",
+            name: "searchTerm",
+            value: searchTerm,
+            errorMessage: {
+              text: errorMessages.searchTerm.text
+            } if errorMessages.searchTerm
+          }) }}
+
+          <div class="moj-button-group">
+            {{ govukButton({
+              text: "Search for offices in this area",
+              type: "submit",
+              name: "action",
+              value: "search",
+              attributes: {
+                id: "search-button"
+              }
+            }) }}
+          </div>
+          {% if addressRadioItems and addressRadioItems | length > 0 %}
+            {{ govukRadios({
+              name: "addressRadio",
+              idPrefix: "addressRadio",
+              fieldset: {
+                legend: {
+                  text: "Please select the relevant address",
+                  isPageHeading: false,
+                  classes: "govuk-fieldset__legend--m"
+                }
+              },
+              errorMessage: {
+                text: errorMessages.addressRadio.text
+              } if errorMessages.addressRadio,
+              items: addressRadioItems
+            }) }}
+
+            <input type="hidden" name="filteredResults" value="{{ filteredResults | dump | escape }}">
+          {% else %}
+            <p class="govuk-body">No results found in the area entered, please refine search or enter manually on the previous screen</p>
+          {% endif %}
+
+          <div class="moj-button-group">
+            {{ govukButton({
+              text: "Select",
+              type: "submit",
+              name: "action",
+              value: "select",
+              attributes: {
+                id: "select-button"
+              }
+            }) }}
+            {{ govukButton({
+              text: "Cancel",
+              type: "submit",
+              href: '/add-dwp-address/'+warrantRiskAssessmentId,
+              classes: "govuk-button--secondary",
+              attributes: {
+                id: "cancel-button"
+              }
+            }) }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+  </form>
+{% endblock %}

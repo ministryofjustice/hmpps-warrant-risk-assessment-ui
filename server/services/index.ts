@@ -3,7 +3,7 @@ import AuditService from './auditService'
 import CommonUtils from './commonUtils'
 
 export const services = () => {
-  const { applicationInfo, hmppsAuditClient, hmppsAuthClient } = dataAccess()
+  const { applicationInfo, hmppsAuditClient, hmppsAuthClient, osPlacesApiClient } = dataAccess()
   const commonUtils = new CommonUtils()
 
   return {
@@ -11,6 +11,7 @@ export const services = () => {
     auditService: new AuditService(hmppsAuditClient),
     hmppsAuthClient,
     commonUtils,
+    osPlacesApiClient,
   }
 }
 
