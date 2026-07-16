@@ -138,6 +138,8 @@
                 "middleName": "The",
                 "surname": "Kid"
               },
+              "telephoneNumber": "01332453294",
+              "mobileNumber": "07707123456",
               "employerAddress": {
                 "id": 1,
                 "status": "Postal",
@@ -156,6 +158,8 @@
                 "middleName": "Dun",
                 "surname": "Dee"
               },
+              "telephoneNumber": "01332453294",
+              "mobileNumber": "07707123456",
               "employerAddress": {
                 "id": 2,
                 "status": "Main",
@@ -196,23 +200,25 @@
           "lastHomeVisitDate": "2025-03-17",
           "dateOfBirth": "1980-03-17",
           "addresses": [],
-          "employerAddresses": {
-            "id": 5,
-            "officeDescription": null,
+          "employers": {
             "employerName": {
               "forename": "Not",
               "middleName": "Nice",
               "surname": "Officer"
             },
-            "status": "Main",
-            "buildingName": null,
-            "buildingNumber": "19",
-            "streetName": "Employer Street",
-            "townCity": "Employer City",
-            "district": "Emptrict",
-            "county": "Emplounty",
-            "postcode": "EM07 YER",
-            "telephoneNumber": "01332453294"
+            "telephoneNumber": "01332453294",
+            "mobileNumber": "07707123456",
+            "employerAddress": {
+              "id": 5,
+              "status": "Main",
+              "buildingName": null,
+              "buildingNumber": "19",
+              "streetName": "Employer Street",
+              "townCity": "Employer City",
+              "district": "Emptrict",
+              "county": "Emplounty",
+              "postcode": "EM07 YER"
+            }
           }
         },
         "headers": {

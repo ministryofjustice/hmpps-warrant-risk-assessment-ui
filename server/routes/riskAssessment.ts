@@ -135,19 +135,19 @@ export default function riskAssessmentRoutes(
       return
 
     const mappaInfo = generateMappaInfo(deliusRiskAssessment)
-    const mappaSelection = warrantRiskAssessment.subjectOfMappaProcedures ?? mappaInfo.length > 0
+    const mappaSelection = warrantRiskAssessment.subjectOfMappaProcedures ?? (mappaInfo.length > 0 ? true : null)
     const selfHarmInfo = generateSelfHarmInfo(arnsRiskAssessment)
-    const selfHarmSelection = warrantRiskAssessment.highRiskOfSelfHarm ?? selfHarmInfo.length > 0
+    const selfHarmSelection = warrantRiskAssessment.highRiskOfSelfHarm
     const abscondingInfo = generateAbscondInfo(arnsRiskAssessment)
-    const abscondingSelection = warrantRiskAssessment.highRiskOfAbsconding ?? selfHarmInfo.length > 0
+    const abscondingSelection = warrantRiskAssessment.highRiskOfAbsconding
     const vulnerableInfo = generateVulnerabilityInfo(arnsRiskAssessment)
-    const vulnerableSelection = warrantRiskAssessment.vulnerable ?? selfHarmInfo.length > 0
+    const vulnerableSelection = warrantRiskAssessment.vulnerable
     const weaponInfo = generateWeaponInfo(arnsAssessmentOffence)
-    const weaponSelection = warrantRiskAssessment.carryOrUseWeapons ?? selfHarmInfo.length > 0
+    const weaponSelection = warrantRiskAssessment.carryOrUseWeapons
     const policeInfo = generatePoliceInfo(arnsRiskAssessment)
-    const policeSelection = warrantRiskAssessment.assaultingPolice ?? selfHarmInfo.length > 0
+    const policeSelection = warrantRiskAssessment.assaultingPolice
     const drugInfo = generateDrugInformation(arnsNeeds)
-    const drugSelection = warrantRiskAssessment.misuseDrugsAndAlcohol ?? selfHarmInfo.length > 0
+    const drugSelection = warrantRiskAssessment.misuseDrugsAndAlcohol
 
     res.render('pages/risk-assessment', {
       warrantRiskAssessment,
@@ -218,13 +218,13 @@ export default function riskAssessmentRoutes(
     if (await commonUtils.redirectRequired(warrantRiskAssessment, warrantRiskAssessmentId, res, authenticationClient))
       return
 
-    warrantRiskAssessment.subjectOfMappaProcedures = req.body.mappaRadio === 'Yes'
-    warrantRiskAssessment.highRiskOfSelfHarm = req.body.selfHarmRadio === 'Yes'
-    warrantRiskAssessment.highRiskOfAbsconding = req.body.abscondRadio === 'Yes'
-    warrantRiskAssessment.vulnerable = req.body.vulnerableRadio === 'Yes'
-    warrantRiskAssessment.carryOrUseWeapons = req.body.weaponRadio === 'Yes'
-    warrantRiskAssessment.assaultingPolice = req.body.policeRadio === 'Yes'
-    warrantRiskAssessment.misuseDrugsAndAlcohol = req.body.drugMisuseRadio === 'Yes'
+    warrantRiskAssessment.subjectOfMappaProcedures = mapYesNoToBooleanOrNull(req.body.mappaRadio)
+    warrantRiskAssessment.highRiskOfSelfHarm = mapYesNoToBooleanOrNull(req.body.selfHarmRadio)
+    warrantRiskAssessment.highRiskOfAbsconding = mapYesNoToBooleanOrNull(req.body.abscondRadio)
+    warrantRiskAssessment.vulnerable = mapYesNoToBooleanOrNull(req.body.vulnerableRadio)
+    warrantRiskAssessment.carryOrUseWeapons = mapYesNoToBooleanOrNull(req.body.weaponRadio)
+    warrantRiskAssessment.assaultingPolice = mapYesNoToBooleanOrNull(req.body.policeRadio)
+    warrantRiskAssessment.misuseDrugsAndAlcohol = mapYesNoToBooleanOrNull(req.body.drugMisuseRadio)
 
     if (req.body.action === 'refreshFromNdelius') {
       // redirect to warning details to force a reload
@@ -261,6 +261,18 @@ export default function riskAssessmentRoutes(
       ]
     }
     return []
+  }
+
+  function mapYesNoToBooleanOrNull(value: string): boolean | null {
+    if (value === 'Yes') {
+      return true
+    }
+
+    if (value === 'No') {
+      return false
+    }
+
+    return null
   }
 
   function generatePoliceInfo(risks: AllRoshRisk): DisplayField[] {

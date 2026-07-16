@@ -189,10 +189,12 @@ describe('toWarrantRiskAssessmentAddress', () => {
         district: 'Test District',
         county: 'Test County',
         postcode: 'TE5 2ST',
+        screen: '',
+        warrantRiskAssessmentId: '0000',
       },
     ],
     ['Returns null if input is null', null, null],
   ])('%s', (_: string, deliusAddress: DeliusAddress, expected: WarrantRiskAssessmentAddress) => {
-    expect(toWarrantRiskAssessmentAddress(deliusAddress)).toEqual(expected)
+    expect(toWarrantRiskAssessmentAddress(deliusAddress, '', '0000')).toEqual(expected)
   })
 })

@@ -66,6 +66,8 @@ export interface BasicDetails {
 
 export interface Employer {
   employerName: Name
+  telephoneNumber: string
+  mobileNumber: string
   employerAddress: DeliusAddress
 }
 

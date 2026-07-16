@@ -125,6 +125,8 @@ export default function addDwpAddressRoutes(
         district: null,
         postcode: null,
         townCity: null,
+        screen: '',
+        warrantRiskAssessmentId,
       }
     }
 
