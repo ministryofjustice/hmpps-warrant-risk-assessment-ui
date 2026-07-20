@@ -183,7 +183,7 @@ export default function addressSearchRoutes(
         postcode: matchingAddress.DPA.POSTCODE,
         townCity: matchingAddress.DPA.POST_TOWN,
         warrantRiskAssessmentId,
-        screen: null
+        screen: null,
       }
       try {
         await warrantRiskAssessmentApiClient.updateWarrantRiskAssessment(
