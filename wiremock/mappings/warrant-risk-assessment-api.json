@@ -633,6 +633,121 @@
     },
     {
       "request": {
+        "urlPattern": "/warrant-risk-assessment-api/warrant-risk-assessment/address/byWRAIdAndPage/[0-9a-fA-F-]{36}/basicDetails",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": [],
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/warrant-risk-assessment-api/warrant-risk-assessment/contact/byWRAId/[0-9a-fA-F-]{36}",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": [],
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/contact",
+        "method": "POST"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/address",
+        "method": "POST"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/5dd78c4b-a2d4-4be6-9024-996664ef6072",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "5dd78c4b-a2d4-4be6-9024-996664ef6072",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/contact/byWRAId/5dd78c4b-a2d4-4be6-9024-996664ef6072",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": [
+          {
+            "id": "00000000-0000-0000-0000-000000000001",
+            "warrantRiskAssessmentId": "5dd78c4b-a2d4-4be6-9024-996664ef6072",
+            "contactPerson": "John Smith",
+            "contactLocation": {
+              "id": 2,
+              "status": "Main",
+              "buildingName": "MainName",
+              "addressNumber": "396",
+              "streetName": "Main Default Street",
+              "townCity": "Test City",
+              "district": "Test District",
+              "county": "County County",
+              "postcode": "NE31 3YY"
+            },
+            "mobileNumber": "07777 777777",
+            "telephoneNumber": "01632 960000"
+          },
+          {
+            "id": "00000000-0000-0000-0000-000000000002",
+            "warrantRiskAssessmentId": "5dd78c4b-a2d4-4be6-9024-996664ef6072",
+            "contactPerson": "Mr Not Nice Officer",
+            "contactLocation": {
+              "id": 5,
+              "status": "Main",
+              "buildingName": null,
+              "addressNumber": "19",
+              "streetName": "Employer Street",
+              "townCity": "Employer City",
+              "district": "Emptrict",
+              "county": "Emplounty",
+              "postcode": "EM07 YER"
+            },
+            "mobileNumber": "07777 777777",
+            "telephoneNumber": "01632 960000"
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
         "url": "/warrant-risk-assessment-api/warrant-risk-assessment/49a3e925-edfd-457e-9206-c351d6164543",
         "method": "GET"
       },

@@ -50,6 +50,94 @@ export default class WarrantRiskAssessmentApiClient extends RestClient {
       asSystem(username),
     )
   }
+
+  async getBasicDetailAddressess(uuid: string, username: string): Promise<Array<WarrantRiskAssessmentAddress>> {
+    return this.get(
+      {
+        path: `/warrant-risk-assessment/address/byWRAIdAndPage/${uuid}/basicDetails`,
+      },
+      asSystem(username),
+    )
+  }
+
+  async getContacts(uuid: string, username: string): Promise<Array<WarrantRiskAssessmentContact>> {
+    return this.get(
+      {
+        path: `/warrant-risk-assessment/contact/byWRAId/${uuid}`,
+      },
+      asSystem(username),
+    )
+  }
+
+  async createAddress(address: WarrantRiskAssessmentAddress, username: string): Promise<string> {
+    return this.post(
+      {
+        path: `/warrant-risk-assessment/address`,
+        data: address as unknown as Record<string, unknown>,
+      },
+      asSystem(username),
+    )
+  }
+
+  async batchCreateAddresses(addresses: Array<WarrantRiskAssessmentAddress>, username: string): Promise<void> {
+    const promises = []
+    for (const a of addresses) {
+      promises.push(this.createAddress(a, username))
+    }
+    await Promise.all(promises)
+  }
+
+  async createContact(contact: WarrantRiskAssessmentContact, username: string): Promise<string> {
+    return this.post(
+      {
+        path: `/warrant-risk-assessment/contact`,
+        data: contact as unknown as Record<string, unknown>,
+      },
+      asSystem(username),
+    )
+  }
+
+  async batchCreateContacts(contacts: Array<WarrantRiskAssessmentContact>, username: string): Promise<void> {
+    const promises = []
+    for (const c of contacts) {
+      promises.push(this.createContact(c, username))
+    }
+    await Promise.all(promises)
+  }
+
+  async deleteAddress(id: string, username: string) {
+    return this.delete(
+      {
+        path: `/warrant-risk-assessment/address/${id}`,
+      },
+      asSystem(username),
+    )
+  }
+
+  async batchDeleteAddresses(addresses: Array<WarrantRiskAssessmentAddress>, username: string): Promise<void> {
+    const promises = []
+    for (const a of addresses) {
+      promises.push(this.deleteAddress(a.id, username))
+    }
+    await Promise.all(promises)
+  }
+
+  async deleteContact(id: string, username: string) {
+    return this.delete(
+      {
+        path: `/warrant-risk-assessment/contact/${id}`,
+      },
+      asSystem(username),
+    )
+  }
+
+  async batchDeleteContacts(contacts: Array<WarrantRiskAssessmentContact>, username: string): Promise<void> {
+    const promises = []
+    for (const c of contacts) {
+      promises.push(this.deleteContact(c.id, username))
+    }
+    await Promise.all(promises)
+  }
 }
 
 export interface WarrantRiskAssessment {
@@ -92,6 +180,7 @@ export interface WarrantRiskAssessment {
 
 export interface WarrantRiskAssessmentAddress {
   id?: string
+  warrantRiskAssessmentId: string
   deliusAddressId: number
   status: string
   officeDescription?: string
@@ -102,4 +191,14 @@ export interface WarrantRiskAssessmentAddress {
   district: string
   county: string
   postcode: string
+  screen: string
+}
+
+export interface WarrantRiskAssessmentContact {
+  id?: string
+  contactPerson: string
+  contactLocation: WarrantRiskAssessmentAddress
+  warrantRiskAssessmentId: string
+  mobileNumber: string
+  telephoneNumber: string
 }

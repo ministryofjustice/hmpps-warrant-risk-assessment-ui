@@ -11,7 +11,8 @@
   <form method="post">
 
     {% set errorList =[
-      { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None
+      { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None,
+      { text: errorMessages.contacts.text, href: "#" } if errorMessages.contacts else None
     ] | reject("undefined") %}
 
     {% if errorMessages | length > 0 %}
@@ -111,13 +112,17 @@
                 {% if employer.employerAddress.county %} {{ employer.employerAddress.county }}
                   <br />{% endif %}
                 {% if employer.employerAddress.postcode %} {{ employer.employerAddress.postcode }}
-                  {% endif %}
+                  <br />{% endif %}
+                {{ employer.employerTelephone }}
+                <br />
               </p>
               {% if not loop.last %}
                 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
               {% endif %}
 
             {% endfor %}
+          {% else %}
+            <p id="no-employer-address">No Current Employer</p>
           {% endif %}
 
           <h2 class="govuk-heading-m">DWP Signing on office</h2>

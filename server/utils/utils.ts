@@ -108,12 +108,17 @@ export function formatTitleAndFullName(title: string, name: Name): string {
   return [title, name.forename, name.middleName, name.surname].filter(Boolean).join(' ')
 }
 
-export function toWarrantRiskAssessmentAddress(deliusAddress: DeliusAddress): WarrantRiskAssessmentAddress {
+export function toWarrantRiskAssessmentAddress(
+  deliusAddress: DeliusAddress,
+  screen: string,
+  wraId: string,
+): WarrantRiskAssessmentAddress {
   if (!deliusAddress) {
     return null
   }
   return {
     deliusAddressId: deliusAddress.id,
+    warrantRiskAssessmentId: wraId,
     status: deliusAddress.status,
     officeDescription: deliusAddress.officeDescription,
     buildingName: deliusAddress.buildingName,
@@ -123,6 +128,7 @@ export function toWarrantRiskAssessmentAddress(deliusAddress: DeliusAddress): Wa
     district: deliusAddress.district,
     county: deliusAddress.county,
     postcode: deliusAddress.postcode,
+    screen,
   }
 }
 
@@ -170,5 +176,5 @@ export function findMainOrPostalAddressInAddressList(addressList: Array<DeliusAd
 
   addressList.sort((a, b) => a.startDate && a.startDate.localeCompare(b.startDate)).reverse()
 
-  return addressList.find(a => a.status === 'Postal') ?? addressList.find(a => a.status === 'Main') ?? null
+  return addressList.find(a => a.status === 'Main') ?? addressList.find(a => a.status === 'Postal') ?? null
 }
