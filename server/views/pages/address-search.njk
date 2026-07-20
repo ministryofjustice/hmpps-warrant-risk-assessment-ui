@@ -6,6 +6,7 @@
 {% block content %}
 
   {% from "moj/components/side-navigation/macro.njk" import mojSideNavigation %}
+  {% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
   {% from "govuk/components/button/macro.njk" import govukButton %}
   {% from "govuk/components/input/macro.njk" import govukInput %}
   {% from "govuk/components/radios/macro.njk" import govukRadios %}
@@ -34,6 +35,11 @@
         {% if not showEmbeddedError %}
 
           <h1 id="page-title" class="govuk-heading-l">Search for a DWP Signing on Office</h1>
+
+          {{ govukWarningText({
+            text: "If you cannot find the office you need, try a different version of the area name, for example ‘Newcastle’ or ‘Newcastle upon Tyne’.",
+            iconFallbackText: "Warning"
+          }) }}
 
           {{ govukInput({
             label: {
