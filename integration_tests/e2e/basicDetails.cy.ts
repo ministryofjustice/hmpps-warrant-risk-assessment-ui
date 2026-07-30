@@ -2,7 +2,7 @@ context('Basic Details page', () => {
   it('can see readonly fields', () => {
     cy.visit('/basic-details/37159b12-5c73-407a-94b6-43fc23938df6')
     cy.url().should('include', '/basic-details')
-    cy.get('#page-title').should('contain.text', 'Warrant Risk Assessment - Basic Details')
+    cy.get('#page-title').should('contain.text', 'Basic Details')
     cy.get('#name').should('contain.text', 'Mr Billy The Kid')
     cy.get('#date-of-birth').should('contain.text', '17/03/1980')
     cy.get('#address').should('contain.text', '2789 Main Street')
@@ -38,7 +38,7 @@ context('Basic Details page', () => {
   it('can see buttons', () => {
     cy.visit('/basic-details/37159b12-5c73-407a-94b6-43fc23938df6')
     cy.url().should('include', '/basic-details')
-    cy.get('#page-title').should('contain.text', 'Warrant Risk Assessment - Basic Details')
+    cy.get('#page-title').should('contain.text', 'Basic Details')
     cy.get('#continue-button').should('contain.text', 'Continue')
     cy.get('#close-button').should('contain.text', 'Save Progress and Close')
     cy.get('#refresh-from-ndelius--button').should('contain.text', 'Refresh from Delius')
@@ -47,7 +47,7 @@ context('Basic Details page', () => {
   it('When no DWP address present, add address button should display with correct navigation', () => {
     cy.visit('/basic-details/37159b12-5c73-407a-94b6-43fc23938df6')
     cy.url().should('include', '/basic-details')
-    cy.get('#page-title').should('contain.text', 'Warrant Risk Assessment - Basic Details')
+    cy.get('#page-title').should('contain.text', 'Basic Details')
     cy.get('#dwp-address').should('not.exist')
     cy.get('#add-address-button').should('exist').should('be.visible')
     cy.get('#update-address-button').should('not.exist')
@@ -59,7 +59,7 @@ context('Basic Details page', () => {
   it('should display DWP address and update address button if present with navigation', () => {
     cy.visit('/basic-details/f42ca70c-8c2e-4def-be06-a455d1034467')
     cy.url().should('include', '/basic-details')
-    cy.get('#page-title').should('contain.text', 'Warrant Risk Assessment - Basic Details')
+    cy.get('#page-title').should('contain.text', 'Basic Details')
     cy.get('#dwp-address').should('exist').should('be.visible')
     cy.get('#dwp-address').should('contain.text', 'A Fun DWP Location')
     cy.get('#dwp-address').should('contain.text', '67 DWPStreet')
@@ -78,13 +78,13 @@ context('Basic Details page', () => {
     cy.intercept('POST', '/basic-details/**').as('refreshRequest')
     cy.visit('/basic-details/ffa7f42c-b355-4a6c-8668-4e4fe6d77b06')
     cy.url().should('include', '/basic-details')
-    cy.get('#page-title').should('contain.text', 'Warrant Risk Assessment - Basic Details')
+    cy.get('#page-title').should('contain.text', 'Basic Details')
     cy.get('#name').should('contain.text', 'Mr Billy The Kid')
     cy.get('#refresh-from-ndelius--button').click()
     cy.wait('@refreshRequest')
     cy.url().should('include', '/basic-details/ffa7f42c-b355-4a6c-8668-4e4fe6d77b06')
     cy.url().should('include', '/basic-details')
-    cy.get('#page-title').should('contain.text', 'Warrant Risk Assessment - Basic Details')
+    cy.get('#page-title').should('contain.text', 'Basic Details')
     cy.get('#name').should('contain.text', 'Mr Billy The Kid')
   })
 
@@ -92,7 +92,7 @@ context('Basic Details page', () => {
     cy.intercept('POST', '/basic-details/**').as('saveAndCloseRequest')
     cy.visit('/basic-details/4146ad41-8a05-45c1-b593-d5c7e22c9625')
     cy.url().should('include', '/basic-details')
-    cy.get('#page-title').should('contain.text', 'Warrant Risk Assessment - Basic Details')
+    cy.get('#page-title').should('contain.text', 'Basic Details')
     cy.get('#name').should('contain.text', 'Mr Billy The Kid')
     cy.get('#close-button').click()
     cy.wait('@saveAndCloseRequest').then(({ request }) => {
@@ -107,7 +107,7 @@ context('Basic Details page', () => {
     cy.intercept('POST', '/basic-details/**').as('formSubmit')
     cy.visit('/basic-details/bf77620c-d913-4e62-9150-0c54486d78cc')
     cy.url().should('include', '/basic-details')
-    cy.get('#page-title').should('contain.text', 'Warrant Risk Assessment - Basic Details')
+    cy.get('#page-title').should('contain.text', 'Basic Details')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
     cy.url().should('include', '/risk-assessment/bf77620c-d913-4e62-9150-0c54486d78cc')
@@ -117,7 +117,7 @@ context('Basic Details page', () => {
     cy.intercept('POST', '/basic-details/**').as('formSubmit')
     cy.visit('/basic-details/96bcb64c-df61-4887-a2f5-76ca61ec8b3d?returnTo=check-your-report')
     cy.url().should('include', '/basic-details')
-    cy.get('#page-title').should('contain.text', 'Warrant Risk Assessment - Basic Details')
+    cy.get('#page-title').should('contain.text', 'Basic Details')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
     cy.url().should('include', '/check-your-report/96bcb64c-df61-4887-a2f5-76ca61ec8b3d')
@@ -126,7 +126,7 @@ context('Basic Details page', () => {
   it('should display deeplink when no valid addresses present', () => {
     cy.visit('/basic-details/5c17706e-a8ec-4276-8755-9b866f751e04')
     cy.url().should('include', '/basic-details')
-    cy.get('#page-title').should('contain.text', 'Warrant Risk Assessment - Basic Details')
+    cy.get('#page-title').should('contain.text', 'Basic Details')
     cy.get('#address').should('not.exist')
     cy.get('#no-address-found').should('exist').should('contain.text', 'No Postal Address found in National Delius')
     cy.get('#add-address--deeplink')
@@ -161,7 +161,7 @@ context('Basic Details page', () => {
   it('warning message to appear when personal contact returned from DB but not NDelius', () => {
     cy.visit('/basic-details/5dd78c4b-a2d4-4be6-9024-996664ef6072')
     cy.url().should('include', '/basic-details')
-    cy.get('#page-title').should('contain.text', 'Warrant Risk Assessment - Basic Details')
+    cy.get('#page-title').should('contain.text', 'Basic Details')
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.contains(
       'Previously recorded employers are no longer available. Please check the content of this screen and press "Continue" or "Save progress and close" to save the current information',
