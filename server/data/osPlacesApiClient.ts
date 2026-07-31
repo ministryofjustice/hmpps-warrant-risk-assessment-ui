@@ -31,10 +31,6 @@ export class OSPlacesAPIClient {
 
     try {
       const response = await fetch(url.toString())
-      if (!response.ok) {
-        logger.error(`OS Places API call failed with HTTP ${response.status}: ${response.statusText}`)
-        return { results: [] }
-      }
       return (await response.json()) as OSPlacesFindResponse
     } catch (error) {
       logger.error('Error calling OS Places API, ', error)

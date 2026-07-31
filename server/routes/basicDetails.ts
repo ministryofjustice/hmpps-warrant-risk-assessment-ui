@@ -309,8 +309,8 @@ export default function basicDetailsRoutes(
     } else if (req.body.action === 'refreshFromNdelius') {
       // redirect to warning details to force a reload
       res.redirect(`/basic-details/${warrantRiskAssessmentId}`)
-    } else if (callingScreen && callingScreen === 'check-your-report') {
-      res.redirect(`/check-your-report/${req.params.id}`)
+    } else if (callingScreen && callingScreen === 'check-your-answers') {
+      res.redirect(`/check-your-answers/${req.params.id}`)
     } else {
       res.redirect(`/risk-assessment/${warrantRiskAssessmentId}`)
     }

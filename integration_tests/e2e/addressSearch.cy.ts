@@ -2,11 +2,11 @@ context('Address Search page', () => {
   it('can see buttons', () => {
     cy.visit('/address-search/1c7bf7ec-9e8d-4f99-8fd8-bf43b7f5ad11')
     cy.url().should('include', '/address-search')
-    cy.get('#page-title').should('contain.text', 'Search for a DWP Signing on Office')
+    cy.get('#page-title').should('contain.text', 'Find a DWP Signing on Office')
     cy.get('#searchTerm').should('exist').should('be.visible')
-    cy.get('#search-button').should('contain.text', 'Search for offices in this area')
+    cy.get('#search-button').should('contain.text', 'Search')
     cy.get('#select-button').should('contain.text', 'Select')
-    cy.get('#cancel-button').should('contain.text', 'Cancel')
+    cy.get('#back-button').should('contain.text', 'Back')
   })
 
   it('Results are displayed when entering a search term and clicking search', () => {
@@ -21,10 +21,10 @@ context('Address Search page', () => {
       expect(body.get('searchTerm')).to.equal('Example')
     })
 
-    cy.contains('Please select the relevant address').should('be.visible')
-    cy.get('input[name="addressRadio"]').should('have.length', 2)
+    cy.contains('Choose an office').should('be.visible')
+    cy.get('input[name="addressRadio"]').should('have.length', 1)
     cy.contains('Jobcentre Plus, 1 Example Street, Leeds, LS1 1AA').should('be.visible')
-    cy.contains('Jobcentre Plus, 20 Market Road, Bradford, BD1 1AA').should('be.visible')
+    cy.contains('Jobcentre Plus, 20 Market Road, Bradford, BD1 1AA').should('not.exist')
     cy.contains('Other Office, 9 Example Street, Leeds, LS1 1AA').should('not.exist')
   })
 
@@ -109,9 +109,9 @@ context('Address Search page', () => {
     cy.get('#addressRadio-error').should('contain.text', 'Please select an address to continue')
   })
 
-  it('should return to add-dwp-address on cancel operation', () => {
+  it('should return to add-dwp-address on back operation', () => {
     cy.visit('/address-search/b6f37d2a-5c1e-4fd7-90c6-2d1ea8b3f9a5')
-    cy.get('#cancel-button').click()
+    cy.get('#back-button').click()
 
     cy.url().should('include', '/add-dwp-address/b6f37d2a-5c1e-4fd7-90c6-2d1ea8b3f9a5')
   })

@@ -172,8 +172,8 @@ export default function riskSummaryRoutes(
         res.send(
           `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
         )
-      } else if (callingScreen && callingScreen === 'check-your-report') {
-        res.redirect(`/check-your-report/${req.params.id}`)
+      } else if (callingScreen && callingScreen === 'check-your-answers') {
+        res.redirect(`/check-your-answers/${req.params.id}`)
       } else {
         res.redirect(`/warrant-execution/${warrantRiskAssessmentId}`)
       }

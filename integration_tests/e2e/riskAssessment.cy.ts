@@ -173,14 +173,14 @@ context('Risk Assessment page', () => {
     cy.url().should('include', '/risk-summary/bb9d0aff-7b6c-4239-99cb-32672e47b4f5')
   })
 
-  it('should return to check your report if came from check your report', () => {
+  it('should return to check your answers if came from check your answers', () => {
     cy.intercept('POST', '/risk-assessment/**').as('formSubmit')
-    cy.visit('/risk-assessment/b5cebf44-b000-46a6-921a-6f8cfc45e0d5?returnTo=check-your-report')
+    cy.visit('/risk-assessment/b5cebf44-b000-46a6-921a-6f8cfc45e0d5?returnTo=check-your-answers')
     cy.url().should('include', '/risk-assessment')
     cy.get('#page-title').should('contain.text', 'Risk Assessment')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
-    cy.url().should('include', '/check-your-report/b5cebf44-b000-46a6-921a-6f8cfc45e0d5')
+    cy.url().should('include', '/check-your-answers/b5cebf44-b000-46a6-921a-6f8cfc45e0d5')
   })
 
   it('should stay on page and show NDelius error message if 500 thrown from NDelius integration service', () => {
