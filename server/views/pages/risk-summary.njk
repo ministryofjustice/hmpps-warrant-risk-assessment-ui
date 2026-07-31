@@ -5,11 +5,33 @@
 
 {% block content %}
 
-  {% from "moj/components/side-navigation/macro.njk" import mojSideNavigation %}
   {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+  {% from "moj/components/side-navigation/macro.njk" import mojSideNavigation %}
   {% from "govuk/components/button/macro.njk" import govukButton %}
+  {% from "govuk/components/radios/macro.njk" import govukRadios %}
+  {% from "govuk/components/details/macro.njk" import govukDetails %}
+
+  {% macro renderInfoList(items) %}
+    {% if items and items.length > 0 %}
+      {% for info in items %}
+        <p><strong>{{ info.label }}:</strong> {{ info.value }}</p>
+      {% endfor %}
+    {% else %}
+      <p>None Found</p>
+    {% endif %}
+  {% endmacro %}
 
   <form method="post">
+
+    {% set errorList =[
+      { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None
+    ] | reject("undefined") %}
+
+    {% if errorMessages | length > 0 %}
+      {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+      {{ govukErrorSummary({ titleText: "There is a problem", errorList: errorList }) }}
+    {% endif %}
+
     <input type="hidden" name="_csrf" value="{{ csrfToken }}">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third">
@@ -17,7 +39,141 @@
       </div>
       <div class="govuk-grid-column-two-thirds">
 
-        <h1 class="govuk-heading-l">Warrant Risk Assessment - Risk Summary</h1>
+        <h1 id="page-title" class="govuk-heading-l">Risk Summary</h1>
+
+        {% set publicContent %}
+          {{ renderInfoList(publicInfo) }}
+        {% endset %}
+
+        {{ govukDetails({
+          id: "publicDetails",
+          summaryText: "Information about risk to public",
+          html: publicContent
+        }) }}
+
+        {{ govukRadios({
+          name: "publicRadio",
+          id: "publicRadio",
+          fieldset: {
+            legend: {
+              text: "What is the risk to the public?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "Low",
+              text: "Low",
+              checked: publicSelection === 'Low'
+            },
+            {
+              value: "Medium",
+              text: "Medium",
+              checked: publicSelection === 'Medium'
+            },
+            {
+              value: "High",
+              text: "High",
+              checked: publicSelection === 'High'
+            }
+          ]
+        }) }}
+
+        {% set staffContent %}
+          {{ renderInfoList(staffInfo) }}
+        {% endset %}
+
+        {{ govukDetails({
+          id: "officerDetails",
+          summaryText: "Information about risk to staff",
+          html: staffContent
+        }) }}
+
+        {{ govukRadios({
+          name: "officerRadio",
+          id: "officerRadio",
+          fieldset: {
+            legend: {
+              text: "What is the risk to the enforcement officer?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "Low",
+              text: "Low",
+              checked: officerSelection === 'Low'
+            },
+            {
+              value: "Medium",
+              text: "Medium",
+              checked: officerSelection === 'Medium'
+            },
+            {
+              value: "High",
+              text: "High",
+              checked: officerSelection === 'High'
+            }
+          ]
+        }) }}
+
+        {{ govukDetails({
+          id: "policeDetails",
+          summaryText: "Information about risk to staff",
+          html: staffContent
+        }) }}
+
+        {{ govukRadios({
+          name: "policeRadio",
+          id: "policeRadio",
+          fieldset: {
+            legend: {
+              text: "What is the risk to the police?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "Low",
+              text: "Low",
+              checked: policeSelection === 'Low'
+            },
+            {
+              value: "Medium",
+              text: "Medium",
+              checked: policeSelection === 'Medium'
+            },
+            {
+              value: "High",
+              text: "High",
+              checked: policeSelection === 'High'
+            }
+          ]
+        }) }}
+
+        <div class="moj-button-group">
+          {{ govukButton({
+            text: "Continue",
+            preventDoubleClick: "true",
+            type: "submit",
+            attributes: {
+              id: "continue-button"
+            }
+          }) }}
+          {{ govukButton({
+            text: "Save Progress and Close",
+            type: "submit",
+            name: "action",
+            value: "saveProgressAndClose",
+            classes: "govuk-button--secondary",
+            attributes: {
+              id: "close-button"
+            }
+          }) }}
+        </div>
 
       </div>
     </div>

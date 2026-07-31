@@ -34,6 +34,15 @@ export default class AssessRiskAndNeedsApiClient extends RestClient {
       asSystem(username),
     )
   }
+
+  async getRisks(crn: string, username: string): Promise<AllRoshRisk> {
+    return this.get(
+      {
+        path: `/risks/crn/${crn}`,
+      },
+      asSystem(username),
+    )
+  }
 }
 
 export interface AssessmentNeeds {
