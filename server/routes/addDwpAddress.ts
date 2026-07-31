@@ -57,7 +57,7 @@ export default function addDwpAddressRoutes(
       }
 
       const showEmbeddedError = true
-      res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
+      res.render(`pages/add-dwp-address`, { errorMessages, showEmbeddedError })
       return
     }
 
@@ -109,7 +109,7 @@ export default function addDwpAddressRoutes(
       }
 
       const showEmbeddedError = true
-      res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
+      res.render(`pages/add-dwp-address`, { errorMessages, showEmbeddedError })
       return
     }
 

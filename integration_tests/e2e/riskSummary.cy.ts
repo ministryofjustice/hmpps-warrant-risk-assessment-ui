@@ -102,14 +102,14 @@ context('Risk Summary page', () => {
     cy.url().should('include', '/warrant-execution/2ac0e93f-8b14-4d67-85ef-f2c0a1d9be73')
   })
 
-  it('should return to check your report if came from check your report', () => {
+  it('should return to check your answers if came from check your answers', () => {
     cy.intercept('POST', '/risk-summary/**').as('formSubmit')
-    cy.visit('/risk-summary/b4d82761-0f6a-4c52-bf8e-3a1d65e9c074?returnTo=check-your-report')
+    cy.visit('/risk-summary/b4d82761-0f6a-4c52-bf8e-3a1d65e9c074?returnTo=check-your-answers')
     cy.url().should('include', '/risk-summary')
     cy.get('#page-title').should('contain.text', 'Risk Summary')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
-    cy.url().should('include', '/check-your-report/b4d82761-0f6a-4c52-bf8e-3a1d65e9c074')
+    cy.url().should('include', '/check-your-answers/b4d82761-0f6a-4c52-bf8e-3a1d65e9c074')
   })
 
   it('should stay on page and show ARNS error message if 500 thrown from ARNS service', () => {

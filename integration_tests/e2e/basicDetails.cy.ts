@@ -113,14 +113,14 @@ context('Basic Details page', () => {
     cy.url().should('include', '/risk-assessment/bf77620c-d913-4e62-9150-0c54486d78cc')
   })
 
-  it('should return to check your report if came from check your report', () => {
+  it('should return to check your answers if came from check your answers', () => {
     cy.intercept('POST', '/basic-details/**').as('formSubmit')
-    cy.visit('/basic-details/96bcb64c-df61-4887-a2f5-76ca61ec8b3d?returnTo=check-your-report')
+    cy.visit('/basic-details/96bcb64c-df61-4887-a2f5-76ca61ec8b3d?returnTo=check-your-answers')
     cy.url().should('include', '/basic-details')
     cy.get('#page-title').should('contain.text', 'Basic Details')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
-    cy.url().should('include', '/check-your-report/96bcb64c-df61-4887-a2f5-76ca61ec8b3d')
+    cy.url().should('include', '/check-your-answers/96bcb64c-df61-4887-a2f5-76ca61ec8b3d')
   })
 
   it('should display deeplink when no valid addresses present', () => {

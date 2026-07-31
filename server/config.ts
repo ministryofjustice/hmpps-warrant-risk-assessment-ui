@@ -103,6 +103,10 @@ export default {
       },
       agent: new AgentConfig(Number(get('ASSESS_RISKS_AND_NEEDS_API_TIMEOUT_RESPONSE', 5000))),
     },
+    osPlaces: {
+      url: get('OS_PLACES_API_URL', 'http://localhost:9091/search/places/v1', requiredInProduction),
+      key: get('OS_DATAHUB_API_KEY', 'test-api-key', requiredInProduction),
+    },
   },
   ndeliusDeeplink: {
     url: get(
