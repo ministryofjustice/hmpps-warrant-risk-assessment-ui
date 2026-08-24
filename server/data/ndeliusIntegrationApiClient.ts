@@ -26,6 +26,15 @@ export default class NDeliusIntegrationApiClient extends RestClient {
     )
   }
 
+  async getResponsibleOfficerDetails(crn: string, username: string): Promise<SignAndSendDetails> {
+    return this.get(
+      {
+        path: `/responsible-officer/${crn}`,
+      },
+      asSystem(username),
+    )
+  }
+
   async getLimitedAccessCheck(crn: string, username: string): Promise<LimitedAccessCheck> {
     return this.get(
       {
@@ -86,10 +95,16 @@ export interface DeliusAddress {
 }
 
 export interface SignAndSendDetails {
+  userDetails: UserDetails
   name: Name
   telephoneNumber?: string
-  emailAddress?: string
-  addresses: DeliusAddress[]
+  probationArea?: ReferenceData
+  replyAddress: DeliusAddress[]
+}
+
+export interface UserDetails {
+  forenames: string
+  surname: string
 }
 
 export interface ReferenceData {

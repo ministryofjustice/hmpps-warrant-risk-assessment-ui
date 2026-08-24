@@ -17,7 +17,6 @@
         "transformers": ["response-template"]
       }
     },
-
     {
       "request": {
         "url": "/warrant-risk-assessment-api/warrant-risk-assessment/00000000-0000-0000-0000-000000000001",
@@ -368,7 +367,6 @@
         "transformers": ["response-template"]
       }
     },
-
     {
       "request": {
         "url": "/warrant-risk-assessment-api/warrant-risk-assessment/00000000-0000-0000-0000-100000000006",
@@ -387,7 +385,6 @@
         "transformers": ["response-template"]
       }
     },
-
     {
       "request": {
         "url": "/warrant-risk-assessment-api/warrant-risk-assessment/00000000-0000-0000-0000-100000000007",
@@ -406,7 +403,6 @@
         "transformers": ["response-template"]
       }
     },
-
     {
       "request": {
         "url": "/warrant-risk-assessment-api/warrant-risk-assessment/00000000-0000-0000-0000-100000000008",
@@ -425,7 +421,6 @@
         "transformers": ["response-template"]
       }
     },
-
     {
       "request": {
         "url": "/warrant-risk-assessment-api/warrant-risk-assessment/00000000-0000-0000-0000-100000000009",
@@ -1133,6 +1128,492 @@
         "jsonBody": {
           "id": "98c1f6ad-4b7a-4f95-a1de-7c2e3f9b5d60",
           "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/11111111-1111-4111-8111-111111111111",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "11111111-1111-4111-8111-111111111111",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/22222222-2222-4222-8222-222222222222",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "22222222-2222-4222-8222-222222222222",
+          "crn": "X000001",
+          "completedDate": null,
+          "signature": "UserSignForename UserSignMiddle UserSignSurname 21/08/2026 (Responsible Officer)",
+          "sheetSentBy": "responsibleOfficer"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/33333333-3333-4333-8333-333333333333",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "33333333-3333-4333-8333-333333333333",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/44444444-4444-4444-8444-444444444444",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "44444444-4444-4444-8444-444444444444",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/55555555-5555-4555-8555-555555555555",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "55555555-5555-4555-8555-555555555555",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/66666666-6666-4666-8666-666666666666",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "66666666-6666-4666-8666-666666666666",
+          "crn": "X000001",
+          "completedDate": null,
+          "signature": "UserSignForename UserSignMiddle UserSignSurname 21/08/2026 (Responsible Officer)",
+          "sheetSentBy": "responsibleOfficer"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/77777777-7777-4777-8777-777777777777",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "77777777-7777-4777-8777-777777777777",
+          "crn": "X000004",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/88888888-8888-4888-8888-888888888888",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "88888888-8888-4888-8888-888888888888",
+          "crn": "X000001",
+          "completedDate": null,
+          "workAddress": {
+            "id": "100",
+            "warrantRiskAssessmentId": "88888888-8888-4888-8888-888888888888",
+            "deliusAddressId": 2,
+            "status": "Main",
+            "officeDescription": "Main Work Location",
+            "buildingName": "Main Building",
+            "addressNumber": "2789",
+            "streetName": "Main Street",
+            "townCity": "Maintown",
+            "district": "MainDistrict",
+            "county": "Maincounty",
+            "postcode": "MA30 3IN",
+            "screen": "warrantExecution"
+          },
+          "basicDetailsSaved": true
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/99999999-9999-4999-8999-999999999999",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "99999999-9999-4999-8999-999999999999",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "crn": "X000001",
+          "completedDate": null,
+          "workAddress": {
+            "id": "101",
+            "warrantRiskAssessmentId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+            "deliusAddressId": 3,
+            "status": "Main",
+            "officeDescription": "Old Work Location",
+            "buildingName": "Old Building",
+            "addressNumber": "1",
+            "streetName": "Old Street",
+            "townCity": "Old Town",
+            "district": "Old District",
+            "county": "Old County",
+            "postcode": "OL1 1AA",
+            "screen": "warrantExecution"
+          },
+          "basicDetailsSaved": true
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/dddddddd-dddd-4ddd-8ddd-dddddddddddd",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/ffffffff-ffff-4fff-8fff-ffffffffffff",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/12121212-1212-4121-8121-121212121212",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/34343434-3434-4343-8343-343434343434",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "crn": "X000002",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+          "crn": "X000002",
+          "completedDate": null,
+          "workAddress": {
+            "id": "102",
+            "warrantRiskAssessmentId": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+            "deliusAddressId": null,
+            "status": "Main",
+            "officeDescription": "Manual Work Location",
+            "buildingName": null,
+            "addressNumber": "19",
+            "streetName": "Employer Street",
+            "townCity": "Employer City",
+            "district": "Emptrict",
+            "county": "Emplounty",
+            "postcode": "EM07 YER",
+            "screen": "warrantExecution"
+          },
+          "basicDetailsSaved": true
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/dddddddd-dddd-4ddd-8ddd-dddddddddddd",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "dddddddd-dddd-4ddd-8ddd-dddddddddddd",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/ffffffff-ffff-4fff-8fff-ffffffffffff",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "ffffffff-ffff-4fff-8fff-ffffffffffff",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/56565656-5656-4565-8565-565656565656",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "56565656-5656-4565-8565-565656565656",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "scenarioName": "warrantExecutionSignScenario",
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/12121212-1212-4121-8121-121212121212",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "12121212-1212-4121-8121-121212121212",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "scenarioName": "warrantExecutionClearScenario",
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/34343434-3434-4343-8343-343434343434",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "34343434-3434-4343-8343-343434343434",
+          "crn": "X000001",
+          "completedDate": null,
+          "signature": "UserSignForename UserSignMiddle UserSignSurname 21/08/2026 (Responsible Officer)",
+          "sheetSentBy": "responsibleOfficer"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/78787878-7878-4787-8787-787878787878",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "78787878-7878-4787-8787-787878787878",
+          "crn": "Z000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/bdbdbdbd-bdbd-4bdb-8bdb-bdbdbdbdbdbd",
+        "method": "GET"
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred in the Warrant Risk Assessment service"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/abababab-abab-4aba-8aba-abababababab",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "abababab-abab-4aba-8aba-abababababab",
+          "crn": "Z000002",
           "completedDate": null
         },
         "headers": {

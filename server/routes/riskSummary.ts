@@ -161,6 +161,7 @@ export default function riskSummaryRoutes(
     warrantRiskAssessment.riskToPublicLevel = req.body.publicRadio
     warrantRiskAssessment.riskToEnforcementOfficers = req.body.officerRadio
     warrantRiskAssessment.riskToPolice = req.body.policeRadio
+    warrantRiskAssessment.riskSummarySaved = true
 
     try {
       await warrantRiskAssessmentApiClient.updateWarrantRiskAssessment(

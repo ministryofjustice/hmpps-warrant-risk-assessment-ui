@@ -1,6 +1,6 @@
 {% extends "../partials/layout.njk" %}
 
-{% set pageTitle = applicationName + " - Warrant Execution and sign off" %}
+{% set pageTitle = applicationName + " - Warrant Execution and Sign off" %}
 {% set mainClasses = "app-container govuk-body" %}
 
 {% block content %}
@@ -8,8 +8,21 @@
   {% from "moj/components/side-navigation/macro.njk" import mojSideNavigation %}
   {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
   {% from "govuk/components/button/macro.njk" import govukButton %}
+  {% from "govuk/components/select/macro.njk" import govukSelect %}
+  {% from "govuk/components/radios/macro.njk" import govukRadios %}
 
   <form method="post">
+    {% set errorList =[
+      { text: errorMessages.sentByResponsibleOfficerOrUser.text, href: "#whoIsSendingTheForm" } if errorMessages.sentByResponsibleOfficerOrUser else None,
+      { text: errorMessages.missingPreviouslySelectedAddress.text, href: "#workAddressHeading" } if errorMessages.missingPreviouslySelectedAddress else None,
+      { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None
+    ] | reject("undefined") %}
+
+    {% if errorMessages | length > 0 %}
+      {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+      {{ govukErrorSummary({ titleText: "There is a problem", errorList: errorList }) }}
+    {% endif %}
+
     <input type="hidden" name="_csrf" value="{{ csrfToken }}">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-third">
@@ -17,8 +30,214 @@
       </div>
       <div class="govuk-grid-column-two-thirds">
 
-        <h1 class="govuk-heading-l">Warrant Risk Assessment - Warrant Execution and sign off</h1>
+        {% set alternateAddressHtml %}
+          {{ govukSelect({
+            id: "alternate-address",
+            name: "alternateAddress",
+            label: {
+              text: "Please pick an alternative work location",
+              classes: "govuk-fieldset__legend--m"
+            },
+            items: alternateAddressOptions
+          }) }}
+        {% endset -%}
 
+        {% if not showEmbeddedError %}
+          {% include "partials/review-required.njk" %}
+
+          <h1 class="govuk-heading-l" id="page-title">Warrant Execution and Sign off</h1>
+
+          <h2 class="govuk-heading-m">Warrant to be executed by</h2>
+          <p id="name">{{ executedBy }}</p>
+
+          <h2 class="govuk-heading-l">Responsible officer and sign off</h2>
+
+          <h2 class="govuk-heading-m">Full name of Responsible Officer</h2>
+          <p id="name">{{ warrantRiskAssessment.responsibleOfficerFullName }}</p>
+
+          <h2 class="govuk-heading-m">Provider</h2>
+          <p id="name">{{ warrantRiskAssessment.probationArea }}</p>
+
+          <h2 class="govuk-heading-m" id="workAddressHeading">Office</h2>
+
+          {% if onlyAlternateAddressesAvailable %}
+            <p id="alternate-address-text"> Please specify the Work Location and Address that the Person on Probation
+              should contact. </p>
+            <div id="alternate-address-dropdown">
+              {{ alternateAddressHtml | safe }}
+            </div>
+          {% endif %}
+
+          {% if not onlyAlternateAddressesAvailable %}
+            {% if warrantRiskAssessment.workAddress != null %}
+              <p id="workAddress">
+                {% if warrantRiskAssessment.workAddress.officeDescription %} {{ warrantRiskAssessment.workAddress.officeDescription }}
+                  <br />{% endif %}
+                {% if warrantRiskAssessment.workAddress.buildingName %} {{ warrantRiskAssessment.workAddress.buildingName }}
+                  <br />{% endif %}
+                {% if warrantRiskAssessment.workAddress.buildingName or warrantRiskAssessment.workAddress.streetName %} {{ warrantRiskAssessment.workAddress.addressNumber }} {{ warrantRiskAssessment.workAddress.streetName }}
+                  <br />{% endif %}
+                {% if warrantRiskAssessment.workAddress.district %} {{ warrantRiskAssessment.workAddress.district }}
+                  <br />{% endif %}
+                {% if warrantRiskAssessment.workAddress.townCity %} {{ warrantRiskAssessment.workAddress.townCity }}
+                  <br />{% endif %}
+                {% if warrantRiskAssessment.workAddress.county %} {{ warrantRiskAssessment.workAddress.county }}
+                  <br />{% endif %}
+                {% if warrantRiskAssessment.workAddress.postcode %} {{ warrantRiskAssessment.workAddress.postcode }}
+                  <br />{% endif %}
+              </p>
+
+              {% if warrantRiskAssessment.workAddress != null and warrantRiskAssessment.workAddress.addressId == null and (signAndSendDetails.replyAddress == null or signAndSendDetails.replyAddress.length == 0) %}
+                {{ govukButton({
+                  text: "Update Address",
+                  type: "submit",
+                  href: '/add-ro-address/'+warrantRiskAssessmentId,
+                  attributes: {
+                    id: "update-address-button"
+                  },
+                  classes: "govuk-button--secondary"
+                }) }}
+              {% endif %}
+            {% elseif addressNotAvailable %}
+              <p id="workAddress">The previously selected address is no longer available. Please select an
+                alternative</p>
+            {% else %}
+              <p id="no-address"></p>
+            {% endif %}
+
+            {% if manualAddressAllowed and warrantRiskAssessment.workAddress == null %}
+              <p id="AddAddressMessage">No reply address can be found for this Responsible Officer. Please add an
+                address by selecting the button below.</p>
+              {{ govukButton({
+                text: "Add Address",
+                type: "submit",
+                href: '/add-ro-address/'+warrantRiskAssessmentId,
+                attributes: {
+                  id: "add-address-button"
+                },
+                classes: "govuk-button--secondary"
+              }) }}
+
+            {% elseif not addressNotAvailable and signAndSendDetails.replyAddress != null and signAndSendDetails.replyAddress.length > 0 %}
+
+              {{ govukRadios({
+                name: "offenderAddressSelectOne",
+                id: "offenderAddressSelectOne",
+                fieldset: {
+                  legend: {
+                    text: "Would you like to use the work location above for this warrant risk assessment form?",
+                    isPageHeading: false,
+                    classes: "govuk-fieldset__legend--m"
+                  }
+                },
+                hint: {
+                  text: "Select one option"
+                },
+                items: [
+                  {
+                    value: "Yes",
+                    text: "Yes",
+                    checked: warrantRiskAssessment.workAddress != null
+                  },
+                  {
+                    value: "No",
+                    text: "No, I would like to use a different work location",
+                    checked: warrantRiskAssessment.workAddress == null,
+                    conditional: {
+                    html: alternateAddressHtml
+                  }
+                  }
+                ]
+              }) }}
+
+            {% elseif signAndSendDetails.replyAddress != null and signAndSendDetails.replyAddress.length > 0 %}
+
+              {{ alternateAddressHtml | safe }}
+
+            {% endif %}
+          {% endif %}
+
+          <h2 class="govuk-heading-m">Phone Number</h2>
+          <p id="name">{{ warrantRiskAssessment.responsibleOfficerTelephoneNumer }}</p>
+
+          {% if warrantRiskAssessment.signature == null %}
+            {{ govukRadios({
+              id: "whoIsSendingTheForm",
+              name: "whoIsSendingTheForm",
+              fieldset: {
+                legend: {
+                  text: "Please select who is sending this document?",
+                  isPageHeading: false,
+                  classes: "govuk-fieldset__legend--m"
+                }
+              },
+              errorMessage: {
+                text: errorMessages.sentByResponsibleOfficerOrUser.text
+              } if errorMessages.sentByResponsibleOfficerOrUser,
+              items: [
+                {
+                  value: "responsibleOfficer",
+                  text: "Responsible Officer",
+                  checked: warrantRiskAssessment.sheetSentBy === 'responsibleOfficer'
+                },
+                {
+                  value: "userOnBehalf",
+                  text: "User on behalf of the Responsible Officer",
+                  checked: warrantRiskAssessment.sheetSentBy === 'userOnBehalf'
+                }
+              ]
+            }) }}
+          {% endif %}
+
+          <h2 class="govuk-heading-m">Signature</h2>
+
+          {% if warrantRiskAssessment.signature == null %}
+            {{ govukButton({
+              text: "Click here to sign now",
+              type: "submit",
+              name: "action",
+              value: "sign",
+              classes: "govuk-button--secondary",
+              attributes: {
+                id: "sign-button"
+              }
+            }) }}
+          {% else %}
+            <p id="signature">{{ warrantRiskAssessment.signature }}</p>
+            {{ govukButton({
+              text: "Clear Signature",
+              type: "submit",
+              name: "action",
+              value: "clear-signature",
+              classes: "govuk-button--secondary",
+              attributes: {
+                id: "clear-signature-button"
+              }
+            }) }}
+          {% endif %}
+
+          <div class="moj-button-group">
+            {{ govukButton({
+              text: "Continue",
+              preventDoubleClick: "true",
+              type: "submit",
+              attributes: {
+                id: "continue-button"
+              }
+            }) }}
+            {{ govukButton({
+              text: "Save Progress and Close",
+              type: "submit",
+              name: "action",
+              value: "saveProgressAndClose",
+              classes: "govuk-button--secondary",
+              attributes: {
+                id: "close-button"
+              }
+            }) }}
+          </div>
+
+        {% endif %}
       </div>
     </div>
   </form>
