@@ -176,6 +176,8 @@ export interface WarrantRiskAssessment {
   lastHomeVisitDate: string
   riskAssessmentSaved: boolean
   riskSummarySaved: boolean
+  responsibleOfficerFullName: string
+  responsibleOfficerTelephoneNumer: string
 }
 
 export interface WarrantRiskAssessmentAddress {

@@ -311,6 +311,171 @@
           "Content-Type": "application/json;charset=UTF-8"
         }
       }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/responsible-officer/X000001",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "userDetails": {
+            "forenames": "UserSignForename UserSignMiddle",
+            "surname": "UserSignSurname"
+          },
+          "name": {
+            "forename": "NotSo",
+            "middleName": "Nice",
+            "surname": "Officer"
+          },
+          "telephoneNumber": "07707123456",
+          "probationArea": {
+            "code": "N01",
+            "description": "Northumbria"
+          },
+          "replyAddress": [
+            {
+              "id": 1,
+              "status": "Postal",
+              "buildingName": null,
+              "buildingNumber": "281",
+              "streetName": "Postal Default Street",
+              "townCity": "Postinton",
+              "district": "Postrict",
+              "county": "County Post",
+              "postcode": "NE30 3ZZ"
+            },
+            {
+              "id": 2,
+              "status": "Main",
+              "buildingName": null,
+              "buildingNumber": "2789",
+              "streetName": "Main Street",
+              "townCity": "Maintown",
+              "district": "MainDistrict",
+              "county": "Maincounty",
+              "postcode": "MA30 3IN"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/responsible-officer/X000002",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "userDetails": {
+            "forenames": "UserSignForename UserSignMiddle",
+            "surname": "UserSignSurname"
+          },
+          "name": {
+            "forename": "NotSo",
+            "middleName": "Nice",
+            "surname": "Officer"
+          },
+          "telephoneNumber": "07707123456",
+          "probationArea": {
+            "code": "N01",
+            "description": "Northumbria"
+          },
+          "replyAddress": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/responsible-officer/X000004",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "userDetails": {
+            "forenames": "UserSignForename UserSignMiddle",
+            "surname": "UserSignSurname"
+          },
+          "name": {
+            "forename": "NotSo",
+            "middleName": "Nice",
+            "surname": "Officer"
+          },
+          "telephoneNumber": "07707123456",
+          "probationArea": {
+            "code": "N01",
+            "description": "Northumbria"
+          },
+          "replyAddress": [
+            {
+              "id": 41,
+              "status": "Default",
+              "officeDescription": "Default Work Location",
+              "buildingName": "Default Building",
+              "buildingNumber": "1",
+              "streetName": "Default Street",
+              "townCity": "Default Town",
+              "district": "Default District",
+              "county": "Default County",
+              "postcode": "DF1 1AA"
+            },
+            {
+              "id": 42,
+              "status": "Main",
+              "officeDescription": "Other Work Location",
+              "buildingName": "Other Building",
+              "buildingNumber": "2",
+              "streetName": "Other Street",
+              "townCity": "Other Town",
+              "district": "Other District",
+              "county": "Other County",
+              "postcode": "OT2 2BB"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/responsible-officer/Z000001",
+        "method": "GET"
+      },
+      "response": {
+        "status": 500,
+        "jsonBody": {
+          "message": "Some server side error occurred"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/responsible-officer/Z000002",
+        "method": "GET"
+      },
+      "response": {
+        "status": 400,
+        "jsonBody": {
+          "message": "CRN not found"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
     }
   ]
 }
