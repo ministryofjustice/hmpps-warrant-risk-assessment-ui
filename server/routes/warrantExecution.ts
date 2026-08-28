@@ -357,7 +357,6 @@ export default function warrantExecutionRoutes(
           'Warrant Risk Assessment',
         )
         const showEmbeddedError = true
-        // always stay on page and display the error when there are isssues retrieving the breach notice
         res.render(`pages/warrant-execution`, { errorMessages, showEmbeddedError })
       }
     }
