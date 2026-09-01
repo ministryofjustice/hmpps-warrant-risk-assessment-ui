@@ -2198,6 +2198,123 @@
         },
         "transformers": ["response-template"]
       }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/13e8c3a1-6f42-4ed3-9510-3c299ef84d11",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "13e8c3a1-6f42-4ed3-9510-3c299ef84d11",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/7b0d92f4-5c61-4ae9-9cb7-6f6be9a27422",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "7b0d92f4-5c61-4ae9-9cb7-6f6be9a27422",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/7b0d92f4-5c61-4ae9-9cb7-6f6be9a27422",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/d1f6a7cb-2bc4-46ea-bf0d-51cb98ad8b33",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "d1f6a7cb-2bc4-46ea-bf0d-51cb98ad8b33",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/24b8f55e-b39e-4cc9-bb41-a8bc2b322844",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "24b8f55e-b39e-4cc9-bb41-a8bc2b322844",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/8ce2d463-9a15-43de-9f6f-1cd8e2cbf155",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "8ce2d463-9a15-43de-9f6f-1cd8e2cbf155",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/a6f412e8-9475-49fb-aacd-273dc7ff0661",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "a6f412e8-9475-49fb-aacd-273dc7ff0661",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
     }
   ]
 }

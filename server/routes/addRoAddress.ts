@@ -10,16 +10,16 @@ import WarrantRiskAssessmentApiClient, {
   WarrantRiskAssessmentAddress,
 } from '../data/warrantRiskAssessmentApiClient'
 
-export default function addDwpAddressRoutes(
+export default function addRoAddressRoutes(
   router: Router,
   auditService: AuditService,
   authenticationClient: AuthenticationClient,
   commonUtils: CommonUtils,
 ): Router {
-  const currentPage = 'add-dwp-address'
+  const currentPage = 'add-ro-address'
 
-  router.get('/add-dwp-address/:id', async (req, res) => {
-    await auditService.logPageView(Page.ADD_DWP_ADDRESS, { who: res.locals.user.username, correlationId: req.id })
+  router.get('/add-ro-address/:id', async (req, res) => {
+    await auditService.logPageView(Page.ADD_RO_ADDRESS, { who: res.locals.user.username, correlationId: req.id })
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
     const warrantRiskAssessmentId: string = req.params.id
     let warrantRiskAssessment: WarrantRiskAssessment = null
@@ -57,21 +57,21 @@ export default function addDwpAddressRoutes(
       }
 
       const showEmbeddedError = true
-      res.render(`pages/add-dwp-address`, { errorMessages, showEmbeddedError })
+      res.render(`pages/add-ro-address`, { errorMessages, showEmbeddedError })
       return
     }
 
     if (await commonUtils.redirectRequired(warrantRiskAssessment, warrantRiskAssessmentId, res, authenticationClient))
       return
 
-    res.render('pages/add-dwp-address', {
+    res.render('pages/add-ro-address', {
       warrantRiskAssessment,
       currentPage,
       warrantRiskAssessmentId,
     })
   })
 
-  router.post('/add-dwp-address/:id', async (req, res) => {
+  router.post('/add-ro-address/:id', async (req, res) => {
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
     const warrantRiskAssessmentId: string = req.params.id
     let warrantRiskAssessment: WarrantRiskAssessment = null
@@ -109,12 +109,12 @@ export default function addDwpAddressRoutes(
       }
 
       const showEmbeddedError = true
-      res.render(`pages/add-dwp-address`, { errorMessages, showEmbeddedError })
+      res.render(`pages/add-ro-address`, { errorMessages, showEmbeddedError })
       return
     }
 
-    if (warrantRiskAssessment.signOnOffice == null) {
-      warrantRiskAssessment.signOnOffice = {
+    if (warrantRiskAssessment.workAddress == null) {
+      warrantRiskAssessment.workAddress = {
         deliusAddressId: null,
         buildingName: null,
         addressNumber: null,
@@ -130,16 +130,16 @@ export default function addDwpAddressRoutes(
       }
     }
 
-    warrantRiskAssessment.signOnOffice.officeDescription = req.body.officeDescription
-    warrantRiskAssessment.signOnOffice.addressNumber = req.body.addressNumber
-    warrantRiskAssessment.signOnOffice.buildingName = req.body.buildingName
-    warrantRiskAssessment.signOnOffice.streetName = req.body.streetName
-    warrantRiskAssessment.signOnOffice.district = req.body.district
-    warrantRiskAssessment.signOnOffice.townCity = req.body.townCity
-    warrantRiskAssessment.signOnOffice.county = req.body.county
-    warrantRiskAssessment.signOnOffice.postcode = req.body.postcode
+    warrantRiskAssessment.workAddress.officeDescription = req.body.officeDescription
+    warrantRiskAssessment.workAddress.addressNumber = req.body.addressNumber
+    warrantRiskAssessment.workAddress.buildingName = req.body.buildingName
+    warrantRiskAssessment.workAddress.streetName = req.body.streetName
+    warrantRiskAssessment.workAddress.district = req.body.district
+    warrantRiskAssessment.workAddress.townCity = req.body.townCity
+    warrantRiskAssessment.workAddress.county = req.body.county
+    warrantRiskAssessment.workAddress.postcode = req.body.postcode
 
-    const errorMessages: ErrorMessages = validateAddress(warrantRiskAssessment.signOnOffice)
+    const errorMessages: ErrorMessages = validateAddress(warrantRiskAssessment.workAddress)
     const hasErrors: boolean = Object.keys(errorMessages).length > 0
 
     if (!hasErrors) {
@@ -149,7 +149,7 @@ export default function addDwpAddressRoutes(
           warrantRiskAssessment,
           res.locals.user.username,
         )
-        res.redirect(`/basic-details/${req.params.id}`)
+        res.redirect(`/warrant-execution/${req.params.id}`)
       } catch (error) {
         const integrationErrorMessages = handleIntegrationErrors(
           error.status,
@@ -157,10 +157,10 @@ export default function addDwpAddressRoutes(
           'Warrant Risk Assessment',
         )
         const showEmbeddedError = true
-        res.render(`pages/add-dwp-address`, { errorMessages, showEmbeddedError, integrationErrorMessages })
+        res.render(`pages/add-ro-address`, { errorMessages, showEmbeddedError, integrationErrorMessages })
       }
     } else {
-      res.render('pages/add-dwp-address', {
+      res.render('pages/add-ro-address', {
         errorMessages,
         warrantRiskAssessment,
         currentPage,

@@ -193,9 +193,12 @@ export default function addressSearchRoutes(
         )
         res.redirect(`/add-dwp-address/${req.params.id}`)
       } catch (error) {
-        const integrationErrorMessages = handleIntegrationErrors(error.status, error.data?.message, 'Breach Notice')
+        const integrationErrorMessages = handleIntegrationErrors(
+          error.status,
+          error.data?.message,
+          'Warrant Risk Assessment',
+        )
         const showEmbeddedError = true
-        // always stay on page and display the error when there are isssues retrieving the breach notice
         res.render(`pages/address-search`, { errorMessages, showEmbeddedError, integrationErrorMessages })
       }
     } else {

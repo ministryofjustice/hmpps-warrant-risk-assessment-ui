@@ -9,6 +9,7 @@ export enum Page {
   CHECK_YOUR_ANSWERS = 'CHECK_YOUR_ANSWERS',
   ADD_DWP_ADDRESS = 'ADD_DWP_ADDRESS',
   ADDRESS_SEARCH = 'ADDRESS_SEARCH',
+  ADD_RO_ADDRESS = 'ADD_RO_ADDRESS',
 }
 
 export interface PageViewEventDetails {

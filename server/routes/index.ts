@@ -8,6 +8,7 @@ import riskSummaryRoutes from './riskSummary'
 import warrantExecutionRoutes from './warrantExecution'
 import addDwpAddressRoutes from './addDwpAddress'
 import addressSearchRoutes from './address-search'
+import addRoAddressRoutes from './addRoAddress'
 
 export default function routes({ auditService, hmppsAuthClient, commonUtils, osPlacesApiClient }: Services): Router {
   const router = Router()
@@ -34,6 +35,7 @@ export default function routes({ auditService, hmppsAuthClient, commonUtils, osP
   checkYourAnswersRoutes(router, auditService, hmppsAuthClient, commonUtils)
   addDwpAddressRoutes(router, auditService, hmppsAuthClient, commonUtils)
   addressSearchRoutes(router, auditService, hmppsAuthClient, commonUtils, osPlacesApiClient)
+  addRoAddressRoutes(router, auditService, hmppsAuthClient, commonUtils)
 
   return router
 }
