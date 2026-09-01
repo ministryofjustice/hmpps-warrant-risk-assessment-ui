@@ -17,7 +17,622 @@
       </div>
       <div class="govuk-grid-column-two-thirds">
 
-        <h1 class="govuk-heading-l">Warrant Risk Assessment - Check Your Answers</h1>
+        <h1 id="page-title" class="govuk-heading-l">Check Your Answers</h1>
+
+        <div class="govuk-summary-card">
+          <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">
+              Basic Details
+            </h2>
+            <ul class="govuk-summary-card__actions">
+              <li class="govuk-summary-card__action">
+                {% if warrantRiskAssessment.basicDetailsSaved %}
+                  <a id="change-basic-details" class="govuk-link"
+                     href="/basic-details/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers">Change<span
+                      class="govuk-visually-hidden"> Basic Details</span></a>
+                {% endif %}
+              </li>
+            </ul>
+          </div>
+          <div class="govuk-summary-card__content">
+            <dl class="govuk-summary-list">
+              <div class="govuk-summary-list__row">
+
+                <dt class="govuk-summary-list__key">
+                  Name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.titleAndFullName == null and warrantRiskAssessment.basicDetailsSaved %}
+                    <a id="cya-link-title-and-name"
+                       href="/basic-details/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for Name</span></a>
+                  {% else %}
+                    {{ warrantRiskAssessment.titleAndFullName }}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.titleAndFullName == null %}
+                    <span class="govuk-tag--light-blue">Required</span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Postal Address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.postalAddress == null and warrantRiskAssessment.basicDetailsSaved %}
+                    <a id="cya-link-postal-address"
+                       href="/basic-details/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for Postal Address</span></a>
+                  {% else %}
+                    {% if warrantRiskAssessment.postalAddress.officeDescription != null %} {{ warrantRiskAssessment.postalAddress.officeDescription }}
+                      <br> {% endif %}
+                    {% if warrantRiskAssessment.postalAddress.buildingName != null %} {{ warrantRiskAssessment.postalAddress.buildingName }}
+                      <br> {% endif %}
+                    {% if warrantRiskAssessment.postalAddress.addressNumber != null or warrantRiskAssessment.postalAddress.streetName != null %} {{ warrantRiskAssessment.postalAddress.addressNumber }} {{ warrantRiskAssessment.postalAddress.streetName }}
+                      <br> {% endif %}
+                    {% if warrantRiskAssessment.postalAddress.district != null %} {{ warrantRiskAssessment.postalAddress.district }}
+                      <br> {% endif %}
+                    {% if warrantRiskAssessment.postalAddress.townCity != null %} {{ warrantRiskAssessment.postalAddress.townCity }}
+                      <br> {% endif %}
+                    {% if warrantRiskAssessment.postalAddress.county != null %} {{ warrantRiskAssessment.postalAddress.county }}
+                      <br> {% endif %}
+                    {% if warrantRiskAssessment.postalAddress.postcode != null %} {{ warrantRiskAssessment.postalAddress.postcode }} {% endif %}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.postalAddress == null %}
+                    <span class="govuk-tag--light-blue">Required</span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Date of Birth
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.dateOfBirth == null and warrantRiskAssessment.basicDetailsSaved %}
+                    <a id="cya-link-date-of-birth"
+                       href="/basic-details/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for Date of Birth</span></a>
+                  {% else %}
+                    {{ dateOfBirth }}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.dateOfBirth == null %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Employers Address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if (employers == null or employers | length == 0) and warrantRiskAssessment.basicDetailsSaved %}
+                    <a id="cya-link-employer-address"
+                       href="/basic-details/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for Employers Address</span></a>
+                  {% else %}
+                    {% for employer in employers %}
+                      <p id="employer-address-{{ loop.index }}">
+                        {{ employer.contactPerson }}
+                        <br />
+                        {% if employer.contactLocation.buildingName %} {{ employer.contactLocation.buildingName }}
+                          <br />{% endif %}
+                        {% if employer.contactLocation.buildingName or employer.contactLocation.streetName %} {{ employer.contactLocation.addressNumber }} {{ employer.contactLocation.streetName }}
+                          <br />{% endif %}
+                        {% if employer.contactLocation.district %} {{ employer.contactLocation.district }}
+                          <br />{% endif %}
+                        {% if employer.contactLocation.townCity %} {{ employer.contactLocation.townCity }}
+                          <br />{% endif %}
+                        {% if employer.contactLocation.county %} {{ employer.contactLocation.county }}
+                          <br />{% endif %}
+                        {% if employer.contactLocation.postcode %} {{ employer.contactLocation.postcode }}
+                          <br />{% endif %}
+                        {{ employer.telephoneNumber }}
+                        <br />
+                      </p>
+                      {% if not loop.last %}
+                        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if employers == null or employers | length == 0 %}
+                    <span class="govuk-tag--light-blue">Required</span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  DWP Signing on office
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.signOnOffice == null and warrantRiskAssessment.basicDetailsSaved %}
+                    <a id="cya-link-dwp-address"
+                       href="/basic-details/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for DWP Signing on Office</span></a>
+                  {% else %}
+                    {% if warrantRiskAssessment.signOnOffice.officeDescription %} {{ warrantRiskAssessment.signOnOffice.officeDescription }}
+                      <br> {% endif %}
+                    {% if warrantRiskAssessment.signOnOffice.buildingName %} {{ warrantRiskAssessment.signOnOffice.buildingName }}
+                      <br> {% endif %}
+                    {% if warrantRiskAssessment.signOnOffice.addressNumber or warrantRiskAssessment.signOnOffice.streetName %} {{ warrantRiskAssessment.signOnOffice.addressNumber }} {{ warrantRiskAssessment.signOnOffice.streetName }}
+                      <br> {% endif %}
+                    {% if warrantRiskAssessment.signOnOffice.district %} {{ warrantRiskAssessment.signOnOffice.district }}
+                      <br> {% endif %}
+                    {% if warrantRiskAssessment.signOnOffice.townCity %} {{ warrantRiskAssessment.signOnOffice.townCity }}
+                      <br> {% endif %}
+                    {% if warrantRiskAssessment.signOnOffice.county %} {{ warrantRiskAssessment.signOnOffice.county }}
+                      <br> {% endif %}
+                    {% if warrantRiskAssessment.signOnOffice.postcode %} {{ warrantRiskAssessment.signOnOffice.postcode }} {% endif %}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.signOnOffice == null %}
+                    <span class="govuk-tag--light-blue">Required</span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  National Insurance Number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.nationalInsuranceNumber == null and warrantRiskAssessment.basicDetailsSaved %}
+                    <a id="cya-link-national-insurance-number"
+                       href="/basic-details/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for National Insurance Number</span></a>
+                  {% else %}
+                    {{ warrantRiskAssessment.nationalInsuranceNumber }}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.nationalInsuranceNumber == null %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+
+            </dl>
+          </div>
+        </div>
+
+        <div class="govuk-summary-card">
+          <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">
+              Risk Assessment
+            </h2>
+            <ul class="govuk-summary-card__actions">
+              <li class="govuk-summary-card__action">
+                {% if warrantRiskAssessment.riskAssessmentSaved %}
+                  <a id="change-risk-assessment" class="govuk-link"
+                     href="/risk-assessment/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers">Change<span
+                      class="govuk-visually-hidden"> Risk Assessment</span></a>
+                {% endif %}
+              </li>
+            </ul>
+          </div>
+          <div class="govuk-summary-card__content">
+            <dl class="govuk-summary-list">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Is the offender subject of MAPPA procedures?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.subjectOfMappaProcedures == null and warrantRiskAssessment.riskAssessmentSaved %}
+                    <a id="cya-link-mappa-procedures"
+                       href="/risk-assessment/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for MAPPA procedures</span></a>
+                  {% else %}
+                    {% if warrantRiskAssessment.subjectOfMappaProcedures == true %}
+                      Yes
+                    {% elseif warrantRiskAssessment.subjectOfMappaProcedures == false %}
+                      No
+                    {% endif %}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.subjectOfMappaProcedures == null %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Is the offender assessed as posing a high risk if self harm?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.highRiskOfSelfHarm == null and warrantRiskAssessment.riskAssessmentSaved %}
+                    <a id="cya-link-high-risk-of-self-harm"
+                       href="/risk-assessment/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for high risk of self harm</span></a>
+                  {% else %}
+                    {% if warrantRiskAssessment.highRiskOfSelfHarm == true %}
+                      Yes
+                    {% elseif warrantRiskAssessment.highRiskOfSelfHarm == false %}
+                      No
+                    {% endif %}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.highRiskOfSelfHarm == null %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Is the offender assessed as posing a high risk of absconding?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.highRiskOfAbsconding == null and warrantRiskAssessment.riskAssessmentSaved %}
+                    <a id="cya-link-high-risk-of-absconding"
+                       href="/risk-assessment/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for high risk of absconding</span></a>
+                  {% else %}
+                    {% if warrantRiskAssessment.highRiskOfAbsconding == true %}
+                      Yes
+                    {% elseif warrantRiskAssessment.highRiskOfAbsconding == false %}
+                      No
+                    {% endif %}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.highRiskOfAbsconding == null %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Is the offender particularly vulnerable?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.vulnerable == null and warrantRiskAssessment.riskAssessmentSaved %}
+                    <a id="cya-link-vulnerable"
+                       href="/risk-assessment/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for particularly vulnerable</span></a>
+                  {% else %}
+                    {% if warrantRiskAssessment.vulnerable == true %}
+                      Yes
+                    {% elseif warrantRiskAssessment.vulnerable == false %}
+                      No
+                    {% endif %}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.vulnerable == null %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Is the offender known to carry or use weapons?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.carryOrUseWeapons == null and warrantRiskAssessment.riskAssessmentSaved %}
+                    <a id="cya-link-carry-or-use-weapons"
+                       href="/risk-assessment/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for known to carry or use weapons</span></a>
+                  {% else %}
+                    {% if warrantRiskAssessment.carryOrUseWeapons == true %}
+                      Yes
+                    {% elseif warrantRiskAssessment.carryOrUseWeapons == false %}
+                      No
+                    {% endif %}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.carryOrUseWeapons == null %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Does the offender have a history of assaulting police?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.assaultingPolice == null and warrantRiskAssessment.riskAssessmentSaved %}
+                    <a id="cya-link-assaulting-police"
+                       href="/risk-assessment/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for history of assaulting police</span></a>
+                  {% else %}
+                    {% if warrantRiskAssessment.assaultingPolice == true %}
+                      Yes
+                    {% elseif warrantRiskAssessment.assaultingPolice == false %}
+                      No
+                    {% endif %}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.assaultingPolice == null %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Does the offender misuse drugs and/or alcohol?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.misuseDrugsAndAlcohol == null and warrantRiskAssessment.riskAssessmentSaved %}
+                    <a id="cya-link-misuse-drugs-or-alcohol"
+                       href="/risk-assessment/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span
+                        class="govuk-visually-hidden"> for history of misusing drugs and/or alcohol</span></a>
+                  {% else %}
+                    {% if warrantRiskAssessment.misuseDrugsAndAlcohol == true %}
+                      Yes
+                    {% elseif warrantRiskAssessment.misuseDrugsAndAlcohol == false %}
+                      No
+                    {% endif %}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.misuseDrugsAndAlcohol == null %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="govuk-summary-card">
+          <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">
+              Risk Assessment
+            </h2>
+            <ul class="govuk-summary-card__actions">
+              <li class="govuk-summary-card__action">
+                {% if warrantRiskAssessment.riskSummarySaved %}
+                  <a id="change-risk-summary" class="govuk-link"
+                     href="/risk-summary/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers">Change<span
+                      class="govuk-visually-hidden"> Risk Summary</span></a>
+                {% endif %}
+              </li>
+            </ul>
+          </div>
+          <div class="govuk-summary-card__content">
+            <dl class="govuk-summary-list">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  What is the risk to the public?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.riskToPublicLevel == null and warrantRiskAssessment.riskAssessmentSaved %}
+                    <a id="cya-link-risk-to-public"
+                       href="/risk-summary/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for risk to the public</span></a>
+                  {% else %}
+                    {{ warrantRiskAssessment.riskToPublicLevel }}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.riskToPublicLevel == null %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  What is the risk to Enforcement Officers?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.riskToEnforcementOfficers == null and warrantRiskAssessment.riskAssessmentSaved %}
+                    <a id="cya-link-risk-to-enforcement-officers"
+                       href="/risk-summary/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for risk to Enforcement Officers</span></a>
+                  {% else %}
+                    {{ warrantRiskAssessment.riskToEnforcementOfficers }}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.riskToEnforcementOfficers == null %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  What is the risk to Police?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.riskToPolice == null and warrantRiskAssessment.riskAssessmentSaved %}
+                    <a id="cya-link-risk-to-police"
+                       href="/risk-summary/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for risk to Police</span></a>
+                  {% else %}
+                    {{ warrantRiskAssessment.riskToPolice }}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.riskToPolice == null %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+
+            </dl>
+          </div>
+        </div>
+
+        <div class="govuk-summary-card">
+          <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">
+              "Warrant execution and sign off"
+            </h2>
+            <ul class="govuk-summary-card__actions">
+              <li class="govuk-summary-card__action">
+                {% if warrantRiskAssessment.signAndSendSaved %}
+                  <a id="change-warrant-execution" class="govuk-link"
+                     href="/warrant-execution/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers">Change<span
+                      class="govuk-visually-hidden"> Warrant execution and sign off</span></a>
+                {% endif %}
+              </li>
+            </ul>
+          </div>
+          <div class="govuk-summary-card__content">
+            <dl class="govuk-summary-list">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Responsible Officer
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.responsibleOfficerFullName == null and warrantRiskAssessment.signAndSendSaved %}
+                    <a id="cya-link-responsible-officer"
+                       href="/warrant-execution/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for Responsible Officer</span></a>
+                  {% else %}
+                    {{ warrantRiskAssessment.responsibleOfficerFullName }}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.responsibleOfficerFullName == null %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Provider
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.probationArea == null and warrantRiskAssessment.signAndSendSaved %}
+                    <a id="cya-link-probation-area"
+                       href="/warrant-execution/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for Probation Area</span></a>
+                  {% else %}
+                    {{ warrantRiskAssessment.probationArea }}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.probationArea == null %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Signature and date
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.signAndSendSaved and (not warrantRiskAssessment.signature or warrantRiskAssessment.signature | trim == '') %}
+                    <a id="cya-link-signature-and-date"
+                       href="/warrant-execution/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for Signature</span></a>
+                  {% else %}
+                    {{ warrantRiskAssessment.signature }}
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.signature == null or warrantRiskAssessment.signature | trim == '' %}
+                    <span class="govuk-tag--light-blue">
+                            Required
+                </span>
+                  {% endif %}
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="moj-button-group">
+          {% if reportValidated %}
+            {{ govukButton({
+              text: "Publish",
+              preventDoubleClick: "true",
+              type: "submit",
+              id: "publish"
+            }) }}
+          {% endif %}
+          {{ govukButton({
+            id: "viewDraft",
+            text: "View Draft Form",
+            classes: "govuk-button--secondary",
+            preventDoubleClick: "true",
+            href: '/pdf/'+warrantRiskAssessmentId,
+            attributes: {
+              target: "_blank"
+            }
+          }) }}
+          {{ govukButton({
+            id: "deleteDraft",
+            text: "Delete Draft Form",
+            href: '/confirm-delete/'+warrantRiskAssessmentId,
+            classes: "govuk-button--secondary",
+            preventDoubleClick: "true"
+          }) }}
+        </div>
 
       </div>
     </div>
