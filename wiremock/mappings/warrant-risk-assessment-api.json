@@ -1624,6 +1624,583 @@
     },
     {
       "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/9f3e2c7a-6c1d-4f58-9a12-5e7b3d2c8f41",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "9f3e2c7a-6c1d-4f58-9a12-5e7b3d2c8f41",
+          "crn": "X900001",
+          "basicDetailsSaved": false,
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/1a7c5e92-3d44-4b61-8fe0-2c9d7a5b6e13",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "1a7c5e92-3d44-4b61-8fe0-2c9d7a5b6e13",
+          "crn": "X900002",
+          "titleAndFullName": null,
+          "postalAddress": null,
+          "dateOfBirth": null,
+          "signOnOffice": null,
+          "nationalInsuranceNumber": null,
+          "basicDetailsSaved": true,
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/contact/byWRAId/1a7c5e92-3d44-4b61-8fe0-2c9d7a5b6e13",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": null,
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/d3b8f1a4-7e22-4c9b-9351-6f0a2d8e4b77",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "d3b8f1a4-7e22-4c9b-9351-6f0a2d8e4b77",
+          "crn": "X900003",
+          "titleAndFullName": "Ms Ada Lovelace",
+          "postalAddress": {
+            "id": "20000001",
+            "addressId": "70000001",
+            "status": "active",
+            "officeDescription": "Home address",
+            "buildingName": "Model House",
+            "addressNumber": "12",
+            "streetName": "Example Street",
+            "townCity": "Example Town",
+            "district": "Example District",
+            "county": "Example County",
+            "postcode": "AB1 2CD"
+          },
+          "dateOfBirth": "1990-03-15",
+          "signOnOffice": {
+            "id": "20000002",
+            "addressId": "70000002",
+            "status": "Main",
+            "officeDescription": "DWP Test Office",
+            "buildingName": "Civic Centre",
+            "addressNumber": "1",
+            "streetName": "Centre Road",
+            "townCity": "Example Town",
+            "district": "Example District",
+            "county": "Example County",
+            "postcode": "AB1 2CD"
+          },
+          "nationalInsuranceNumber": "QQ123456C",
+          "basicDetailsSaved": true,
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/contact/byWRAId/d3b8f1a4-7e22-4c9b-9351-6f0a2d8e4b77",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": [
+          {
+            "id": "00000000-0000-0000-0000-000000009001",
+            "warrantRiskAssessmentId": "d3b8f1a4-7e22-4c9b-9351-6f0a2d8e4b77",
+            "contactPerson": "Employer Contact",
+            "contactLocation": {
+              "id": 9001,
+              "status": "Main",
+              "buildingName": "Employer House",
+              "addressNumber": "22",
+              "streetName": "Employer Street",
+              "townCity": "Example Town",
+              "district": "Example District",
+              "county": "Example County",
+              "postcode": "AB1 2CD"
+            },
+            "mobileNumber": "07777 777777",
+            "telephoneNumber": "01632 960000"
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/6c2f4e9a-1b73-4d88-9f20-3a5c7e1d4b6f",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "6c2f4e9a-1b73-4d88-9f20-3a5c7e1d4b6f",
+          "crn": "X910001",
+          "riskAssessmentSaved": false,
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/a1d9c3f7-5e24-4b68-8a91-2f6e3c7b4d10",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "a1d9c3f7-5e24-4b68-8a91-2f6e3c7b4d10",
+          "crn": "X910002",
+          "riskAssessmentSaved": true,
+          "subjectOfMappaProcedures": null,
+          "highRiskOfSelfHarm": null,
+          "highRiskOfAbsconding": null,
+          "vulnerable": null,
+          "carryOrUseWeapons": null,
+          "assaultingPolice": null,
+          "misuseDrugsAndAlcohol": null,
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/f4b8a2d6-9c31-4e75-b0a4-1d7f3c5e8a92",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "f4b8a2d6-9c31-4e75-b0a4-1d7f3c5e8a92",
+          "crn": "X910003",
+          "riskAssessmentSaved": true,
+          "subjectOfMappaProcedures": false,
+          "highRiskOfSelfHarm": false,
+          "highRiskOfAbsconding": false,
+          "vulnerable": false,
+          "carryOrUseWeapons": false,
+          "assaultingPolice": false,
+          "misuseDrugsAndAlcohol": false,
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/7e1a4c9d-2b63-4f58-9a70-3d5c8e1b6f24",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "7e1a4c9d-2b63-4f58-9a70-3d5c8e1b6f24",
+          "crn": "X920001",
+          "riskAssessmentSaved": false,
+          "riskSummarySaved": false,
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/c8f3d2a1-5e47-4b69-8c10-2a7d6e4f9b35",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "c8f3d2a1-5e47-4b69-8c10-2a7d6e4f9b35",
+          "crn": "X920002",
+          "riskAssessmentSaved": true,
+          "riskSummarySaved": true,
+          "riskToPublicLevel": null,
+          "riskToEnforcementOfficers": null,
+          "riskToPolice": null,
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/2d6f9a3b-1c84-4e57-b290-5a7e3c1d8f46",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "2d6f9a3b-1c84-4e57-b290-5a7e3c1d8f46",
+          "crn": "X920003",
+          "riskAssessmentSaved": true,
+          "riskSummarySaved": true,
+          "riskToPublicLevel": "Low",
+          "riskToEnforcementOfficers": "Medium",
+          "riskToPolice": "High",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/3b7d1e9a-6c24-4f58-8a10-2d5e7c9b4a31",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "3b7d1e9a-6c24-4f58-8a10-2d5e7c9b4a31",
+          "crn": "X930001",
+          "signAndSendSaved": false,
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/8a2f6c1d-4b73-49e5-9c20-1d7e3a5b6f42",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "8a2f6c1d-4b73-49e5-9c20-1d7e3a5b6f42",
+          "crn": "X930002",
+          "signAndSendSaved": true,
+          "responsibleOfficerFullName": null,
+          "probationArea": null,
+          "signature": null,
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/5d9c2a7e-1f34-4b68-8e90-3a6d1c7f4b25",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "5d9c2a7e-1f34-4b68-8e90-3a6d1c7f4b25",
+          "crn": "X930003",
+          "signAndSendSaved": true,
+          "responsibleOfficerFullName": "Alex Johnson",
+          "probationArea": "North Region",
+          "signature": "Alex Johnson",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/4a1e9d3c-7b25-4f68-9c10-2d6e8a5b3f41",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "4a1e9d3c-7b25-4f68-9c10-2d6e8a5b3f41",
+          "crn": "X940001",
+          "titleAndFullName": "Jamie Porter",
+          "postalAddress": {
+            "id": "30000001",
+            "addressId": "80000001",
+            "status": "active",
+            "officeDescription": "Home",
+            "buildingName": "Kings Court",
+            "addressNumber": "42",
+            "streetName": "High Street",
+            "townCity": "Leeds",
+            "district": "Leeds",
+            "county": "West Yorkshire",
+            "postcode": "LS1 1AA"
+          },
+          "dateOfBirth": "1988-05-14",
+          "signOnOffice": {
+            "id": "30000002",
+            "addressId": "80000002",
+            "status": "Main",
+            "officeDescription": "DWP City Office",
+            "buildingName": "Civic House",
+            "addressNumber": "7",
+            "streetName": "Station Road",
+            "townCity": "Leeds",
+            "district": "Leeds",
+            "county": "West Yorkshire",
+            "postcode": "LS1 2BB"
+          },
+          "nationalInsuranceNumber": "QQ123456C",
+          "subjectOfMappaProcedures": false,
+          "highRiskOfSelfHarm": false,
+          "highRiskOfAbsconding": false,
+          "vulnerable": false,
+          "carryOrUseWeapons": false,
+          "assaultingPolice": false,
+          "misuseDrugsAndAlcohol": false,
+          "riskToPublicLevel": "Low",
+          "riskToEnforcementOfficers": "Medium",
+          "riskToPolice": "Low",
+          "responsibleOfficerFullName": "Jamie Porter",
+          "probationArea": "North Region",
+          "signature": "Jamie Porter",
+          "basicDetailsSaved": true,
+          "riskAssessmentSaved": true,
+          "riskSummarySaved": true,
+          "signAndSendSaved": true,
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/contact/byWRAId/4a1e9d3c-7b25-4f68-9c10-2d6e8a5b3f41",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": [
+          {
+            "id": "00000000-0000-0000-0000-000000009401",
+            "warrantRiskAssessmentId": "4a1e9d3c-7b25-4f68-9c10-2d6e8a5b3f41",
+            "contactPerson": "Employer Contact",
+            "contactLocation": {
+              "id": 9401,
+              "status": "Main",
+              "buildingName": "Employer House",
+              "addressNumber": "21",
+              "streetName": "Business Road",
+              "townCity": "Leeds",
+              "district": "Leeds",
+              "county": "West Yorkshire",
+              "postcode": "LS1 3CC"
+            },
+            "mobileNumber": "07777 777777",
+            "telephoneNumber": "01632 960000"
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/7c5a2d91-4e3f-48b6-9a20-1d6e8b4f3c72",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "7c5a2d91-4e3f-48b6-9a20-1d6e8b4f3c72",
+          "crn": "X940002",
+          "titleAndFullName": "Jamie Porter",
+          "postalAddress": {
+            "id": "30000003",
+            "addressId": "80000003",
+            "status": "active",
+            "officeDescription": "Home",
+            "buildingName": "Kings Court",
+            "addressNumber": "42",
+            "streetName": "High Street",
+            "townCity": "Leeds",
+            "district": "Leeds",
+            "county": "West Yorkshire",
+            "postcode": "LS1 1AA"
+          },
+          "dateOfBirth": "1988-05-14",
+          "signOnOffice": {
+            "id": "30000004",
+            "addressId": "80000004",
+            "status": "Main",
+            "officeDescription": "DWP City Office",
+            "buildingName": "Civic House",
+            "addressNumber": "7",
+            "streetName": "Station Road",
+            "townCity": "Leeds",
+            "district": "Leeds",
+            "county": "West Yorkshire",
+            "postcode": "LS1 2BB"
+          },
+          "nationalInsuranceNumber": "QQ123456C",
+          "subjectOfMappaProcedures": false,
+          "highRiskOfSelfHarm": false,
+          "highRiskOfAbsconding": false,
+          "vulnerable": false,
+          "carryOrUseWeapons": false,
+          "assaultingPolice": false,
+          "misuseDrugsAndAlcohol": false,
+          "riskToPublicLevel": "Low",
+          "riskToEnforcementOfficers": "Medium",
+          "riskToPolice": "Low",
+          "responsibleOfficerFullName": "Jamie Porter",
+          "probationArea": "North Region",
+          "signature": "Jamie Porter",
+          "basicDetailsSaved": true,
+          "riskAssessmentSaved": true,
+          "riskSummarySaved": true,
+          "signAndSendSaved": true,
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/contact/byWRAId/7c5a2d91-4e3f-48b6-9a20-1d6e8b4f3c72",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": [
+          {
+            "id": "00000000-0000-0000-0000-000000009402",
+            "warrantRiskAssessmentId": "7c5a2d91-4e3f-48b6-9a20-1d6e8b4f3c72",
+            "contactPerson": "Employer Contact",
+            "contactLocation": {
+              "id": 9402,
+              "status": "Main",
+              "buildingName": "Employer House",
+              "addressNumber": "21",
+              "streetName": "Business Road",
+              "townCity": "Leeds",
+              "district": "Leeds",
+              "county": "West Yorkshire",
+              "postcode": "LS1 3CC"
+            },
+            "mobileNumber": "07777 777777",
+            "telephoneNumber": "01632 960000"
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "priority": 1,
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/7c5a2d91-4e3f-48b6-9a20-1d6e8b4f3c72",
+        "method": "PUT"
+      },
+      "response": {
+        "status": 200
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/72d2199f-4b5f-4a1d-a1ca-44ede214c729",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "72d2199f-4b5f-4a1d-a1ca-44ede214c729",
+          "crn": "X920003",
+          "completedDate": "2025-01-01T12:34:56"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
         "url": "/warrant-risk-assessment-api/warrant-risk-assessment/13e8c3a1-6f42-4ed3-9510-3c299ef84d11",
         "method": "GET"
       },
