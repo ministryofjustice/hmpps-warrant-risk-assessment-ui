@@ -10,6 +10,7 @@ export enum Page {
   ADD_DWP_ADDRESS = 'ADD_DWP_ADDRESS',
   ADDRESS_SEARCH = 'ADDRESS_SEARCH',
   ADD_RO_ADDRESS = 'ADD_RO_ADDRESS',
+  VIEW_PDF = 'VIEW_PDF',
 }
 
 export interface PageViewEventDetails {
