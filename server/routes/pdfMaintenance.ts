@@ -16,13 +16,22 @@ export default function pdfMaintenanceRoutes(
     const warrantRiskAssessmentId: string = req.params.id
 
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
-    const warrantRiskAssessment = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(req.params.id as string, res.locals.user.username)
+    const warrantRiskAssessment = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(
+      req.params.id as string,
+      res.locals.user.username,
+    )
 
     try {
-      const stream: ArrayBuffer = await warrantRiskAssessmentApiClient.getPdfById(warrantRiskAssessmentId, res.locals.user.username)
+      const stream: ArrayBuffer = await warrantRiskAssessmentApiClient.getPdfById(
+        warrantRiskAssessmentId,
+        res.locals.user.username,
+      )
 
       res.setHeader('Content-Type', 'application/pdf')
-      res.setHeader('Content-Disposition', `filename="warrant_risk_assessment_form_${warrantRiskAssessment.crn}_draft.pdf"`)
+      res.setHeader(
+        'Content-Disposition',
+        `filename="warrant_risk_assessment_form_${warrantRiskAssessment.crn}_draft.pdf"`,
+      )
       res.send(stream)
     } catch (error) {
       const errorMessages: ErrorMessages = handleIntegrationErrors(
