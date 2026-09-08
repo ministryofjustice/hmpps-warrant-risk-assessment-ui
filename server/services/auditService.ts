@@ -10,6 +10,8 @@ export enum Page {
   ADD_DWP_ADDRESS = 'ADD_DWP_ADDRESS',
   ADDRESS_SEARCH = 'ADDRESS_SEARCH',
   ADD_RO_ADDRESS = 'ADD_RO_ADDRESS',
+  CONFIRM_DELETE = 'CONFIRM_DELETE',
+  FORM_DELETED = 'FORM_DELETED',
 }
 
 export interface PageViewEventDetails {
