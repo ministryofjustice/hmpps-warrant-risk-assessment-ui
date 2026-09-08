@@ -11,6 +11,8 @@ export enum Page {
   ADDRESS_SEARCH = 'ADDRESS_SEARCH',
   ADD_RO_ADDRESS = 'ADD_RO_ADDRESS',
   VIEW_PDF = 'VIEW_PDF',
+  CONFIRM_DELETE = 'CONFIRM_DELETE',
+  FORM_DELETED = 'FORM_DELETED',
 }
 
 export interface PageViewEventDetails {
