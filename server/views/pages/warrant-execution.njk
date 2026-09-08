@@ -89,7 +89,7 @@
 
               {% if warrantRiskAssessment.workAddress != null and warrantRiskAssessment.workAddress.addressId == null and (signAndSendDetails.replyAddress == null or signAndSendDetails.replyAddress.length == 0) %}
                 {{ govukButton({
-                  text: "Update Address",
+                  text: "Update address",
                   type: "submit",
                   href: '/add-ro-address/'+warrantRiskAssessmentId,
                   attributes: {
@@ -109,7 +109,7 @@
               <p id="AddAddressMessage">No reply address can be found for this Responsible Officer. Please add an
                 address by selecting the button below.</p>
               {{ govukButton({
-                text: "Add Address",
+                text: "Add address",
                 type: "submit",
                 href: '/add-ro-address/'+warrantRiskAssessmentId,
                 attributes: {
@@ -125,7 +125,7 @@
                 id: "offenderAddressSelectOne",
                 fieldset: {
                   legend: {
-                    text: "Would you like to use the work location above for this warrant risk assessment form?",
+                    text: "Would you like to use the work location above for this warrant risk assessment?",
                     isPageHeading: false,
                     classes: "govuk-fieldset__legend--m"
                   }
@@ -205,7 +205,7 @@
           {% else %}
             <p id="signature">{{ warrantRiskAssessment.signature }}</p>
             {{ govukButton({
-              text: "Clear Signature",
+              text: "Clear signature",
               type: "submit",
               name: "action",
               value: "clear-signature",
@@ -226,7 +226,7 @@
               }
             }) }}
             {{ govukButton({
-              text: "Save Progress and Close",
+              text: "Save progress and close",
               type: "submit",
               name: "action",
               value: "saveProgressAndClose",

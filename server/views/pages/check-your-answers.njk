@@ -617,7 +617,7 @@
           {% endif %}
           {{ govukButton({
             id: "viewDraft",
-            text: "View Draft Report",
+            text: "View draft assessment",
             classes: "govuk-button--secondary",
             preventDoubleClick: "true",
             href: '/pdf/'+warrantRiskAssessmentId,
@@ -627,7 +627,7 @@
           }) }}
           {{ govukButton({
             id: "deleteDraft",
-            text: "Delete Draft Report",
+            text: "Delete draft assessment",
             href: '/confirm-delete/'+warrantRiskAssessmentId,
             classes: "govuk-button--secondary",
             preventDoubleClick: "true"

@@ -48,7 +48,7 @@ context('Risk Summary page', () => {
     cy.url().should('include', '/risk-summary')
     cy.get('#page-title').should('contain.text', 'Risk Summary')
     cy.get('#continue-button').should('contain.text', 'Continue')
-    cy.get('#close-button').should('contain.text', 'Save Progress and Close')
+    cy.get('#close-button').should('contain.text', 'Save progress and close')
   })
 
   it('Information dropdowns should show None found when no information returned', () => {

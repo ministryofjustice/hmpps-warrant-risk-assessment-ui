@@ -142,7 +142,7 @@
                 <br />{% endif %}
             </p>
             {{ govukButton({
-              text: "Update Address",
+              text: "Update address",
               href: '/add-dwp-address/'+warrantRiskAssessmentId,
               preventDoubleClick: "true",
               attributes: {
@@ -151,7 +151,7 @@
             }) }}
             {% else %}
               {{ govukButton({
-                text: "Add Address",
+                text: "Add address",
                 href: '/add-dwp-address/'+warrantRiskAssessmentId,
                 preventDoubleClick: "true",
                 attributes: {
@@ -173,7 +173,7 @@
               }
             }) }}
             {{ govukButton({
-              text: "Save Progress and Close",
+              text: "Save progress and close",
               type: "submit",
               name: "action",
               value: "saveProgressAndClose",
@@ -183,7 +183,7 @@
               }
             }) }}
             {{ govukButton({
-              text: "Refresh from Delius",
+              text: "Refresh from delius",
               preventDoubleClick: "true",
               type: "submit",
               name: "action",
