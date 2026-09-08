@@ -236,20 +236,26 @@ context('Check your answers data checks', () => {
   it('should show relevant buttons when report is Validated and publish button should redirect correctly', () => {
     cy.visit('/check-your-answers/7c5a2d91-4e3f-48b6-9a20-1d6e8b4f3c72')
     cy.get('#publish').should('exist')
-    cy.get('#deleteDraft')
-      .should('exist')
-      .should('have.attr', 'href', '/confirm-delete/7c5a2d91-4e3f-48b6-9a20-1d6e8b4f3c72')
-    cy.get('#viewDraft').should('exist').should('have.attr', 'href', '/pdf/7c5a2d91-4e3f-48b6-9a20-1d6e8b4f3c72')
+    cy.get('#deleteDraft').should('exist').should('contain.text', 'Delete Draft Report')
+    cy.get('#viewDraft').should('exist').should('contain.text', 'View Draft Report')
     cy.get('#publish').click()
     cy.url().should('include', '/report-completed/7c5a2d91-4e3f-48b6-9a20-1d6e8b4f3c72')
   })
 
-  it('should show relevant buttons when report is not Validated', () => {
+  it('should show relevant buttons when report is not Validated and delete draft button should redirect correctly', () => {
     cy.visit('/check-your-answers/8a2f6c1d-4b73-49e5-9c20-1d7e3a5b6f42')
     cy.get('#publish').should('not.exist')
-    cy.get('#deleteDraft')
-      .should('exist')
-      .should('have.attr', 'href', '/confirm-delete/8a2f6c1d-4b73-49e5-9c20-1d7e3a5b6f42')
+    cy.get('#deleteDraft').should('exist').should('contain.text', 'Delete Draft Report')
+    cy.get('#viewDraft').should('exist').should('contain.text', 'View Draft Report')
+    cy.get('#deleteDraft').click()
+    cy.url().should('include', '/confirm-delete/8a2f6c1d-4b73-49e5-9c20-1d7e3a5b6f42')
+  })
+
+  it('should show relevant buttons when report is not Validated and view draft button should have correct link', () => {
+    cy.visit('/check-your-answers/8a2f6c1d-4b73-49e5-9c20-1d7e3a5b6f42')
+    cy.get('#publish').should('not.exist')
+    cy.get('#deleteDraft').should('exist').should('contain.text', 'Delete Draft Report')
+    cy.get('#viewDraft').should('exist').should('contain.text', 'View Draft Report')
     cy.get('#viewDraft').should('exist').should('have.attr', 'href', '/pdf/8a2f6c1d-4b73-49e5-9c20-1d7e3a5b6f42')
   })
 
