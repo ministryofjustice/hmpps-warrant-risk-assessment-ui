@@ -1,6 +1,6 @@
 {% extends "../partials/layout.njk" %}
 
-{% set pageTitle = applicationName + " - Report Completed" %}
+{% set pageTitle = applicationName + " - Assessment Completed" %}
 {% set mainClasses = "app-container govuk-body" %}
 
 {% block content %}
@@ -13,14 +13,14 @@
             {% set mainClasses = "govuk-main-wrapper--l" %}
 
             {{ govukPanel({
-                titleText: "Report Published",
+                titleText: "Assessment Completed",
                 html: "Your Warrant Risk Assessment has been completed and uploaded."
             }) }}
 
           <h1 class="govuk-heading-l">What to do next</h1>
 
           <h2 class="govuk-heading-m">Review and print your Warrant Risk Assessment</h2>
-          <p id="reviewReport"><a href="{{ '/pdf/' + warrantRiskAssessmentId }}" class="govuk-link" target="_blank">View your completed PDF Report</a></p>
+          <p id="reviewReport"><a href="{{ '/pdf/' + warrantRiskAssessmentId }}" class="govuk-link" target="_blank">View your completed PDF assessment</a></p>
 
           <h2 class="govuk-heading-m">Close this window</h2>
           <p id="close-window"><a href="/close" class="govuk-link">Close the Warrant Risk Assessment Service</a></p>
