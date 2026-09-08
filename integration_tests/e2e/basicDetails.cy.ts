@@ -40,8 +40,8 @@ context('Basic Details page', () => {
     cy.url().should('include', '/basic-details')
     cy.get('#page-title').should('contain.text', 'Basic Details')
     cy.get('#continue-button').should('contain.text', 'Continue')
-    cy.get('#close-button').should('contain.text', 'Save Progress and Close')
-    cy.get('#refresh-from-ndelius--button').should('contain.text', 'Refresh from Delius')
+    cy.get('#close-button').should('contain.text', 'Save progress and close')
+    cy.get('#refresh-from-ndelius--button').should('contain.text', 'Refresh from delius')
   })
 
   it('When no DWP address present, add address button should display with correct navigation', () => {
@@ -51,7 +51,7 @@ context('Basic Details page', () => {
     cy.get('#dwp-address').should('not.exist')
     cy.get('#add-address-button').should('exist').should('be.visible')
     cy.get('#update-address-button').should('not.exist')
-    cy.get('#add-address-button').should('contain.text', 'Add Address')
+    cy.get('#add-address-button').should('contain.text', 'Add address')
     cy.get('#add-address-button').click()
     cy.url().should('include', '/add-dwp-address/37159b12-5c73-407a-94b6-43fc23938df6')
   })
@@ -69,7 +69,7 @@ context('Basic Details page', () => {
     cy.get('#dwp-address').should('contain.text', 'PE45 5NS')
     cy.get('#add-address-button').should('not.exist')
     cy.get('#update-address-button').should('exist').should('be.visible')
-    cy.get('#update-address-button').should('contain.text', 'Update Address')
+    cy.get('#update-address-button').should('contain.text', 'Update address')
     cy.get('#update-address-button').click()
     cy.url().should('include', '/add-dwp-address/f42ca70c-8c2e-4def-be06-a455d1034467')
   })

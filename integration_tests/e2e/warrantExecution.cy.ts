@@ -5,7 +5,7 @@ context('Warrant Execution Page', () => {
     cy.get('#page-title').should('contain.text', 'Warrant Execution')
     cy.get('#sign-button').should('exist').should('contain.text', 'Click here to sign now')
     cy.get('#continue-button').should('exist').should('contain.text', 'Continue')
-    cy.get('#close-button').should('exist').should('contain.text', 'Save Progress and Close')
+    cy.get('#close-button').should('exist').should('contain.text', 'Save progress and close')
     cy.get('#clear-signature-button').should('not.exist')
   })
 
@@ -14,7 +14,7 @@ context('Warrant Execution Page', () => {
     cy.url().should('include', '/warrant-execution')
     cy.get('#page-title').should('contain.text', 'Warrant Execution')
     cy.get('#signature').should('contain.text', 'UserSignForename UserSignMiddle UserSignSurname')
-    cy.get('#clear-signature-button').should('exist').should('contain.text', 'Clear Signature')
+    cy.get('#clear-signature-button').should('exist').should('contain.text', 'Clear signature')
     cy.get('#sign-button').should('not.exist')
     cy.get('#whoIsSendingTheForm').should('not.exist')
   })
@@ -22,7 +22,7 @@ context('Warrant Execution Page', () => {
   it('Form buttons should display correctly', () => {
     cy.visit('/warrant-execution/33333333-3333-4333-8333-333333333333')
     cy.get('#continue-button').should('contain.text', 'Continue')
-    cy.get('#close-button').should('contain.text', 'Save Progress and Close')
+    cy.get('#close-button').should('contain.text', 'Save progress and close')
     cy.get('#sign-button').should('contain.text', 'Click here to sign now')
   })
 
@@ -95,14 +95,14 @@ context('Warrant Execution Page', () => {
   it('should display add address button when no addresses are returned from the API and none stored in DB', () => {
     cy.visit('/warrant-execution/bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb')
     cy.get('#AddAddressMessage').should('contain.text', 'No reply address can be found for this Responsible Officer')
-    cy.get('#add-address-button').should('exist').should('contain.text', 'Add Address')
+    cy.get('#add-address-button').should('exist').should('contain.text', 'Add address')
     cy.get('#update-address-button').should('not.exist')
   })
 
   it('should display update address button when current address has a null delius address id', () => {
     cy.visit('/warrant-execution/cccccccc-cccc-4ccc-8ccc-cccccccccccc')
     cy.get('#workAddress').should('contain.text', 'Manual Work Location')
-    cy.get('#update-address-button').should('exist').should('contain.text', 'Update Address')
+    cy.get('#update-address-button').should('exist').should('contain.text', 'Update address')
     cy.get('#add-address-button').should('not.exist')
   })
 

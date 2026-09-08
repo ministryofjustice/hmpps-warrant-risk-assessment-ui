@@ -89,8 +89,8 @@ context('Risk Assessment page', () => {
     cy.url().should('include', '/risk-assessment')
     cy.get('#page-title').should('contain.text', 'Risk Assessment')
     cy.get('#continue-button').should('contain.text', 'Continue')
-    cy.get('#close-button').should('contain.text', 'Save Progress and Close')
-    cy.get('#refresh-from-ndelius--button').should('contain.text', 'Refresh from Delius and OASys')
+    cy.get('#close-button').should('contain.text', 'Save progress and close')
+    cy.get('#refresh-from-ndelius--button').should('contain.text', 'Refresh from delius and OASys')
   })
 
   it('Mappa Dropdown should blank None found when no information returned', () => {
