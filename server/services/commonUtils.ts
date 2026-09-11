@@ -28,6 +28,11 @@ export default class CommonUtils {
       return true
     }
 
+    if (warrantRiskAssessment.terminated === true) {
+      res.redirect(`/event-terminated/${warrantRiskAssessmentId}`)
+      return true
+    }
+
     return false
   }
 }

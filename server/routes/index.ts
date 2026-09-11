@@ -12,6 +12,7 @@ import addRoAddressRoutes from './addRoAddress'
 import confirmDeleteRoutes from './confirmDelete'
 import reportDeletedRoutes from './formDeleted'
 import pdfMaintenanceRoutes from './pdfMaintenance'
+import eventTerminatedRoutes from './eventTerminated'
 
 export default function routes({ auditService, hmppsAuthClient, commonUtils, osPlacesApiClient }: Services): Router {
   const router = Router()
@@ -42,6 +43,7 @@ export default function routes({ auditService, hmppsAuthClient, commonUtils, osP
   confirmDeleteRoutes(router, auditService, hmppsAuthClient)
   reportDeletedRoutes(router, auditService)
   pdfMaintenanceRoutes(router, auditService, hmppsAuthClient)
+  eventTerminatedRoutes(router, auditService, hmppsAuthClient)
 
   return router
 }

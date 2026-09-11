@@ -13,6 +13,7 @@ export enum Page {
   VIEW_PDF = 'VIEW_PDF',
   CONFIRM_DELETE = 'CONFIRM_DELETE',
   FORM_DELETED = 'FORM_DELETED',
+  EVENT_TERMINATED = 'EVENT_TERMINATED',
 }
 
 export interface PageViewEventDetails {
