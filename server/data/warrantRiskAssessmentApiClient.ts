@@ -178,6 +178,8 @@ export interface WarrantRiskAssessment {
   riskSummarySaved: boolean
   responsibleOfficerFullName: string
   responsibleOfficerTelephoneNumer: string
+  terminated: boolean
+  terminatedUnterminatedDate: Date
 }
 
 export interface WarrantRiskAssessmentAddress {
