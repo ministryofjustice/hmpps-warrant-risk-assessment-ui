@@ -15,6 +15,8 @@ generic-service:
     NDELIUS_DEEPLINK_URL: "https://ndelius.pre-prod.delius.probation.hmpps.dsd.io/NDelius-war/delius/JSP/deeplink.xhtml"
     WARRANT_RISK_ASSESSMENT_API_URL: 'https://warrant-risk-assesssment-api-preprod.hmpps.service.justice.gov.uk'
     NDELIUS_INTEGRATION_URL: "https://warrant-risk-assessment-and-delius-preprod.hmpps.service.justice.gov.uk"
+    ASSESS_RISKS_AND_NEEDS_API_URL: "https://arns-assessment-view-api-preprod.hmpps.service.justice.gov.uk"
+    OS_PLACES_API_URL: "https://api.os.uk/search/places/v1"
 
   allowlist:
     groups:
