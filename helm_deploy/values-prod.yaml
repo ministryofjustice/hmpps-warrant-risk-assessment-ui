@@ -14,6 +14,7 @@ generic-service:
     NDELIUS_INTEGRATION_URL: "https://warrant-risk-assessment-and-delius.hmpps.service.justice.gov.uk"
     ASSESS_RISKS_AND_NEEDS_API_URL: "https://arns-assessment-view-api.hmpps.service.justice.gov.uk"
     OS_PLACES_API_URL: "https://api.os.uk/search/places/v1"
+    PROBATION_ACCESS_CONTROL_URL: "https://probation-access-control.hmpps.service.justice.gov.uk"
 
   allowlist:
     groups:
