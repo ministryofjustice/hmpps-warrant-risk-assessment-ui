@@ -251,8 +251,10 @@ export default function basicDetailsRoutes(
     warrantRiskAssessment.mobileNumber = mobileNumber
     warrantRiskAssessment.telephoneNumber = telephoneNumber
     warrantRiskAssessment.nationalInsuranceNumber = nationalInsuranceNumber
-    warrantRiskAssessment.dateOfBirth = `${basicDetails.dateOfBirth}T00:00:00`
-    warrantRiskAssessment.lastHomeVisitDate = `${basicDetails.lastHomeVisitDate}T00:00:00`
+    warrantRiskAssessment.dateOfBirth = basicDetails.dateOfBirth ? `${basicDetails.dateOfBirth}T00:00:00` : null
+    warrantRiskAssessment.lastHomeVisitDate = basicDetails.lastHomeVisitDate
+      ? `${basicDetails.lastHomeVisitDate}T00:00:00`
+      : null
     warrantRiskAssessment.basicDetailsSaved = true
 
     const contactsToDelete = existingContacts.filter(
