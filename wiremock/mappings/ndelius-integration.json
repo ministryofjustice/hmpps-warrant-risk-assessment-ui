@@ -171,7 +171,7 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/wra-risk-assessment/X000001",
+        "urlPattern": "/ndelius/mappa-information/X000001",
         "method": "GET"
       },
       "response": {
@@ -195,7 +195,7 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/wra-risk-assessment/X000002",
+        "urlPattern": "/ndelius/mappa-information/X000002",
         "method": "GET"
       },
       "response": {
@@ -211,7 +211,7 @@
     },
     {
       "request": {
-        "urlPattern": "/ndelius/wra-risk-assessment/Z000003",
+        "urlPattern": "/ndelius/mappa-information/Z000003",
         "method": "GET"
       },
       "response": {

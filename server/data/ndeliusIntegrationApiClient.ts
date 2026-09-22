@@ -20,7 +20,7 @@ export default class NDeliusIntegrationApiClient extends RestClient {
   async getRiskAssessment(crn: string, username: string): Promise<RiskAssessment> {
     return this.get(
       {
-        path: `/wra-risk-assessment/${crn}`,
+        path: `/mappa-information/${crn}`,
       },
       asSystem(username),
     )
