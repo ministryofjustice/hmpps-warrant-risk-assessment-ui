@@ -29,7 +29,7 @@ export default class NDeliusIntegrationApiClient extends RestClient {
   async getResponsibleOfficerDetails(crn: string, username: string): Promise<SignAndSendDetails> {
     return this.get(
       {
-        path: `/responsible-officer/${crn}`,
+        path: `/sign-and-send/${crn}/${username}`,
       },
       asSystem(username),
     )
