@@ -119,7 +119,7 @@ export default function basicDetailsRoutes(
     const contactDeleted = existingContacts?.some(
       existingContact =>
         !basicDetails.employers.some(
-          employer => employer.employerAddress.id === existingContact.contactLocation.deliusAddressId,
+          employer => employer.employerAddress?.id === existingContact.contactLocation?.deliusAddressId,
         ),
     )
 
@@ -260,7 +260,7 @@ export default function basicDetailsRoutes(
     const contactsToDelete = existingContacts.filter(
       existingContact =>
         !basicDetails.employers.some(
-          employer => employer.employerAddress.id === existingContact.contactLocation.deliusAddressId,
+          employer => employer.employerAddress?.id === existingContact.contactLocation?.deliusAddressId,
         ),
     )
     if (contactsToDelete.length > 0) {
@@ -276,7 +276,7 @@ export default function basicDetailsRoutes(
 
     const contactsToCreate: WarrantRiskAssessmentContact[] = basicDetails.employers
       .filter(
-        employer => !existingContacts?.some(c => c.contactLocation.deliusAddressId === employer.employerAddress.id),
+        employer => !existingContacts?.some(c => c.contactLocation?.deliusAddressId === employer.employerAddress?.id),
       )
       .map(employer => ({
         contactPerson: formatTitleAndFullName('', employer.employerName),
@@ -291,7 +291,7 @@ export default function basicDetailsRoutes(
     }
 
     const addressesToCreate = otherAddresses
-      .filter(address => !existingAddresses?.some(existingAddress => existingAddress.deliusAddressId === address.id))
+      .filter(address => !existingAddresses?.some(existingAddress => existingAddress?.deliusAddressId === address.id))
       .map(address => toWarrantRiskAssessmentAddress(address, 'basicDetails', warrantRiskAssessmentId))
     if (addressesToCreate.length > 0) {
       await warrantRiskAssessmentApiClient.batchCreateAddresses(addressesToCreate, res.locals.user.username)

@@ -141,8 +141,10 @@
                           <br />{% endif %}
                         {% if employer.contactLocation.postcode %} {{ employer.contactLocation.postcode }}
                           <br />{% endif %}
-                        {{ employer.telephoneNumber }}
-                        <br />
+                        {% if employer.telephoneNumber %}{{ employer.telephoneNumber }}
+                          <br />{% endif %}
+                        {% if employer.mobileNumber %}{{ employer.mobileNumber }}
+                          <br />{% endif %}
                       </p>
                       {% if not loop.last %}
                         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
