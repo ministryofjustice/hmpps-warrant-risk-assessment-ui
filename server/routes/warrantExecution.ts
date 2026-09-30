@@ -409,8 +409,13 @@ export default function warrantExecutionRoutes(
     let updatedWarrantRiskAssessment = warrantRiskAssessment
     let updatedErrorMessages = errorMessages
     let onlyAlternateAddressesAvailable = false
-    if (updatedWarrantRiskAssessment.workAddress == null && signAndSendDetails?.responsibleOfficer?.replyAddresses != null) {
-      const defaultAddress = signAndSendDetails.responsibleOfficer.replyAddresses.find(record => record.status === 'Default')
+    if (
+      updatedWarrantRiskAssessment.workAddress == null &&
+      signAndSendDetails?.responsibleOfficer?.replyAddresses != null
+    ) {
+      const defaultAddress = signAndSendDetails.responsibleOfficer.replyAddresses.find(
+        record => record.status === 'Default',
+      )
 
       if (defaultAddress) {
         updatedWarrantRiskAssessment = {
