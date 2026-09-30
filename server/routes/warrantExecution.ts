@@ -111,14 +111,17 @@ export default function warrantExecutionRoutes(
     }
 
     // always use number from NDelius if available and fall back to saved one
-    if (signAndSendDetails?.telephoneNumber != null) {
-      warrantRiskAssessment.responsibleOfficerTelephoneNumer = signAndSendDetails.telephoneNumber
+    if (signAndSendDetails?.responsibleOfficer.telephoneNumber != null) {
+      warrantRiskAssessment.responsibleOfficerTelephoneNumer = signAndSendDetails.responsibleOfficer.telephoneNumber
     }
-    if (signAndSendDetails?.name != null) {
-      warrantRiskAssessment.responsibleOfficerFullName = formatTitleAndFullName('', signAndSendDetails.name)
+    if (signAndSendDetails?.responsibleOfficer.name != null) {
+      warrantRiskAssessment.responsibleOfficerFullName = formatTitleAndFullName(
+        '',
+        signAndSendDetails.responsibleOfficer.name,
+      )
     }
-    if (signAndSendDetails?.probationArea != null) {
-      warrantRiskAssessment.probationArea = signAndSendDetails.probationArea.description
+    if (signAndSendDetails?.responsibleOfficer.probationArea != null) {
+      warrantRiskAssessment.probationArea = signAndSendDetails.responsibleOfficer.probationArea.description
     }
 
     const {
@@ -256,14 +259,17 @@ export default function warrantExecutionRoutes(
           text: 'Please select who is sending this document before pressing "Sign Now"',
         }
 
-        if (signAndSendDetails?.telephoneNumber != null) {
-          warrantRiskAssessment.responsibleOfficerTelephoneNumer = signAndSendDetails.telephoneNumber
+        if (signAndSendDetails?.responsibleOfficer.telephoneNumber != null) {
+          warrantRiskAssessment.responsibleOfficerTelephoneNumer = signAndSendDetails.responsibleOfficer.telephoneNumber
         }
-        if (signAndSendDetails?.name != null) {
-          warrantRiskAssessment.responsibleOfficerFullName = formatTitleAndFullName('', signAndSendDetails.name)
+        if (signAndSendDetails?.responsibleOfficer.name != null) {
+          warrantRiskAssessment.responsibleOfficerFullName = formatTitleAndFullName(
+            '',
+            signAndSendDetails.responsibleOfficer.name,
+          )
         }
-        if (signAndSendDetails?.probationArea != null) {
-          warrantRiskAssessment.probationArea = signAndSendDetails.probationArea.description
+        if (signAndSendDetails?.responsibleOfficer.probationArea != null) {
+          warrantRiskAssessment.probationArea = signAndSendDetails.responsibleOfficer.probationArea.description
         }
 
         const {
@@ -301,14 +307,17 @@ export default function warrantExecutionRoutes(
         })
       }
     } else {
-      if (signAndSendDetails?.telephoneNumber != null) {
-        warrantRiskAssessment.responsibleOfficerTelephoneNumer = signAndSendDetails.telephoneNumber
+      if (signAndSendDetails?.responsibleOfficer.telephoneNumber != null) {
+        warrantRiskAssessment.responsibleOfficerTelephoneNumer = signAndSendDetails.responsibleOfficer.telephoneNumber
       }
-      if (signAndSendDetails?.name != null) {
-        warrantRiskAssessment.responsibleOfficerFullName = formatTitleAndFullName('', signAndSendDetails.name)
+      if (signAndSendDetails?.responsibleOfficer.name != null) {
+        warrantRiskAssessment.responsibleOfficerFullName = formatTitleAndFullName(
+          '',
+          signAndSendDetails.responsibleOfficer.name,
+        )
       }
-      if (signAndSendDetails?.probationArea != null) {
-        warrantRiskAssessment.probationArea = signAndSendDetails.probationArea.description
+      if (signAndSendDetails?.responsibleOfficer.probationArea != null) {
+        warrantRiskAssessment.probationArea = signAndSendDetails.responsibleOfficer.probationArea.description
       }
 
       const { warrantRiskAssessment: preparedWarrantRiskAssessment, errorMessages: preparedErrorMessages } =
@@ -400,15 +409,20 @@ export default function warrantExecutionRoutes(
     let updatedWarrantRiskAssessment = warrantRiskAssessment
     let updatedErrorMessages = errorMessages
     let onlyAlternateAddressesAvailable = false
-    if (updatedWarrantRiskAssessment.workAddress == null && signAndSendDetails?.replyAddress != null) {
-      const defaultAddress = signAndSendDetails.replyAddress.find(record => record.status === 'Default')
+    if (
+      updatedWarrantRiskAssessment.workAddress == null &&
+      signAndSendDetails?.responsibleOfficer?.replyAddresses != null
+    ) {
+      const defaultAddress = signAndSendDetails.responsibleOfficer.replyAddresses.find(
+        record => record.status === 'Default',
+      )
 
       if (defaultAddress) {
         updatedWarrantRiskAssessment = {
           ...updatedWarrantRiskAssessment,
           workAddress: toWarrantRiskAssessmentAddress(defaultAddress, 'warrantExecution', warrantRiskAssessmentId),
         }
-      } else if (signAndSendDetails.replyAddress.length > 0) {
+      } else if (signAndSendDetails.responsibleOfficer.replyAddresses?.length > 0) {
         // If no default exists, UI offers the alternate address list only.
         onlyAlternateAddressesAvailable = true
       }
@@ -418,9 +432,9 @@ export default function warrantExecutionRoutes(
     if (
       updatedWarrantRiskAssessment.workAddress != null &&
       updatedWarrantRiskAssessment.workAddress.deliusAddressId != null &&
-      signAndSendDetails?.replyAddress != null
+      signAndSendDetails?.responsibleOfficer?.replyAddresses != null
     ) {
-      const addressPresent = signAndSendDetails.replyAddress.find(
+      const addressPresent = signAndSendDetails.responsibleOfficer.replyAddresses.find(
         record => record.id === updatedWarrantRiskAssessment.workAddress?.deliusAddressId,
       )
       if (addressPresent == null) {
@@ -445,10 +459,11 @@ export default function warrantExecutionRoutes(
     }
 
     const manualAddressAllowed =
-      signAndSendDetails?.replyAddress == null || signAndSendDetails.replyAddress.length === 0
+      signAndSendDetails?.responsibleOfficer.replyAddresses == null ||
+      signAndSendDetails.responsibleOfficer.replyAddresses?.length === 0
 
     const alternateAddressOptions = addressListToSelectItemList(
-      signAndSendDetails?.replyAddress,
+      signAndSendDetails?.responsibleOfficer.replyAddresses,
       updatedWarrantRiskAssessment.basicDetailsSaved,
       updatedWarrantRiskAssessment.workAddress?.deliusAddressId,
     )
@@ -468,7 +483,10 @@ export default function warrantExecutionRoutes(
     signAndSendDetails: SignAndSendDetails,
     req: Request,
   ): WarrantRiskAssessment {
-    const selectedAddress = getSelectedAddress(signAndSendDetails.replyAddress, req.body.alternateAddress)
+    const selectedAddress = getSelectedAddress(
+      signAndSendDetails.responsibleOfficer.replyAddresses,
+      req.body.alternateAddress,
+    )
     if (selectedAddress) {
       return {
         ...warrantRiskAssessment,
