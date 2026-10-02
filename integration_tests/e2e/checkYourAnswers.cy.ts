@@ -236,6 +236,7 @@ context('Check your answers data checks', () => {
   it('should show relevant buttons when report is Validated and publish button should redirect correctly', () => {
     cy.visit('/check-your-answers/7c5a2d91-4e3f-48b6-9a20-1d6e8b4f3c72')
     cy.get('#publish').should('exist')
+    cy.get('#close').should('exist')
     cy.get('#deleteDraft').should('exist').should('contain.text', 'Delete draft assessment')
     cy.get('#viewDraft').should('exist').should('contain.text', 'View draft assessment')
     cy.get('#publish').click()
@@ -245,6 +246,7 @@ context('Check your answers data checks', () => {
   it('should show relevant buttons when report is not Validated and delete draft button should redirect correctly', () => {
     cy.visit('/check-your-answers/8a2f6c1d-4b73-49e5-9c20-1d7e3a5b6f42')
     cy.get('#publish').should('not.exist')
+    cy.get('#close').should('exist')
     cy.get('#deleteDraft').should('exist').should('contain.text', 'Delete draft assessment')
     cy.get('#viewDraft').should('exist').should('contain.text', 'View draft assessment')
     cy.get('#deleteDraft').click()
@@ -254,6 +256,7 @@ context('Check your answers data checks', () => {
   it('should show relevant buttons when report is not Validated and view draft button should have correct link', () => {
     cy.visit('/check-your-answers/8a2f6c1d-4b73-49e5-9c20-1d7e3a5b6f42')
     cy.get('#publish').should('not.exist')
+    cy.get('#close').should('exist')
     cy.get('#deleteDraft').should('exist').should('contain.text', 'Delete draft assessment')
     cy.get('#viewDraft').should('exist').should('contain.text', 'View draft assessment')
     cy.get('#viewDraft').should('exist').should('have.attr', 'href', '/pdf/8a2f6c1d-4b73-49e5-9c20-1d7e3a5b6f42')
@@ -262,5 +265,19 @@ context('Check your answers data checks', () => {
   it('navigates to report completed page if completed date set', () => {
     cy.visit('/check-your-answers/72d2199f-4b5f-4a1d-a1ca-44ede214c729')
     cy.url().should('include', '/report-completed/72d2199f-4b5f-4a1d-a1ca-44ede214c729')
+  })
+
+  it('close button performs a post request and displays message', () => {
+    cy.intercept('POST', '/check-your-answers/**').as('saveAndCloseRequest')
+    cy.visit('/check-your-answers/8a2f6c1d-4b73-49e5-9c20-1d7e3a5b6f42')
+    cy.url().should('include', '/check-your-answers')
+    cy.get('#page-title').should('contain.text', 'Check Your Answers')
+    cy.get('#close').click()
+    cy.wait('@saveAndCloseRequest').then(({ request }) => {
+      const body = new URLSearchParams(request.body)
+      expect(body.get('action')).to.equal('close')
+    })
+    cy.contains('You can now safely close this window').should('be.visible')
+    cy.get('#page-title').should('not.exist')
   })
 })
