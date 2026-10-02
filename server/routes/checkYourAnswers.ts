@@ -58,14 +58,21 @@ export default function checkYourAnswersRoutes(
       )
     if (await commonUtils.redirectRequired(warrantRiskAssessment, warrantRiskAssessmentId, res, authenticationClient))
       return
-    warrantRiskAssessment.completedDate = ZonedDateTime.now(ZoneId.of('Europe/London'))
-    warrantRiskAssessment.dateOfLetter = new Date().toISOString()
-    await warrantRiskAssessmentApiClient.updateWarrantRiskAssessment(
-      warrantRiskAssessmentId,
-      warrantRiskAssessment,
-      res.locals.user.username,
-    )
-    res.redirect(`/report-completed/${req.params.id}`)
+
+    if (req.body.action === 'close') {
+      res.send(
+        `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
+      )
+    } else {
+      warrantRiskAssessment.completedDate = ZonedDateTime.now(ZoneId.of('Europe/London'))
+      warrantRiskAssessment.dateOfLetter = new Date().toISOString()
+      await warrantRiskAssessmentApiClient.updateWarrantRiskAssessment(
+        warrantRiskAssessmentId,
+        warrantRiskAssessment,
+        res.locals.user.username,
+      )
+      res.redirect(`/report-completed/${req.params.id}`)
+    }
   })
 
   function validateReport(warrantRiskAssessment: WarrantRiskAssessment, employerCount: number): boolean {

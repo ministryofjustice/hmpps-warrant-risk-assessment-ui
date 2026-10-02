@@ -618,6 +618,16 @@
             }) }}
           {% endif %}
           {{ govukButton({
+            text: "Close",
+            type: "submit",
+            name: "action",
+            value: "close",
+            classes: "govuk-button--secondary",
+            attributes: {
+              id: "close"
+            }
+          }) }}
+          {{ govukButton({
             id: "viewDraft",
             text: "View draft assessment",
             classes: "govuk-button--secondary",
