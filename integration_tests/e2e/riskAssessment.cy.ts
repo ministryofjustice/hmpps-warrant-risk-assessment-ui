@@ -9,7 +9,7 @@ context('Risk Assessment page', () => {
     cy.get('#mappaDetails .govuk-details__summary-text').click()
     cy.get('#mappaDetails .govuk-details__text')
       .cleanText()
-      .should('include', 'MAPPA Category: MAPPA Level 1')
+      .should('include', 'MAPPA Category: MAPPA Cat 3')
       .and('include', 'Date: 01/01/2025')
     cy.get('input[name="mappaRadio"][value="Yes"]').should('be.checked')
     cy.get('input[name="mappaRadio"][value="No"]').should('not.be.checked')
