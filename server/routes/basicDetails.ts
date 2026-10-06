@@ -297,6 +297,46 @@ export default function basicDetailsRoutes(
       await warrantRiskAssessmentApiClient.batchCreateAddresses(addressesToCreate, res.locals.user.username)
     }
 
+    const otherAddressesById = new Map(otherAddresses.map(address => [address.id, address]))
+    const addressesToUpdate: WarrantRiskAssessmentAddress[] = existingAddresses
+      .filter(existingAddress => otherAddressesById.has(existingAddress.deliusAddressId))
+      .map(existingAddress => ({
+        ...existingAddress,
+        ...toWarrantRiskAssessmentAddress(
+          otherAddressesById.get(existingAddress.deliusAddressId),
+          existingAddress.screen ?? 'basicDetails',
+          warrantRiskAssessmentId,
+        ),
+        id: existingAddress.id,
+        screen: existingAddress.screen ?? 'basicDetails',
+      }))
+    if (addressesToUpdate.length > 0) {
+      await warrantRiskAssessmentApiClient.batchUpdateAddresses(addressesToUpdate, res.locals.user.username)
+    }
+
+    const employersById = new Map(basicDetails.employers.map(employer => [employer.employerAddress?.id, employer]))
+    const contactsToUpdate: WarrantRiskAssessmentContact[] = existingContacts
+      .filter(existingContact => employersById.has(existingContact.contactLocation?.deliusAddressId))
+      .map(existingContact => {
+        const linkedEmployer = employersById.get(existingContact.contactLocation?.deliusAddressId)
+        return {
+          ...existingContact,
+          contactPerson: formatTitleAndFullName('', linkedEmployer.employerName),
+          contactLocation: toWarrantRiskAssessmentAddress(
+            linkedEmployer.employerAddress,
+            existingContact.contactLocation?.screen ?? '',
+            warrantRiskAssessmentId,
+          ),
+          mobileNumber: linkedEmployer.mobileNumber,
+          telephoneNumber: linkedEmployer.telephoneNumber,
+          id: existingContact.id,
+          warrantRiskAssessmentId,
+        }
+      })
+    if (contactsToUpdate.length > 0) {
+      await warrantRiskAssessmentApiClient.batchUpdateContacts(contactsToUpdate, res.locals.user.username)
+    }
+
     await warrantRiskAssessmentApiClient.updateWarrantRiskAssessment(
       warrantRiskAssessmentId,
       warrantRiskAssessment,
