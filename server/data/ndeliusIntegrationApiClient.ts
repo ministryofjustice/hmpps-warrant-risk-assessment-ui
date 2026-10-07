@@ -107,6 +107,8 @@ export interface RiskAssessment {
 export interface Registration {
   id: number
   type: ReferenceData
+  level: ReferenceData
+  category: ReferenceData
   startDate: string
   notes: string
 }

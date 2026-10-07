@@ -181,8 +181,16 @@
           "mappaRegistration": {
             "id": 123456,
             "type": {
-              "code": "MAP1",
-              "description": "MAPPA Level 1"
+              "code": "MAPP",
+              "description": "MAPPA"
+            },
+            "level": {
+              "code": "M2",
+              "description": "MAPPA Level 2"
+            },
+            "category": {
+              "code": "M3",
+              "description": "MAPPA Cat 3"
             },
             "startDate": "2025-01-01",
             "notes": "some notes in here relating to the mappa registration"

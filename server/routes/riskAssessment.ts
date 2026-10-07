@@ -348,7 +348,7 @@ export default function riskAssessmentRoutes(
     if (mappaRegistration != null) {
       const formattedDate = toFullUserDate(mappaRegistration.startDate)
       return [
-        { label: 'MAPPA Category', value: mappaRegistration.type?.description },
+        { label: 'MAPPA Category', value: mappaRegistration.category?.description },
         { label: 'Date', value: formattedDate },
       ]
     }
