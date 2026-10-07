@@ -87,6 +87,30 @@ export default class WarrantRiskAssessmentApiClient extends RestClient {
     await Promise.all(promises)
   }
 
+  async updateAddress(
+    id: string,
+    address: WarrantRiskAssessmentAddress,
+    username: string,
+  ): Promise<WarrantRiskAssessmentAddress> {
+    return this.put(
+      {
+        path: `/warrant-risk-assessment/address/${id}`,
+        data: address as unknown as Record<string, unknown>,
+      },
+      asSystem(username),
+    )
+  }
+
+  async batchUpdateAddresses(addresses: Array<WarrantRiskAssessmentAddress>, username: string): Promise<void> {
+    const promises = []
+    for (const a of addresses) {
+      if (a.id) {
+        promises.push(this.updateAddress(a.id, a, username))
+      }
+    }
+    await Promise.all(promises)
+  }
+
   async createContact(contact: WarrantRiskAssessmentContact, username: string): Promise<string> {
     return this.post(
       {
@@ -101,6 +125,30 @@ export default class WarrantRiskAssessmentApiClient extends RestClient {
     const promises = []
     for (const c of contacts) {
       promises.push(this.createContact(c, username))
+    }
+    await Promise.all(promises)
+  }
+
+  async updateContact(
+    id: string,
+    contact: WarrantRiskAssessmentContact,
+    username: string,
+  ): Promise<WarrantRiskAssessmentContact> {
+    return this.put(
+      {
+        path: `/warrant-risk-assessment/contact/${id}`,
+        data: contact as unknown as Record<string, unknown>,
+      },
+      asSystem(username),
+    )
+  }
+
+  async batchUpdateContacts(contacts: Array<WarrantRiskAssessmentContact>, username: string): Promise<void> {
+    const promises = []
+    for (const c of contacts) {
+      if (c.id) {
+        promises.push(this.updateContact(c.id, c, username))
+      }
     }
     await Promise.all(promises)
   }
