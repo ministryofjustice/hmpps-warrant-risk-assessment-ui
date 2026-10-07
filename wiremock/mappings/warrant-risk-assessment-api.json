@@ -1202,6 +1202,7 @@
         "jsonBody": {
           "id": "44444444-4444-4444-8444-444444444444",
           "crn": "X000001",
+          "warrantExecutedBy": "Enforcement Officer",
           "completedDate": null
         },
         "headers": {

@@ -226,6 +226,14 @@ export default function riskAssessmentRoutes(
     warrantRiskAssessment.assaultingPolice = mapYesNoToBooleanOrNull(req.body.policeRadio)
     warrantRiskAssessment.misuseDrugsAndAlcohol = mapYesNoToBooleanOrNull(req.body.drugMisuseRadio)
 
+    warrantRiskAssessment.warrantExecutedBy =
+      warrantRiskAssessment.subjectOfMappaProcedures ||
+      warrantRiskAssessment.highRiskOfSelfHarm ||
+      warrantRiskAssessment.highRiskOfAbsconding ||
+      warrantRiskAssessment.vulnerable
+        ? 'Police Officer'
+        : 'Enforcement Officer'
+
     if (req.body.action === 'refreshFromNdelius') {
       // redirect to warning details to force a reload
       res.redirect(`/risk-assessment/${warrantRiskAssessmentId}`)

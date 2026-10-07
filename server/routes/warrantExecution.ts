@@ -139,20 +139,11 @@ export default function warrantExecutionRoutes(
     warrantRiskAssessment = preparedWarrantRiskAssessment
     errorMessages = preparedErrorMessages
 
-    const executedBy: string =
-      warrantRiskAssessment.subjectOfMappaProcedures ||
-      warrantRiskAssessment.highRiskOfSelfHarm ||
-      warrantRiskAssessment.highRiskOfAbsconding ||
-      warrantRiskAssessment.vulnerable
-        ? 'Police Officer'
-        : 'Enforcement Officer'
-
     res.render('pages/warrant-execution', {
       warrantRiskAssessment,
       warrantRiskAssessmentId,
       currentPage,
       callingScreen,
-      executedBy,
       errorMessages,
       ...workAddressContext,
       signAndSendDetails,
@@ -287,20 +278,11 @@ export default function warrantExecutionRoutes(
         warrantRiskAssessment = preparedWarrantRiskAssessment
         errorMessages = preparedErrorMessages
 
-        const executedBy: string =
-          warrantRiskAssessment.subjectOfMappaProcedures ||
-          warrantRiskAssessment.highRiskOfSelfHarm ||
-          warrantRiskAssessment.highRiskOfAbsconding ||
-          warrantRiskAssessment.vulnerable
-            ? 'Police Officer'
-            : 'Enforcement Officer'
-
         res.render('pages/warrant-execution', {
           warrantRiskAssessment,
           warrantRiskAssessmentId,
           currentPage,
           callingScreen,
-          executedBy,
           errorMessages,
           ...workAddressContext,
           signAndSendDetails,
@@ -333,14 +315,6 @@ export default function warrantExecutionRoutes(
       errorMessages = preparedErrorMessages
 
       warrantRiskAssessment = handleSelectedAddress(warrantRiskAssessment, signAndSendDetails, req)
-
-      warrantRiskAssessment.warrantExecutedBy =
-        warrantRiskAssessment.subjectOfMappaProcedures ||
-        warrantRiskAssessment.highRiskOfSelfHarm ||
-        warrantRiskAssessment.highRiskOfAbsconding ||
-        warrantRiskAssessment.vulnerable
-          ? 'Police Officer'
-          : 'Enforcement Officer'
 
       warrantRiskAssessment.signAndSendSaved = true
 
