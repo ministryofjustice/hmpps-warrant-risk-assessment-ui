@@ -3,6 +3,12 @@ context('Basic Details page', () => {
     cy.visit('/basic-details/37159b12-5c73-407a-94b6-43fc23938df6')
     cy.url().should('include', '/basic-details')
     cy.get('#page-title').should('contain.text', 'Basic Details')
+    cy.get('#current-employer-heading')
+      .should('exist')
+      .invoke('text')
+      .then(text => {
+        expect(text?.trim() ?? '').to.eq('Current employer(s)')
+      })
     cy.get('#name').should('contain.text', 'Mr Billy The Kid')
     cy.get('#date-of-birth').should('contain.text', '17/03/1980')
     cy.get('#address').should('contain.text', '2789 Main Street')
