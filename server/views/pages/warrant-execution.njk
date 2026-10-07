@@ -48,7 +48,7 @@
           <h1 class="govuk-heading-l" id="page-title">Warrant Execution and Sign off</h1>
 
           <h2 class="govuk-heading-m">Warrant to be executed by</h2>
-          <p id="name">{{ executedBy }}</p>
+          <p id="name">{{ warrantRiskAssessment.warrantExecutedBy }}</p>
 
           <h2 class="govuk-heading-l">Responsible officer and sign off</h2>
 
@@ -87,7 +87,7 @@
                   <br />{% endif %}
               </p>
 
-              {% if warrantRiskAssessment.workAddress != null and warrantRiskAssessment.workAddress.addressId == null and (signAndSendDetails.replyAddress == null or signAndSendDetails.replyAddress.length == 0) %}
+              {% if warrantRiskAssessment.workAddress != null and warrantRiskAssessment.workAddress.addressId == null and (signAndSendDetails.responsibleOfficer.replyAddresses == null or signAndSendDetails.responsibleOfficer.replyAddresses.length == 0) %}
                 {{ govukButton({
                   text: "Update address",
                   type: "submit",
@@ -118,7 +118,7 @@
                 classes: "govuk-button--secondary"
               }) }}
 
-            {% elseif not addressNotAvailable and signAndSendDetails.replyAddress != null and signAndSendDetails.replyAddress.length > 0 %}
+            {% elseif not addressNotAvailable and signAndSendDetails.responsibleOfficer.replyAddresses != null and signAndSendDetails.responsibleOfficer.replyAddresses.length > 0 %}
 
               {{ govukRadios({
                 name: "offenderAddressSelectOne",
@@ -150,7 +150,7 @@
                 ]
               }) }}
 
-            {% elseif signAndSendDetails.replyAddress != null and signAndSendDetails.replyAddress.length > 0 %}
+            {% elseif signAndSendDetails.responsibleOfficer.replyAddresses != null and signAndSendDetails.responsibleOfficer.replyAddresses.length > 0 %}
 
               {{ alternateAddressHtml | safe }}
 

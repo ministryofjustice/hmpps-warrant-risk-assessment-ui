@@ -119,7 +119,7 @@ export default function basicDetailsRoutes(
     const contactDeleted = existingContacts?.some(
       existingContact =>
         !basicDetails.employers.some(
-          employer => employer.employerAddress.id === existingContact.contactLocation.deliusAddressId,
+          employer => employer.employerAddress?.id === existingContact.contactLocation?.deliusAddressId,
         ),
     )
 
@@ -260,23 +260,17 @@ export default function basicDetailsRoutes(
     const contactsToDelete = existingContacts.filter(
       existingContact =>
         !basicDetails.employers.some(
-          employer => employer.employerAddress.id === existingContact.contactLocation.deliusAddressId,
+          employer => employer.employerAddress?.id === existingContact.contactLocation?.deliusAddressId,
         ),
     )
-    if (contactsToDelete.length > 0) {
-      await warrantRiskAssessmentApiClient.batchDeleteContacts(contactsToDelete, res.locals.user.username)
-    }
 
     const addressesToDelete = existingAddresses.filter(
       existingAddress => !otherAddresses.some(address => address.id === existingAddress.deliusAddressId),
     )
-    if (addressesToDelete.length > 0) {
-      await warrantRiskAssessmentApiClient.batchDeleteAddresses(addressesToDelete, res.locals.user.username)
-    }
 
     const contactsToCreate: WarrantRiskAssessmentContact[] = basicDetails.employers
       .filter(
-        employer => !existingContacts?.some(c => c.contactLocation.deliusAddressId === employer.employerAddress.id),
+        employer => !existingContacts?.some(c => c.contactLocation?.deliusAddressId === employer.employerAddress?.id),
       )
       .map(employer => ({
         contactPerson: formatTitleAndFullName('', employer.employerName),
@@ -286,35 +280,83 @@ export default function basicDetailsRoutes(
         warrantRiskAssessmentId,
       }))
 
-    if (contactsToCreate.length > 0) {
-      await warrantRiskAssessmentApiClient.batchCreateContacts(contactsToCreate, res.locals.user.username)
-    }
-
     const addressesToCreate = otherAddresses
-      .filter(address => !existingAddresses?.some(existingAddress => existingAddress.deliusAddressId === address.id))
+      .filter(address => !existingAddresses?.some(existingAddress => existingAddress?.deliusAddressId === address.id))
       .map(address => toWarrantRiskAssessmentAddress(address, 'basicDetails', warrantRiskAssessmentId))
-    if (addressesToCreate.length > 0) {
-      await warrantRiskAssessmentApiClient.batchCreateAddresses(addressesToCreate, res.locals.user.username)
-    }
 
-    await warrantRiskAssessmentApiClient.updateWarrantRiskAssessment(
-      warrantRiskAssessmentId,
-      warrantRiskAssessment,
-      res.locals.user.username,
-    )
+    const otherAddressesById = new Map(otherAddresses.map(address => [address.id, address]))
+    const addressesToUpdate: WarrantRiskAssessmentAddress[] = existingAddresses
+      .filter(existingAddress => otherAddressesById.has(existingAddress.deliusAddressId))
+      .map(existingAddress => ({
+        ...existingAddress,
+        ...toWarrantRiskAssessmentAddress(
+          otherAddressesById.get(existingAddress.deliusAddressId),
+          existingAddress.screen ?? 'basicDetails',
+          warrantRiskAssessmentId,
+        ),
+        id: existingAddress.id,
+        screen: existingAddress.screen ?? 'basicDetails',
+      }))
+
+    const employersById = new Map(basicDetails.employers.map(employer => [employer.employerAddress?.id, employer]))
+    const contactsToUpdate: WarrantRiskAssessmentContact[] = existingContacts
+      .filter(existingContact => employersById.has(existingContact.contactLocation?.deliusAddressId))
+      .map(existingContact => {
+        const linkedEmployer = employersById.get(existingContact.contactLocation?.deliusAddressId)
+        return {
+          ...existingContact,
+          contactPerson: formatTitleAndFullName('', linkedEmployer.employerName),
+          contactLocation: toWarrantRiskAssessmentAddress(
+            linkedEmployer.employerAddress,
+            existingContact.contactLocation?.screen ?? '',
+            warrantRiskAssessmentId,
+          ),
+          mobileNumber: linkedEmployer.mobileNumber,
+          telephoneNumber: linkedEmployer.telephoneNumber,
+          id: existingContact.id,
+          warrantRiskAssessmentId,
+        }
+      })
 
     // if the user selected saveProgressAndClose then send a close back to the client
-    if (req.body.action === 'saveProgressAndClose') {
-      res.send(
-        `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
-      )
-    } else if (req.body.action === 'refreshFromNdelius') {
+    if (req.body.action === 'refreshFromNdelius') {
       // redirect to warning details to force a reload
       res.redirect(`/basic-details/${warrantRiskAssessmentId}`)
-    } else if (callingScreen && callingScreen === 'check-your-answers') {
-      res.redirect(`/check-your-answers/${req.params.id}`)
     } else {
-      res.redirect(`/risk-assessment/${warrantRiskAssessmentId}`)
+      if (addressesToCreate.length > 0) {
+        await warrantRiskAssessmentApiClient.batchCreateAddresses(addressesToCreate, res.locals.user.username)
+      }
+      if (addressesToUpdate.length > 0) {
+        await warrantRiskAssessmentApiClient.batchUpdateAddresses(addressesToUpdate, res.locals.user.username)
+      }
+      if (addressesToDelete.length > 0) {
+        await warrantRiskAssessmentApiClient.batchDeleteAddresses(addressesToDelete, res.locals.user.username)
+      }
+      if (contactsToCreate.length > 0) {
+        await warrantRiskAssessmentApiClient.batchCreateContacts(contactsToCreate, res.locals.user.username)
+      }
+      if (contactsToUpdate.length > 0) {
+        await warrantRiskAssessmentApiClient.batchUpdateContacts(contactsToUpdate, res.locals.user.username)
+      }
+      if (contactsToDelete.length > 0) {
+        await warrantRiskAssessmentApiClient.batchDeleteContacts(contactsToDelete, res.locals.user.username)
+      }
+
+      await warrantRiskAssessmentApiClient.updateWarrantRiskAssessment(
+        warrantRiskAssessmentId,
+        warrantRiskAssessment,
+        res.locals.user.username,
+      )
+
+      if (req.body.action === 'saveProgressAndClose') {
+        res.send(
+          `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
+        )
+      } else if (callingScreen && callingScreen === 'check-your-answers') {
+        res.redirect(`/check-your-answers/${req.params.id}`)
+      } else {
+        res.redirect(`/risk-assessment/${warrantRiskAssessmentId}`)
+      }
     }
   })
 

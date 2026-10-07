@@ -181,8 +181,16 @@
           "mappaRegistration": {
             "id": 123456,
             "type": {
-              "code": "MAP1",
-              "description": "MAPPA Level 1"
+              "code": "MAPP",
+              "description": "MAPPA"
+            },
+            "level": {
+              "code": "M2",
+              "description": "MAPPA Level 2"
+            },
+            "category": {
+              "code": "M3",
+              "description": "MAPPA Cat 3"
             },
             "startDate": "2025-01-01",
             "notes": "some notes in here relating to the mappa registration"
@@ -237,40 +245,42 @@
             "forenames": "UserSignForename UserSignMiddle",
             "surname": "UserSignSurname"
           },
-          "name": {
-            "forename": "NotSo",
-            "middleName": "Nice",
-            "surname": "Officer"
-          },
-          "telephoneNumber": "07707123456",
-          "probationArea": {
-            "code": "N01",
-            "description": "Northumbria"
-          },
-          "replyAddress": [
-            {
-              "id": 1,
-              "status": "Postal",
-              "buildingName": null,
-              "buildingNumber": "281",
-              "streetName": "Postal Default Street",
-              "townCity": "Postinton",
-              "district": "Postrict",
-              "county": "County Post",
-              "postcode": "NE30 3ZZ"
+          "responsibleOfficer": {
+            "name": {
+              "forename": "NotSo",
+              "middleName": "Nice",
+              "surname": "Officer"
             },
-            {
-              "id": 2,
-              "status": "Main",
-              "buildingName": null,
-              "buildingNumber": "2789",
-              "streetName": "Main Street",
-              "townCity": "Maintown",
-              "district": "MainDistrict",
-              "county": "Maincounty",
-              "postcode": "MA30 3IN"
-            }
-          ]
+            "telephoneNumber": "07707123456",
+            "probationArea": {
+              "code": "N01",
+              "description": "Northumbria"
+            },
+            "replyAddresses": [
+              {
+                "id": 1,
+                "status": "Postal",
+                "buildingName": null,
+                "buildingNumber": "281",
+                "streetName": "Postal Default Street",
+                "townCity": "Postinton",
+                "district": "Postrict",
+                "county": "County Post",
+                "postcode": "NE30 3ZZ"
+              },
+              {
+                "id": 2,
+                "status": "Main",
+                "buildingName": null,
+                "buildingNumber": "2789",
+                "streetName": "Main Street",
+                "townCity": "Maintown",
+                "district": "MainDistrict",
+                "county": "Maincounty",
+                "postcode": "MA30 3IN"
+              }
+            ]
+          }
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
@@ -289,17 +299,19 @@
             "forenames": "UserSignForename UserSignMiddle",
             "surname": "UserSignSurname"
           },
-          "name": {
-            "forename": "NotSo",
-            "middleName": "Nice",
-            "surname": "Officer"
-          },
-          "telephoneNumber": "07707123456",
-          "probationArea": {
-            "code": "N01",
-            "description": "Northumbria"
-          },
-          "replyAddress": []
+          "responsibleOfficer": {
+            "name": {
+              "forename": "NotSo",
+              "middleName": "Nice",
+              "surname": "Officer"
+            },
+            "telephoneNumber": "07707123456",
+            "probationArea": {
+              "code": "N01",
+              "description": "Northumbria"
+            },
+            "replyAddresses": []
+          }
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
@@ -318,42 +330,44 @@
             "forenames": "UserSignForename UserSignMiddle",
             "surname": "UserSignSurname"
           },
-          "name": {
-            "forename": "NotSo",
-            "middleName": "Nice",
-            "surname": "Officer"
-          },
-          "telephoneNumber": "07707123456",
-          "probationArea": {
-            "code": "N01",
-            "description": "Northumbria"
-          },
-          "replyAddress": [
-            {
-              "id": 41,
-              "status": "Default",
-              "officeDescription": "Default Work Location",
-              "buildingName": "Default Building",
-              "buildingNumber": "1",
-              "streetName": "Default Street",
-              "townCity": "Default Town",
-              "district": "Default District",
-              "county": "Default County",
-              "postcode": "DF1 1AA"
+          "responsibleOfficer": {
+            "name": {
+              "forename": "NotSo",
+              "middleName": "Nice",
+              "surname": "Officer"
             },
-            {
-              "id": 42,
-              "status": "Main",
-              "officeDescription": "Other Work Location",
-              "buildingName": "Other Building",
-              "buildingNumber": "2",
-              "streetName": "Other Street",
-              "townCity": "Other Town",
-              "district": "Other District",
-              "county": "Other County",
-              "postcode": "OT2 2BB"
-            }
-          ]
+            "telephoneNumber": "07707123456",
+            "probationArea": {
+              "code": "N01",
+              "description": "Northumbria"
+            },
+            "replyAddresses": [
+              {
+                "id": 41,
+                "status": "Default",
+                "officeDescription": "Default Work Location",
+                "buildingName": "Default Building",
+                "buildingNumber": "1",
+                "streetName": "Default Street",
+                "townCity": "Default Town",
+                "district": "Default District",
+                "county": "Default County",
+                "postcode": "DF1 1AA"
+              },
+              {
+                "id": 42,
+                "status": "Main",
+                "officeDescription": "Other Work Location",
+                "buildingName": "Other Building",
+                "buildingNumber": "2",
+                "streetName": "Other Street",
+                "townCity": "Other Town",
+                "district": "Other District",
+                "county": "Other County",
+                "postcode": "OT2 2BB"
+              }
+            ]
+          }
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"

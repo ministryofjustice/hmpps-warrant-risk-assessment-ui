@@ -79,10 +79,14 @@ export interface DeliusAddress {
 
 export interface SignAndSendDetails {
   userDetails: UserDetails
+  responsibleOfficer: ResponsibleOfficer
+}
+
+export interface ResponsibleOfficer {
   name: Name
   telephoneNumber?: string
   probationArea?: ReferenceData
-  replyAddress: DeliusAddress[]
+  replyAddresses: DeliusAddress[]
 }
 
 export interface UserDetails {
@@ -103,6 +107,8 @@ export interface RiskAssessment {
 export interface Registration {
   id: number
   type: ReferenceData
+  level: ReferenceData
+  category: ReferenceData
   startDate: string
   notes: string
 }

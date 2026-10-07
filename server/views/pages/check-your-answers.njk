@@ -141,8 +141,10 @@
                           <br />{% endif %}
                         {% if employer.contactLocation.postcode %} {{ employer.contactLocation.postcode }}
                           <br />{% endif %}
-                        {{ employer.telephoneNumber }}
-                        <br />
+                        {% if employer.telephoneNumber %}{{ employer.telephoneNumber }}
+                          <br />{% endif %}
+                        {% if employer.mobileNumber %}{{ employer.mobileNumber }}
+                          <br />{% endif %}
                       </p>
                       {% if not loop.last %}
                         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
@@ -263,7 +265,7 @@
 
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                  Is the offender assessed as posing a high risk if self harm?
+                  Is the offender assessed as posing a high risk of serious harm?
                 </dt>
                 <dd class="govuk-summary-list__value">
                   {% if warrantRiskAssessment.highRiskOfSelfHarm == null and warrantRiskAssessment.riskAssessmentSaved %}
@@ -430,7 +432,7 @@
         <div class="govuk-summary-card">
           <div class="govuk-summary-card__title-wrapper">
             <h2 class="govuk-summary-card__title">
-              Risk Assessment
+              Risk Summary
             </h2>
             <ul class="govuk-summary-card__actions">
               <li class="govuk-summary-card__action">
@@ -520,14 +522,14 @@
         <div class="govuk-summary-card">
           <div class="govuk-summary-card__title-wrapper">
             <h2 class="govuk-summary-card__title">
-              Warrant execution and sign off
+              Warrant Execution and Sign off
             </h2>
             <ul class="govuk-summary-card__actions">
               <li class="govuk-summary-card__action">
                 {% if warrantRiskAssessment.signAndSendSaved %}
                   <a id="change-warrant-execution" class="govuk-link"
                      href="/warrant-execution/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers">Change<span
-                      class="govuk-visually-hidden"> Warrant execution and sign off</span></a>
+                      class="govuk-visually-hidden"> Warrant Execution and Sign off</span></a>
                 {% endif %}
               </li>
             </ul>
@@ -615,6 +617,16 @@
               id: "publish"
             }) }}
           {% endif %}
+          {{ govukButton({
+            text: "Close",
+            type: "submit",
+            name: "action",
+            value: "close",
+            classes: "govuk-button--secondary",
+            attributes: {
+              id: "close"
+            }
+          }) }}
           {{ govukButton({
             id: "viewDraft",
             text: "View draft assessment",
