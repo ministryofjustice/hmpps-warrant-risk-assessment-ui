@@ -339,6 +339,8 @@ export default function riskAssessmentRoutes(
 
   function generateSelfHarmInfo(risks: AllRoshRisk): DisplayField[] {
     const selfHarm = risks.riskToSelf?.selfHarm
+    const riskInCommunity = risks.summary?.riskInCommunity
+    const riskInCustody = risks.summary?.riskInCustody
     if (selfHarm != null) {
       return [
         { label: 'Risk', value: selfHarm.risk },
@@ -346,6 +348,45 @@ export default function riskAssessmentRoutes(
         { label: 'Previous Concerns Notes', value: selfHarm.previousConcernsText },
         { label: 'Current', value: selfHarm.current },
         { label: 'Current Concerns Notes', value: selfHarm.currentConcernsText },
+        { label: 'Risk in Community', value: '' },
+        {
+          label: 'Risk to Children',
+          value: Object.entries(riskInCommunity).find(([_, arr]) => arr.includes('Children'))?.[0],
+        },
+        {
+          label: 'Risk to Known Adult',
+          value: Object.entries(riskInCommunity).find(([_, arr]) => arr.includes('Know adult'))?.[0],
+        },
+        {
+          label: 'Risk to Prisoners',
+          value: Object.entries(riskInCommunity).find(([_, arr]) => arr.includes('Prisoners'))?.[0],
+        },
+        {
+          label: 'Risk to Staff',
+          value: Object.entries(riskInCommunity).find(([_, arr]) => arr.includes('Staff'))?.[0],
+        },
+        {
+          label: 'Risk to Public',
+          value: Object.entries(riskInCommunity).find(([_, arr]) => arr.includes('Public'))?.[0],
+        },
+        { label: 'Risk in Custody', value: '' },
+        {
+          label: 'Risk to Children',
+          value: Object.entries(riskInCustody).find(([_, arr]) => arr.includes('Children'))?.[0],
+        },
+        {
+          label: 'Risk to Known Adult',
+          value: Object.entries(riskInCustody).find(([_, arr]) => arr.includes('Know adult'))?.[0],
+        },
+        {
+          label: 'Risk to Prisoners',
+          value: Object.entries(riskInCustody).find(([_, arr]) => arr.includes('Prisoners'))?.[0],
+        },
+        { label: 'Risk to Staff', value: Object.entries(riskInCustody).find(([_, arr]) => arr.includes('Staff'))?.[0] },
+        {
+          label: 'Risk to Public',
+          value: Object.entries(riskInCustody).find(([_, arr]) => arr.includes('Public'))?.[0],
+        },
       ]
     }
     return []

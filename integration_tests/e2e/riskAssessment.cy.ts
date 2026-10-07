@@ -15,7 +15,7 @@ context('Risk Assessment page', () => {
     cy.get('input[name="mappaRadio"][value="No"]').should('not.be.checked')
     cy.get('#selfHarmDetails .govuk-details__summary-text')
       .should('be.visible')
-      .should('contain.text', 'Click here to view Self Harm information')
+      .should('contain.text', 'Click here to view Serious harm information')
     cy.get('#selfHarmDetails .govuk-details__summary-text').click()
     cy.get('#selfHarmDetails .govuk-details__text')
       .cleanText()
