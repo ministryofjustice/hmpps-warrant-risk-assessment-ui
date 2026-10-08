@@ -20,7 +20,7 @@ WORKDIR /app
 RUN npm install -g npm@12
 COPY package*.json .npmrc ./
 RUN NPM_CONFIG_AUDIT=false NPM_CONFIG_FUND=false npm run setup
-RUN CYPRESS_INSTALL_BINARY=0 npm ci --no-audit
+
 ENV NODE_ENV='production'
 
 COPY . .
@@ -50,6 +50,7 @@ EXPOSE 3000
 ENV BUILD_NUMBER=${BUILD_NUMBER}
 ENV GIT_REF=${GIT_REF}
 ENV GIT_BRANCH=${GIT_BRANCH}
+RUN CYPRESS_INSTALL_BINARY=0 npm ci --no-audit
 ENV NODE_ENV='production'
 USER 2000
 
