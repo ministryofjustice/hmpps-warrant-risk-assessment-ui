@@ -9,18 +9,29 @@ import type { Services } from '../../services'
 import AuditService from '../../services/auditService'
 import { HmppsUser } from '../../interfaces/hmppsUser'
 import setUpWebSession from '../../middleware/setUpWebSession'
+import type { ApplicationInfo } from '../../applicationInfo'
 
 jest.mock('../../services/auditService')
 
 export const user: HmppsUser = {
   name: 'FIRST LAST',
   userId: 'id',
+  userUuid: '11111111-1111-1111-1111-111111111111',
   token: 'token',
   username: 'user1',
   displayName: 'First Last',
   authSource: 'nomis',
   staffId: 1234,
   userRoles: [],
+}
+
+const applicationInfo: ApplicationInfo = {
+  applicationName: 'hmpps-warrant-risk-assessment-ui',
+  buildNumber: '1',
+  gitRef: 'https://github.com/ministryofjustice/hmpps-warrant-risk-assessment-ui',
+  gitShortHash: 'a3ca835',
+  productId: 'WRA',
+  branchName: 'main',
 }
 
 export const flashProvider = jest.fn()
@@ -46,7 +57,7 @@ function appSetup(services: Services, production: boolean, userSupplier: () => H
   })
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
-  app.use(routes(services))
+  app.use(routes({ applicationInfo, ...services } as Services))
   app.use((req, res, next) => next(new NotFound()))
   app.use(errorHandler(production))
 
