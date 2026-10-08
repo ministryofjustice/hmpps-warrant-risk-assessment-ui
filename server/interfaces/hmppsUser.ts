@@ -1,4 +1,5 @@
 import { UUID } from 'crypto'
+
 export type AuthSource = 'nomis' | 'delius' | 'external' | 'azuread'
 
 /**
