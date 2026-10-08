@@ -25,23 +25,25 @@
     "precommit:secrets": "gitleaks git --pre-commit --redact --staged --verbose --config .gitleaks/config.toml --gitleaks-ignore-path .gitleaks/.gitleaksignore",
     "precommit:lint": "lint-staged",
     "precommit:verify": "npm run typecheck && npm test",
-    "setup": "npm ci && hmpps-npm-script-run-allowlist"
+    "setup": "npm ci"
   },
   "engines": {
-    "node": "^24"
+    "node": "^24",
+    "npm": "^12"
   },
   "dependencies": {
-    "@aws-sdk/client-sqs": "^3.1145.0",
+    "@aws-sdk/client-sqs": "^3.1147.0",
     "@js-joda/core": "6.2.0",
     "@js-joda/timezone": "2.26.0",
     "@ministryofjustice/frontend": "^11.1.0",
+    "@ministryofjustice/hmpps-audit-client": "2.0.0-beta.5",
     "@ministryofjustice/hmpps-auth-clients": "^3.0.0",
+    "@ministryofjustice/hmpps-azure-telemetry": "1.1.0",
     "@ministryofjustice/hmpps-monitoring": "^2.1.0",
     "@ministryofjustice/hmpps-npm-script-allowlist": "0.0.6",
     "@ministryofjustice/hmpps-rest-client": "^2.2.0",
     "@playwright/test": "^1.63.0",
     "@types/qs": "^6.15.1",
-    "applicationinsights": "^3.16.0",
     "body-parser": "^2.3.0",
     "bunyan": "^1.8.15",
     "bunyan-format": "^0.2.1",
@@ -82,8 +84,8 @@
     "@types/passport-oauth2": "^1.8.0",
     "@types/superagent": "^8.1.11",
     "@types/supertest": "^7.2.1",
-    "@typescript-eslint/eslint-plugin": "^8.71.0",
-    "@typescript-eslint/parser": "^8.71.0",
+    "@typescript-eslint/eslint-plugin": "^8.71.1",
+    "@typescript-eslint/parser": "^8.71.1",
     "audit-ci": "^7.1.0",
     "aws-sdk-client-mock": "^4.1.0",
     "chokidar": "^3.6.0",
@@ -110,5 +112,20 @@
     "ts-jest": "^29.4.14",
     "typescript": "^5.9.3",
     "wiremock": "^3.13.2"
+  },
+  "overrides": {
+    "@opentelemetry/core": "2.11.0",
+    "brace-expansion": "5.0.9",
+    "js-yaml": "3.15.2"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": true,
+    "dtrace-provider@0.8.8": false,
+    "fsevents@2.3.3": true,
+    "fsevents@2.3.2": true,
+    "unrs-resolver@1.12.2": true,
+    "esbuild@0.28.2": true,
+    "cypress@16.1.1": true,
+    "protobufjs@7.6.6": true
   }
 }

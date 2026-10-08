@@ -155,6 +155,7 @@ The secret scanner hook can also be configured as described [here](https://githu
 
 `npm run test`
 
+
 ### Running integration tests
 
 For local running, start a wiremock instance by:
