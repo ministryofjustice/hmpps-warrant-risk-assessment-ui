@@ -1708,6 +1708,7 @@
             "postcode": "AB1 2CD"
           },
           "dateOfBirth": "1990-03-15",
+          "lastHomeVisitDate": "2025-03-17",
           "signOnOffice": {
             "id": "20000002",
             "addressId": "70000002",
@@ -1722,9 +1723,41 @@
             "postcode": "AB1 2CD"
           },
           "nationalInsuranceNumber": "QQ123456C",
+          "telephoneNumber": "01632 960111",
+          "mobileNumber": "07777 111111",
+          "emailAddress": "ada.lovelace@example.com",
           "basicDetailsSaved": true,
           "completedDate": null
         },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/address/byWRAIdAndPage/d3b8f1a4-7e22-4c9b-9351-6f0a2d8e4b77/basicDetails",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": [
+          {
+            "id": "30000001",
+            "warrantRiskAssessmentId": "d3b8f1a4-7e22-4c9b-9351-6f0a2d8e4b77",
+            "deliusAddressId": 70000003,
+            "status": "active",
+            "buildingName": "Annexe House",
+            "addressNumber": "34",
+            "streetName": "Side Street",
+            "townCity": "Example Town",
+            "district": "Example District",
+            "county": "Example County",
+            "postcode": "EF3 4GH",
+            "screen": "basicDetails"
+          }
+        ],
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
         },
@@ -1966,7 +1999,24 @@
           "responsibleOfficerFullName": "Alex Johnson",
           "probationArea": "North Region",
           "signature": "Alex Johnson",
-          "completedDate": null
+          "completedDate": null,
+          "workAddress": {
+            "id": "30000003",
+            "warrantRiskAssessmentId": "4a1e9d3c-7b25-4f68-9c10-2d6e8a5b3f41",
+            "deliusAddressId": 3,
+            "status": "Main",
+            "officeDescription": "Main Work Location",
+            "buildingName": "Main Building",
+            "addressNumber": "2789",
+            "streetName": "Main Street",
+            "townCity": "Maintown",
+            "district": "MainDistrict",
+            "county": "Maincounty",
+            "postcode": "MA30 3IN",
+            "screen": "warrantExecution"
+          },
+          "responsibleOfficerTelephoneNumer": "01232 123456",
+          "warrantExecutedBy": "Enforcement Officer"
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"

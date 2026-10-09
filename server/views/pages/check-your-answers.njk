@@ -116,6 +116,102 @@
 
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
+                  Date of Last home Visit
+                </dt>
+                <dd id="cya-last-home-visit" class="govuk-summary-list__value">
+                  {{ lastHomeVisitDate }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Other Addresses
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% for address in existingAddresses %}
+                    <p id="other-address-{{ loop.index }}">
+                      {% if address.buildingName %} {{ address.buildingName }}
+                        <br />{% endif %}
+                      {% if address.buildingName or address.streetName %} {{ address.addressNumber }} {{ address.streetName }}
+                        <br />{% endif %}
+                      {% if address.district %} {{ address.district }}
+                        <br />{% endif %}
+                      {% if address.townCity %} {{ address.townCity }}
+                        <br />{% endif %}
+                      {% if address.county %} {{ address.county }}
+                        <br />{% endif %}
+                      {% if address.postcode %} {{ address.postcode }}
+                        <br />{% endif %}
+                    </p>
+                    {% if not loop.last %}
+                      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+                    {% endif %}
+                  {% endfor %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Telephone Number
+                </dt>
+                <dd id="cya-telephone-number" class="govuk-summary-list__value">
+                  {{ warrantRiskAssessment.telephoneNumber }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Mobile Number
+                </dt>
+                <dd id="cya-mobile-number" class="govuk-summary-list__value">
+                  {{ warrantRiskAssessment.mobileNumber }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Email Address
+                </dt>
+                <dd id="cya-email-address" class="govuk-summary-list__value">
+                  {{ warrantRiskAssessment.emailAddress }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Employer's Address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {% for employer in employers %}
+                      <p id="employer-address-{{ loop.index }}">
+                        {{ employer.contactPerson }}
+                        <br />
+                        {% if employer.contactLocation.buildingName %} {{ employer.contactLocation.buildingName }}
+                          <br />{% endif %}
+                        {% if employer.contactLocation.buildingName or employer.contactLocation.streetName %} {{ employer.contactLocation.addressNumber }} {{ employer.contactLocation.streetName }}
+                          <br />{% endif %}
+                        {% if employer.contactLocation.district %} {{ employer.contactLocation.district }}
+                          <br />{% endif %}
+                        {% if employer.contactLocation.townCity %} {{ employer.contactLocation.townCity }}
+                          <br />{% endif %}
+                        {% if employer.contactLocation.county %} {{ employer.contactLocation.county }}
+                          <br />{% endif %}
+                        {% if employer.contactLocation.postcode %} {{ employer.contactLocation.postcode }}
+                          <br />{% endif %}
+                        {% if employer.telephoneNumber %}{{ employer.telephoneNumber }}
+                          <br />{% endif %}
+                        {% if employer.mobileNumber %}{{ employer.mobileNumber }}
+                          <br />{% endif %}
+                      </p>
+                      {% if not loop.last %}
+                        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+                      {% endif %}
+                    {% endfor %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
                   DWP Signing on office
                 </dt>
                 <dd class="govuk-summary-list__value">
@@ -144,6 +240,15 @@
                   {% if warrantRiskAssessment.signOnOffice == null %}
                     <span class="govuk-tag--light-blue">Required</span>
                   {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  National Insurance Number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ warrantRiskAssessment.nationalInsuranceNumber }}
                 </dd>
               </div>
 
@@ -470,6 +575,15 @@
             <dl class="govuk-summary-list">
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
+                  Warrant to be executed by
+                </dt>
+                <dd id="cya-warrant-executed-by" class="govuk-summary-list__value">
+                  {{ warrantRiskAssessment.warrantExecutedBy }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
                   Responsible Officer
                 </dt>
                 <dd class="govuk-summary-list__value">
@@ -511,6 +625,41 @@
                             Required
                 </span>
                   {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Officer Work Address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.workAddress != null %}
+                    <p id="cya-officer-work-address">
+                      {% if warrantRiskAssessment.workAddress.officeDescription %} {{ warrantRiskAssessment.workAddress.officeDescription }}
+                        <br />{% endif %}
+                      {% if warrantRiskAssessment.workAddress.buildingName %} {{ warrantRiskAssessment.workAddress.buildingName }}
+                        <br />{% endif %}
+                      {% if warrantRiskAssessment.workAddress.buildingName or warrantRiskAssessment.workAddress.streetName %} {{ warrantRiskAssessment.workAddress.addressNumber }} {{ warrantRiskAssessment.workAddress.streetName }}
+                        <br />{% endif %}
+                      {% if warrantRiskAssessment.workAddress.district %} {{ warrantRiskAssessment.workAddress.district }}
+                        <br />{% endif %}
+                      {% if warrantRiskAssessment.workAddress.townCity %} {{ warrantRiskAssessment.workAddress.townCity }}
+                        <br />{% endif %}
+                      {% if warrantRiskAssessment.workAddress.county %} {{ warrantRiskAssessment.workAddress.county }}
+                        <br />{% endif %}
+                      {% if warrantRiskAssessment.workAddress.postcode %} {{ warrantRiskAssessment.workAddress.postcode }}
+                        <br />{% endif %}
+                    </p>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Responsible Officer Telephone Number
+                </dt>
+                <dd id="cya-responsible-officer-telephone" class="govuk-summary-list__value">
+                  {{ warrantRiskAssessment.responsibleOfficerTelephoneNumer }}
                 </dd>
               </div>
 
