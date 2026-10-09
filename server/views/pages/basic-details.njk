@@ -68,23 +68,25 @@
           <h2 class="govuk-heading-m">Date of Last Home Visit</h2>
           <p id="date-of-home-visit">{{ formattedHomeVisit }}</p>
 
-          <h2 class="govuk-heading-m">Any other known addresses</h2>
-          {% for address in otherAddresses %}
-            <p id="other-address-{{ loop.index }}">
-              {% if address.buildingName %} {{ address.buildingName }}
-                <br />{% endif %}
-              {% if address.buildingName or address.streetName %} {{ address.buildingNumber }} {{ address.streetName }}
-                <br />{% endif %}
-              {% if address.district %} {{ address.district }}
-                <br />{% endif %}
-              {% if address.townCity %} {{ address.townCity }}
-                <br />{% endif %}
-              {% if address.county %} {{ address.county }}
-                <br />{% endif %}
-              {% if address.postcode %} {{ address.postcode }}
-                <br />{% endif %}
-            </p>
-          {% endfor %}
+          {% if otherAddresses and otherAddresses | length > 0 %}
+            <h2 class="govuk-heading-m">Any other known addresses</h2>
+            {% for address in otherAddresses %}
+              <p id="other-address-{{ loop.index }}">
+                {% if address.buildingName %} {{ address.buildingName }}
+                  <br />{% endif %}
+                {% if address.buildingName or address.streetName %} {{ address.buildingNumber }} {{ address.streetName }}
+                  <br />{% endif %}
+                {% if address.district %} {{ address.district }}
+                  <br />{% endif %}
+                {% if address.townCity %} {{ address.townCity }}
+                  <br />{% endif %}
+                {% if address.county %} {{ address.county }}
+                  <br />{% endif %}
+                {% if address.postcode %} {{ address.postcode }}
+                  <br />{% endif %}
+              </p>
+            {% endfor %}
+          {% endif %}
 
           <h2 class="govuk-heading-m">Phone Number</h2>
           <p id="phone-number">{{ telephoneNumber }}</p>
