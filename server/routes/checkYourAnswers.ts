@@ -27,6 +27,10 @@ export default function checkYourAnswersRoutes(
         res.locals.user.username,
       )
 
+    const existingAddresses = await warrantRiskAssessmentApiClient.getBasicDetailAddressess(
+      warrantRiskAssessmentId,
+      res.locals.user.username,
+    )
     const employers: WarrantRiskAssessmentContact[] = await warrantRiskAssessmentApiClient.getContacts(
       warrantRiskAssessmentId,
       res.locals.user.username,
@@ -35,13 +39,16 @@ export default function checkYourAnswersRoutes(
       return
 
     const dateOfBirth: string = toUserDate(warrantRiskAssessment.dateOfBirth)
-    const reportValidated = validateReport(warrantRiskAssessment, employers?.length)
+    const lastHomeVisitDate: string = toUserDate(warrantRiskAssessment.lastHomeVisitDate)
+    const reportValidated = validateReport(warrantRiskAssessment)
 
     res.render('pages/check-your-answers', {
       warrantRiskAssessment,
       warrantRiskAssessmentId,
       currentPage,
       dateOfBirth,
+      lastHomeVisitDate,
+      existingAddresses,
       employers,
       reportValidated,
     })
@@ -75,14 +82,12 @@ export default function checkYourAnswersRoutes(
     }
   })
 
-  function validateReport(warrantRiskAssessment: WarrantRiskAssessment, employerCount: number): boolean {
+  function validateReport(warrantRiskAssessment: WarrantRiskAssessment): boolean {
     return (
       warrantRiskAssessment.titleAndFullName?.trim().length > 0 &&
       warrantRiskAssessment.postalAddress != null &&
       warrantRiskAssessment.dateOfBirth != null &&
-      employerCount > 0 &&
       warrantRiskAssessment.signOnOffice != null &&
-      warrantRiskAssessment.nationalInsuranceNumber?.trim().length > 0 &&
       warrantRiskAssessment.subjectOfMappaProcedures != null &&
       warrantRiskAssessment.highRiskOfSelfHarm != null &&
       warrantRiskAssessment.highRiskOfAbsconding != null &&
