@@ -43,7 +43,7 @@
         {% include "partials/review-required.njk" %}
         {% if not showEmbeddedError %}
 
-          <h1 id="page-title" class="govuk-heading-l">Risk Assessment</h1>
+          <h1 id="page-title" class="govuk-heading-l">Risk assessment</h1>
 
           {% set mappaContent %}
             {{ renderInfoList(mappaInfo) }}
@@ -85,7 +85,7 @@
 
           {{ govukDetails({
             id: "seriousHarmDetails",
-            summaryText: "Click here to view Serious harm information",
+            summaryText: "Click here to view serious harm information",
             html: seriousHarmContent
           }) }}
 
@@ -197,7 +197,7 @@
             id: "weaponRadio",
             fieldset: {
               legend: {
-                text: "Is the offender known to carry or use Weapons?",
+                text: "Is the offender known to carry or use weapons?",
                 isPageHeading: false,
                 classes: "govuk-fieldset__legend--m"
               }
