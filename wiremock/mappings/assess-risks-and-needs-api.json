@@ -59,12 +59,12 @@
             "riskMitigationFactors": "Giving offender therapy in X will reduce the risk",
             "analysisOfRiskFactors": "If offender in situation X the risk can be higher",
             "riskInCommunity": {
-              "HIGH ": ["Children", "Public", "Know adult"],
+              "HIGH": ["Children", "Public", "Know adult"],
               "MEDIUM": ["Staff"],
               "LOW": ["Prisoners"]
             },
             "riskInCustody": {
-              "HIGH ": ["Know adult"],
+              "HIGH": ["Know adult"],
               "VERY_HIGH": ["Staff", "Prisoners"],
               "LOW": ["Children", "Public"]
             },
@@ -495,12 +495,12 @@
             "riskMitigationFactors": "Giving offender therapy in X will reduce the risk",
             "analysisOfRiskFactors": "If offender in situation X the risk can be higher",
             "riskInCommunity": {
-              "HIGH ": ["Children", "Public", "Know adult"],
+              "HIGH": ["Children", "Public", "Know adult"],
               "MEDIUM": ["Staff"],
               "LOW": ["Prisoners"]
             },
             "riskInCustody": {
-              "HIGH ": ["Know adult"],
+              "HIGH": ["Know adult"],
               "VERY_HIGH": ["Staff", "Prisoners"],
               "LOW": ["Children", "Public"]
             },
