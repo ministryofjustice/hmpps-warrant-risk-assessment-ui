@@ -21,6 +21,13 @@ export default function riskSummaryRoutes(
   commonUtils: CommonUtils,
 ): Router {
   const currentPage = 'risk-summary'
+  const riskGroups = [
+    { label: 'Risk to Children', group: 'Children' },
+    { label: 'Risk to Known Adult', group: 'Know adult' },
+    { label: 'Risk to Prisoners', group: 'Prisoners' },
+    { label: 'Risk to Staff', group: 'Staff' },
+    { label: 'Risk to Public', group: 'Public' },
+  ]
 
   router.get('/risk-summary/:id', async (req, res) => {
     await auditService.logPageView(Page.RISK_SUMMARY, { who: res.locals.user.username, correlationId: req.id })
@@ -111,7 +118,7 @@ export default function riskSummaryRoutes(
     })
   })
 
-  router.post('/risk-summary/:id', async (req, res, next) => {
+  router.post('/risk-summary/:id', async (req, res) => {
     await auditService.logPageView(Page.RISK_SUMMARY, { who: res.locals.user.username, correlationId: req.id })
     const warrantRiskAssessmentId: string = req.params.id
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
@@ -192,14 +199,7 @@ export default function riskSummaryRoutes(
   function generateStaffInfo(risks: AllRoshRisk): DisplayField[] {
     const risk = risks.summary?.riskInCommunity
     if (risk != null) {
-      return [
-        {
-          label: 'Risk to Known Adult',
-          value: Object.entries(risk).find(([_, arr]) => arr.includes('Know adult'))?.[0],
-        },
-        { label: 'Risk to Prisoners', value: Object.entries(risk).find(([_, arr]) => arr.includes('Prisoners'))?.[0] },
-        { label: 'Risk to Staff', value: Object.entries(risk).find(([_, arr]) => arr.includes('Staff'))?.[0] },
-      ]
+      return generateRiskLevelFields(risk, ['Risk to Known Adult', 'Risk to Prisoners', 'Risk to Staff'])
     }
     return []
   }
@@ -207,18 +207,36 @@ export default function riskSummaryRoutes(
   function generatePublicInfo(risks: AllRoshRisk): DisplayField[] {
     const risk = risks.summary?.riskInCommunity
     if (risk != null) {
-      return [
-        { label: 'Risk to Children', value: Object.entries(risk).find(([_, arr]) => arr.includes('Children'))?.[0] },
-        {
-          label: 'Risk to Known Adult',
-          value: Object.entries(risk).find(([_, arr]) => arr.includes('Know adult'))?.[0],
-        },
-        { label: 'Risk to Prisoners', value: Object.entries(risk).find(([_, arr]) => arr.includes('Prisoners'))?.[0] },
-        { label: 'Risk to Staff', value: Object.entries(risk).find(([_, arr]) => arr.includes('Staff'))?.[0] },
-        { label: 'Risk to Public', value: Object.entries(risk).find(([_, arr]) => arr.includes('Public'))?.[0] },
-      ]
+      return generateRiskLevelFields(risk)
     }
     return []
+  }
+
+  function generateRiskLevelFields(
+    risk: Partial<Record<string, string[]>>,
+    labels: string[] = riskGroups.map(({ label }) => label),
+  ): DisplayField[] {
+    return riskGroups
+      .filter(({ label }) => labels.includes(label))
+      .map(({ label, group }) => ({
+        label,
+        value: toRiskValueString(Object.entries(risk).find(([_, people]) => people.includes(group))?.[0]),
+      }))
+  }
+
+  function toRiskValueString(riskValue?: string | null): string {
+    if (riskValue == null) {
+      return ''
+    }
+
+    const riskValueMap: Record<string, string> = {
+      HIGH: 'High',
+      MEDIUM: 'Medium',
+      LOW: 'Low',
+      VERY_HIGH: 'Very High',
+    }
+
+    return riskValueMap[riskValue] ?? riskValue
   }
 
   return router
