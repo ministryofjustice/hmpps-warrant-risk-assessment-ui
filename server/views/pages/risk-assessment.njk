@@ -79,19 +79,19 @@
             ]
           }) }}
 
-          {% set selfHarmContent %}
-            {{ renderInfoList(selfHarmInfo) }}
+          {% set seriousHarmContent %}
+            {{ renderInfoList(seriousHarmInfo) }}
           {% endset %}
 
           {{ govukDetails({
-            id: "selfHarmDetails",
+            id: "seriousHarmDetails",
             summaryText: "Click here to view Serious harm information",
-            html: selfHarmContent
+            html: seriousHarmContent
           }) }}
 
           {{ govukRadios({
-            name: "selfHarmRadio",
-            id: "selfHarmRadio",
+            name: "seriousHarmRadio",
+            id: "seriousHarmRadio",
             fieldset: {
               legend: {
                 text: "Is the offender assessed as posing a high risk of serious harm?",
@@ -103,12 +103,12 @@
               {
                 value: "Yes",
                 text: "Yes",
-                checked: selfHarmSelection === true
+                checked: seriousHarmSelection === true
               },
               {
                 value: "No",
                 text: "No",
-                checked: selfHarmSelection === false
+                checked: seriousHarmSelection === false
               }
             ]
           }) }}

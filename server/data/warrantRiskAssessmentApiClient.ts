@@ -204,7 +204,7 @@ export interface WarrantRiskAssessment {
   riskToPolice: string
   warrantExecutedBy: string
   subjectOfMappaProcedures: boolean
-  highRiskOfSelfHarm: boolean
+  highRiskOfSeriousHarm: boolean
   highRiskOfAbsconding: boolean
   vulnerable: boolean
   carryOrUseWeapons: boolean
