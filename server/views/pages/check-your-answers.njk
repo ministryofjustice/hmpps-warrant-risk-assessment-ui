@@ -302,27 +302,27 @@
                   </dd>
                 </div>
 
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Is the offender assessed as posing a high risk of serious harm?
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {% if warrantRiskAssessment.highRiskOfSelfHarm == null and warrantRiskAssessment.riskAssessmentSaved %}
-                      <a id="cya-link-high-risk-of-self-harm"
-                         href="/risk-assessment/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
-                         class="govuk-link">enter required
-                        information<span class="govuk-visually-hidden"> for high risk of self harm</span></a>
-                    {% else %}
-                      {% if warrantRiskAssessment.highRiskOfSelfHarm == true %}
-                        Yes
-                      {% elseif warrantRiskAssessment.highRiskOfSelfHarm == false %}
-                        No
-                      {% endif %}
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Is the offender assessed as posing a high risk of serious harm?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {% if warrantRiskAssessment.highRiskOfSeriousHarm == null and warrantRiskAssessment.riskAssessmentSaved %}
+                    <a id="cya-link-high-risk-of-serious-harm"
+                       href="/risk-assessment/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for high risk of self harm</span></a>
+                  {% else %}
+                    {% if warrantRiskAssessment.highRiskOfSeriousHarm == true %}
+                      Yes
+                    {% elseif warrantRiskAssessment.highRiskOfSeriousHarm == false %}
+                      No
                     {% endif %}
-                  </dd>
-                  <dd class="govuk-summary-list__actions">
-                    {% if warrantRiskAssessment.highRiskOfSelfHarm == null %}
-                      <span class="govuk-tag--light-blue">
+                  {% endif %}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                  {% if warrantRiskAssessment.highRiskOfSeriousHarm == null %}
+                    <span class="govuk-tag--light-blue">
                             Required
                 </span>
                     {% endif %}

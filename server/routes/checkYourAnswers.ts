@@ -89,7 +89,7 @@ export default function checkYourAnswersRoutes(
       warrantRiskAssessment.dateOfBirth != null &&
       warrantRiskAssessment.signOnOffice != null &&
       warrantRiskAssessment.subjectOfMappaProcedures != null &&
-      warrantRiskAssessment.highRiskOfSelfHarm != null &&
+      warrantRiskAssessment.highRiskOfSeriousHarm != null &&
       warrantRiskAssessment.highRiskOfAbsconding != null &&
       warrantRiskAssessment.vulnerable != null &&
       warrantRiskAssessment.carryOrUseWeapons != null &&

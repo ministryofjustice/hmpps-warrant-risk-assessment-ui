@@ -28,7 +28,7 @@ export default function riskAssessmentRoutes(
   const currentPage = 'risk-assessment'
   const riskGroups = [
     { label: 'Risk to Children', group: 'Children' },
-    { label: 'Risk to Known Adult', group: 'Know adult' },
+    { label: 'Risk to Known Adult', group: 'Known adult' },
     { label: 'Risk to Prisoners', group: 'Prisoners' },
     { label: 'Risk to Staff', group: 'Staff' },
     { label: 'Risk to Public', group: 'Public' },
@@ -143,8 +143,8 @@ export default function riskAssessmentRoutes(
 
     const mappaInfo = generateMappaInfo(deliusRiskAssessment)
     const mappaSelection = warrantRiskAssessment.subjectOfMappaProcedures ?? (mappaInfo.length > 0 ? true : null)
-    const selfHarmInfo = generateSelfHarmInfo(arnsRiskAssessment)
-    const selfHarmSelection = warrantRiskAssessment.highRiskOfSelfHarm
+    const seriousHarmInfo = generateSeriousHarmInfo(arnsRiskAssessment)
+    const seriousHarmSelection = warrantRiskAssessment.highRiskOfSeriousHarm
     const abscondingInfo = generateAbscondInfo(arnsRiskAssessment)
     const abscondingSelection = warrantRiskAssessment.highRiskOfAbsconding
     const vulnerableInfo = generateVulnerabilityInfo(arnsRiskAssessment)
@@ -163,8 +163,8 @@ export default function riskAssessmentRoutes(
       callingScreen,
       mappaInfo,
       mappaSelection,
-      selfHarmInfo,
-      selfHarmSelection,
+      seriousHarmInfo,
+      seriousHarmSelection,
       abscondingInfo,
       abscondingSelection,
       vulnerableInfo,
@@ -226,7 +226,7 @@ export default function riskAssessmentRoutes(
       return
 
     warrantRiskAssessment.subjectOfMappaProcedures = mapYesNoToBooleanOrNull(req.body.mappaRadio)
-    warrantRiskAssessment.highRiskOfSelfHarm = mapYesNoToBooleanOrNull(req.body.selfHarmRadio)
+    warrantRiskAssessment.highRiskOfSeriousHarm = mapYesNoToBooleanOrNull(req.body.selfHarmRadio)
     warrantRiskAssessment.highRiskOfAbsconding = mapYesNoToBooleanOrNull(req.body.abscondRadio)
     warrantRiskAssessment.vulnerable = mapYesNoToBooleanOrNull(req.body.vulnerableRadio)
     warrantRiskAssessment.carryOrUseWeapons = mapYesNoToBooleanOrNull(req.body.weaponRadio)
@@ -235,7 +235,7 @@ export default function riskAssessmentRoutes(
 
     warrantRiskAssessment.warrantExecutedBy =
       warrantRiskAssessment.subjectOfMappaProcedures ||
-      warrantRiskAssessment.highRiskOfSelfHarm ||
+      warrantRiskAssessment.highRiskOfSeriousHarm ||
       warrantRiskAssessment.highRiskOfAbsconding ||
       warrantRiskAssessment.vulnerable
         ? 'Police Officer'
@@ -335,7 +335,7 @@ export default function riskAssessmentRoutes(
     return []
   }
 
-  function generateSelfHarmInfo(risks: AllRoshRisk): DisplayField[] {
+  function generateSeriousHarmInfo(risks: AllRoshRisk): DisplayField[] {
     const selfHarm = risks.riskToSelf?.selfHarm
     const riskInCommunity = risks.summary?.riskInCommunity
     const riskInCustody = risks.summary?.riskInCustody
