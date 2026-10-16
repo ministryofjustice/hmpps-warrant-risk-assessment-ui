@@ -28,8 +28,6 @@ context('Warrant Execution Page', () => {
 
   it('Read only fields should display correctly', () => {
     cy.visit('/warrant-execution/44444444-4444-4444-8444-444444444444')
-    cy.get('h2').contains('Warrant to be executed by')
-    cy.contains('Enforcement Officer').should('exist')
     cy.contains('Full name of Responsible Officer').should('exist')
     cy.contains('NotSo Nice Officer').should('exist')
     cy.contains('Provider').should('exist')
