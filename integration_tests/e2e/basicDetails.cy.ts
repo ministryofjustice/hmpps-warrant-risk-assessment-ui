@@ -7,7 +7,7 @@ context('Basic Details page', () => {
       .should('exist')
       .invoke('text')
       .then(text => {
-        expect(text?.trim() ?? '').to.eq('Current employer(s)')
+        expect(text?.trim() ?? '').to.eq('Current employer details')
       })
     cy.get('#name').should('contain.text', 'Mr Billy The Kid')
     cy.get('#date-of-birth').should('contain.text', '17/03/1980')

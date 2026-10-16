@@ -95,13 +95,8 @@
           <h2 class="govuk-heading-m">Email Address</h2>
           <p id="email-address">{{ emailAddress }}</p>
 
-          <h2 id="current-employer-heading" class="govuk-heading-m">
-            {% if employers and employers | length >= 2 %}
-              Current employer(s)
-            {% else %}
-              Current Employer
-            {% endif %}
-          </h2>
+          <h2 id="current-employer-heading" class="govuk-heading-m">Current employer details</h2>
+          <p>If there is more than one employer, provide details of each employer(including employer’s address/phone number if known)</p>
           {% if employers and employers | length > 0 %}
             {% for employer in employers %}
               <p id="employer-address-{{ loop.index }}">
