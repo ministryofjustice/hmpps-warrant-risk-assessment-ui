@@ -35,7 +35,7 @@ context('Risk Assessment page', () => {
     cy.get('input[name="abscondRadio"][value="No"]').should('not.be.checked')
     cy.get('#vulnerabilityDetails .govuk-details__summary-text')
       .should('be.visible')
-      .should('contain.text', 'Click here to view Vulnerability information')
+      .should('contain.text', 'Click here to view vulnerability information')
     cy.get('#vulnerabilityDetails .govuk-details__summary-text').click()
     cy.get('#vulnerabilityDetails .govuk-details__text')
       .cleanText()
@@ -90,7 +90,7 @@ context('Risk Assessment page', () => {
     cy.get('#page-title').should('contain.text', 'Risk assessment')
     cy.get('#continue-button').should('contain.text', 'Continue')
     cy.get('#close-button').should('contain.text', 'Save progress and close')
-    cy.get('#refresh-from-ndelius--button').should('contain.text', 'Refresh from delius and OASys')
+    cy.get('#refresh-from-ndelius--button').should('contain.text', 'Refresh from National Delius and OASys')
   })
 
   it('Mappa Dropdown should blank None found when no information returned', () => {
