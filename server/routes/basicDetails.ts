@@ -129,7 +129,7 @@ export default function basicDetailsRoutes(
     const errorMessages: ErrorMessages = {}
     if (contactDeleted) {
       errorMessages.contacts = {
-        text: 'Previously recorded employers are no longer available. Please check the content of this screen and press "Continue" or "Save progress and close" to save the current information',
+        text: 'Previously recorded employers are no longer available. Check the content of this screen and press "Continue" or "Save progress and close" to save the current information',
       }
     }
 

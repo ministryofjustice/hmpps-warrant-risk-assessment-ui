@@ -30,15 +30,15 @@
         {% include "partials/review-required.njk" %}
         {% if not showEmbeddedError %}
 
-          <h1 id="page-title" class="govuk-heading-l">Basic Details</h1>
+          <h1 id="page-title" class="govuk-heading-l">Basic details</h1>
 
-          <h2 class="govuk-heading-m">Title and Full Name</h2>
+          <h2 class="govuk-heading-m">Title and full name</h2>
           <p id="name">{{ titleAndFullName }}</p>
 
-          <h2 class="govuk-heading-m">Date of Birth</h2>
+          <h2 class="govuk-heading-m">Date of birth</h2>
           <p id="date-of-birth">{{ formattedDob }}</p>
 
-          <h2 class="govuk-heading-m">Main Address</h2>
+          <h2 class="govuk-heading-m">Offender address(es)</h2>
           {% if defaultAddress %}
             <p id="address">
               {% if defaultAddress.buildingName %} {{ defaultAddress.buildingName }}
@@ -55,17 +55,17 @@
                 <br />{% endif %}
             </p>
           {% else %}
-            <p id="no-address-found"> No Postal Address found in National Delius <br />
-              In order to complete a Warrant Risk Assessment you must add an address to Delius <br />
+            <p id="no-address-found"> No postal address was found in National Delius. <br />
+              You must add a postal address in National Delius before you can complete the warrant risk assessment. <br />
               Please use the below link to add an address <br />
               <a href="{{ addAddressDeeplink }}" id="add-address--deeplink"
                  target="_blank" class="govuk-link">
-                Click this hyperlink to open a new tab to add an address to Delius
+                Add a postal address in National Delius
               </a><br />
-              Once this is completed, click the Refresh from Delius button </p>
+              After adding the address, return to this page and select Refresh from National Delius </p>
           {% endif %}
 
-          <h2 class="govuk-heading-m">Date of Last Home Visit</h2>
+          <h2 class="govuk-heading-m">Date of last home visit</h2>
           <p id="date-of-home-visit">{{ formattedHomeVisit }}</p>
 
           {% if otherAddresses and otherAddresses | length > 0 %}
@@ -88,13 +88,13 @@
             {% endfor %}
           {% endif %}
 
-          <h2 class="govuk-heading-m">Phone Number</h2>
+          <h2 class="govuk-heading-m">Telephone number</h2>
           <p id="phone-number">{{ telephoneNumber }}</p>
 
-          <h2 class="govuk-heading-m">Mobile Number</h2>
+          <h2 class="govuk-heading-m">Mobile number</h2>
           <p id="mobile-number">{{ mobileNumber }}</p>
 
-          <h2 class="govuk-heading-m">Email Address</h2>
+          <h2 class="govuk-heading-m">Email address</h2>
           <p id="email-address">{{ emailAddress }}</p>
 
           <h2 id="current-employer-heading" class="govuk-heading-m">Current employer details</h2>
@@ -127,10 +127,10 @@
 
             {% endfor %}
           {% else %}
-            <p id="no-employer-address">No Current Employer</p>
+            <p id="no-employer-address">No current employer</p>
           {% endif %}
 
-          <h2 class="govuk-heading-m">DWP Signing on office</h2>
+          <h2 class="govuk-heading-m">DWP signing-on office</h2>
           {% if warrantRiskAssessment.signOnOffice %}
             <p id="dwp-address">
               {% if warrantRiskAssessment.signOnOffice.buildingName %} {{ warrantRiskAssessment.signOnOffice.buildingName }}
@@ -165,7 +165,7 @@
               }) }}
           {% endif %}
 
-          <h2 class="govuk-heading-m">National Insurance Number</h2>
+          <h2 class="govuk-heading-m">National insurance number</h2>
           <p id="ni-number">{{ nationalInsuranceNumber }}</p>
 
           <div class="moj-button-group">
@@ -188,7 +188,7 @@
               }
             }) }}
             {{ govukButton({
-              text: "Refresh from delius",
+              text: "Refresh from National Delius",
               preventDoubleClick: "true",
               type: "submit",
               name: "action",
