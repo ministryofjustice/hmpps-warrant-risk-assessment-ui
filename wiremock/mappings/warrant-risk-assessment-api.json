@@ -1165,7 +1165,7 @@
           "id": "22222222-2222-4222-8222-222222222222",
           "crn": "X000001",
           "completedDate": null,
-          "signature": "UserSignForename UserSignMiddle UserSignSurname 21/08/2026 (Responsible Officer)",
+          "signature": "UserSignForename UserSignMiddle UserSignSurname 21/08/2026 (Responsible officer)",
           "sheetSentBy": "responsibleOfficer"
         },
         "headers": {
@@ -1240,7 +1240,7 @@
           "id": "66666666-6666-4666-8666-666666666666",
           "crn": "X000001",
           "completedDate": null,
-          "signature": "UserSignForename UserSignMiddle UserSignSurname 21/08/2026 (Responsible Officer)",
+          "signature": "UserSignForename UserSignMiddle UserSignSurname 21/08/2026 (Responsible officer)",
           "sheetSentBy": "responsibleOfficer"
         },
         "headers": {
@@ -1562,7 +1562,7 @@
           "id": "34343434-3434-4343-8343-343434343434",
           "crn": "X000001",
           "completedDate": null,
-          "signature": "UserSignForename UserSignMiddle UserSignSurname 21/08/2026 (Responsible Officer)",
+          "signature": "UserSignForename UserSignMiddle UserSignSurname 21/08/2026 (Responsible officer)",
           "sheetSentBy": "responsibleOfficer"
         },
         "headers": {

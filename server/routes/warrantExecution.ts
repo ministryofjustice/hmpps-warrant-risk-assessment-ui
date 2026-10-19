@@ -478,11 +478,11 @@ export default function warrantExecutionRoutes(
     }
 
     if (formSentBy === 'responsibleOfficer') {
-      signature += ` (Responsible Officer)`
+      signature += ` (Responsible officer)`
     }
 
     if (formSentBy === 'userOnBehalf') {
-      signature += ` (User on behalf of the Responsible Officer)`
+      signature += ` (User on behalf of the responsible officer)`
     }
 
     return signature
