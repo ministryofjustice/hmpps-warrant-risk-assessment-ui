@@ -2,7 +2,7 @@ context('Address Search page', () => {
   it('can see buttons', () => {
     cy.visit('/address-search/1c7bf7ec-9e8d-4f99-8fd8-bf43b7f5ad11')
     cy.url().should('include', '/address-search')
-    cy.get('#page-title').should('contain.text', 'Find a DWP Signing on Office')
+    cy.get('#page-title').should('contain.text', 'Find a DWP signing on office')
     cy.get('#searchTerm').should('exist').should('be.visible')
     cy.get('#search-button').should('contain.text', 'Search')
     cy.get('#select-button').should('contain.text', 'Select')
