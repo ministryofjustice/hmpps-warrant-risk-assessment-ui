@@ -59,12 +59,12 @@
             "riskMitigationFactors": "Giving offender therapy in X will reduce the risk",
             "analysisOfRiskFactors": "If offender in situation X the risk can be higher",
             "riskInCommunity": {
-              "HIGH": ["Children", "Public", "Known adult"],
+              "HIGH": ["Children", "Public", "Known Adult"],
               "MEDIUM": ["Staff"],
               "LOW": ["Prisoners"]
             },
             "riskInCustody": {
-              "HIGH": ["Known adult"],
+              "HIGH": ["Known Adult"],
               "VERY_HIGH": ["Staff", "Prisoners"],
               "LOW": ["Children", "Public"]
             },
@@ -100,7 +100,9 @@
               "offence": "string",
               "disinhibitors": ["string"],
               "patternOfOffending": "Pattern",
-              "offenceInvolved": ["WOUNDING"],
+              "offenceInvolved": [     "AR Offence Involved #1",
+                "AR Offence Involved #2"
+              ],
               "specificWeapon": "BIG KNIVES",
               "victimPerpetratorRelationship": "string",
               "victimOtherInfo": "string",
@@ -495,12 +497,12 @@
             "riskMitigationFactors": "Giving offender therapy in X will reduce the risk",
             "analysisOfRiskFactors": "If offender in situation X the risk can be higher",
             "riskInCommunity": {
-              "HIGH": ["Children", "Public", "Known adult"],
+              "HIGH": ["Children", "Public", "Known Adult"],
               "MEDIUM": ["Staff"],
               "LOW": ["Prisoners"]
             },
             "riskInCustody": {
-              "HIGH": ["Known adult"],
+              "HIGH": ["Known Adult"],
               "VERY_HIGH": ["Staff", "Prisoners"],
               "LOW": ["Children", "Public"]
             },
