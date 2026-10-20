@@ -226,7 +226,7 @@ export default function riskAssessmentRoutes(
       return
 
     warrantRiskAssessment.subjectOfMappaProcedures = mapYesNoToBooleanOrNull(req.body.mappaRadio)
-    warrantRiskAssessment.highRiskOfSeriousHarm = mapYesNoToBooleanOrNull(req.body.selfHarmRadio)
+    warrantRiskAssessment.highRiskOfSeriousHarm = mapYesNoToBooleanOrNull(req.body.seriousHarmRadio)
     warrantRiskAssessment.highRiskOfAbsconding = mapYesNoToBooleanOrNull(req.body.abscondRadio)
     warrantRiskAssessment.vulnerable = mapYesNoToBooleanOrNull(req.body.vulnerableRadio)
     warrantRiskAssessment.carryOrUseWeapons = mapYesNoToBooleanOrNull(req.body.weaponRadio)
