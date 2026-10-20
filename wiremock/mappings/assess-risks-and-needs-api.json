@@ -100,9 +100,7 @@
               "offence": "string",
               "disinhibitors": ["string"],
               "patternOfOffending": "Pattern",
-              "offenceInvolved": [     "AR Offence Involved #1",
-                "AR Offence Involved #2"
-              ],
+              "offenceInvolved": ["WOUNDING"],
               "specificWeapon": "BIG KNIVES",
               "victimPerpetratorRelationship": "string",
               "victimOtherInfo": "string",
