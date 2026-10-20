@@ -46,13 +46,22 @@ context('Add RO Address page', () => {
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
     cy.get('#description-error')
       .should('exist')
-      .should('contain.text', 'At least 1 out of these fields [Description, Building name, Address number] must be present')
+      .should(
+        'contain.text',
+        'At least 1 out of these fields [Description, Building name, Address number] must be present',
+      )
     cy.get('#buildingName-error')
       .should('exist')
-      .should('contain.text', 'At least 1 out of these fields [Description, Building name, Address number] must be present')
+      .should(
+        'contain.text',
+        'At least 1 out of these fields [Description, Building name, Address number] must be present',
+      )
     cy.get('#houseNumber-error')
       .should('exist')
-      .should('contain.text', 'At least 1 out of these fields [Description, Building name, Address number] must be present')
+      .should(
+        'contain.text',
+        'At least 1 out of these fields [Description, Building name, Address number] must be present',
+      )
   })
 
   it('validation will trigger when street, town or postcode is left blank', () => {
