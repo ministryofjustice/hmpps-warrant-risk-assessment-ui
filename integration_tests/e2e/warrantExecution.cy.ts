@@ -2,7 +2,7 @@ context('Warrant Execution Page', () => {
   it('Warrant Execution with no signature shows correct buttons', () => {
     cy.visit('/warrant-execution/11111111-1111-4111-8111-111111111111')
     cy.url().should('include', '/warrant-execution')
-    cy.get('#page-title').should('contain.text', 'Warrant Execution')
+    cy.get('#page-title').should('contain.text', 'Warrant execution and sign off')
     cy.get('#sign-button').should('exist').should('contain.text', 'Click here to sign now')
     cy.get('#continue-button').should('exist').should('contain.text', 'Continue')
     cy.get('#close-button').should('exist').should('contain.text', 'Save progress and close')
@@ -12,7 +12,7 @@ context('Warrant Execution Page', () => {
   it('Warrant Execution with completed signature shows correct buttons', () => {
     cy.visit('/warrant-execution/22222222-2222-4222-8222-222222222222')
     cy.url().should('include', '/warrant-execution')
-    cy.get('#page-title').should('contain.text', 'Warrant Execution')
+    cy.get('#page-title').should('contain.text', 'Warrant execution and sign off')
     cy.get('#signature').should('contain.text', 'UserSignForename UserSignMiddle UserSignSurname')
     cy.get('#clear-signature-button').should('exist').should('contain.text', 'Clear signature')
     cy.get('#sign-button').should('not.exist')
@@ -28,11 +28,11 @@ context('Warrant Execution Page', () => {
 
   it('Read only fields should display correctly', () => {
     cy.visit('/warrant-execution/44444444-4444-4444-8444-444444444444')
-    cy.contains('Full name of Responsible Officer').should('exist')
+    cy.contains('Full name of responsible officer').should('exist')
     cy.contains('NotSo Nice Officer').should('exist')
     cy.contains('Provider').should('exist')
     cy.contains('Northumbria').should('exist')
-    cy.contains('Phone Number').should('exist')
+    cy.contains('Phone number').should('exist')
     cy.contains('07707123456').should('exist')
   })
 
@@ -87,12 +87,12 @@ context('Warrant Execution Page', () => {
   it('warning when previously selected address is no longer available', () => {
     cy.visit('/warrant-execution/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa')
     cy.get('.govuk-error-summary__title').should('contain.text', 'There is a problem')
-    cy.contains('The previously selected address is no longer available. Please select an alternative.').should('exist')
+    cy.contains('The previously selected address is no longer available. Select an alternative').should('exist')
   })
 
   it('should display add address button when no addresses are returned from the API and none stored in DB', () => {
     cy.visit('/warrant-execution/bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb')
-    cy.get('#AddAddressMessage').should('contain.text', 'No reply address can be found for this Responsible Officer')
+    cy.get('#AddAddressMessage').should('contain.text', 'No reply address can be found for this responsible officer')
     cy.get('#add-address-button').should('exist').should('contain.text', 'Add address')
     cy.get('#update-address-button').should('not.exist')
   })
@@ -138,7 +138,7 @@ context('Warrant Execution Page', () => {
     cy.get('#sign-button').click()
     cy.wait('@signRequest')
     cy.url().should('include', '/warrant-execution')
-    cy.get('#page-title').should('contain.text', 'Warrant Execution')
+    cy.get('#page-title').should('contain.text', 'Warrant execution and sign off')
   })
 
   it('Clicking clear signature button should refresh page with no error', () => {
@@ -146,11 +146,11 @@ context('Warrant Execution Page', () => {
     cy.visit('/warrant-execution/34343434-3434-4343-8343-343434343434')
     cy.get('#signature')
       .should('be.visible')
-      .should('contain.text', 'UserSignForename UserSignMiddle UserSignSurname 21/08/2026 (Responsible Officer)')
+      .should('contain.text', 'UserSignForename UserSignMiddle UserSignSurname 21/08/2026 (Responsible officer)')
     cy.get('#clear-signature-button').click()
     cy.wait('@clearSignatureRequest')
     cy.url().should('include', '/warrant-execution')
-    cy.get('#page-title').should('contain.text', 'Warrant Execution')
+    cy.get('#page-title').should('contain.text', 'Warrant execution and sign off')
   })
 
   it('Clicking sign button when who is sending this document radio selection is empty should trigger validation', () => {

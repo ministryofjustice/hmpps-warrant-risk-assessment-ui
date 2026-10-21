@@ -45,11 +45,11 @@
         {% if not showEmbeddedError %}
           {% include "partials/review-required.njk" %}
 
-          <h1 class="govuk-heading-l" id="page-title">Warrant Execution and Sign off</h1>
+          <h1 class="govuk-heading-l" id="page-title">Warrant execution and sign off</h1>
 
           <h2 class="govuk-heading-l">Responsible officer and sign off</h2>
 
-          <h2 class="govuk-heading-m">Full name of Responsible Officer</h2>
+          <h2 class="govuk-heading-m">Full name of responsible officer</h2>
           <p id="name">{{ warrantRiskAssessment.responsibleOfficerFullName }}</p>
 
           <h2 class="govuk-heading-m">Provider</h2>
@@ -58,8 +58,7 @@
           <h2 class="govuk-heading-m" id="workAddressHeading">Office</h2>
 
           {% if onlyAlternateAddressesAvailable %}
-            <p id="alternate-address-text"> Please specify the Work Location and Address that the Person on Probation
-              should contact. </p>
+            <p id="alternate-address-text"> Specify the work location and address that the person on probation should contact. </p>
             <div id="alternate-address-dropdown">
               {{ alternateAddressHtml | safe }}
             </div>
@@ -96,15 +95,13 @@
                 }) }}
               {% endif %}
             {% elseif addressNotAvailable %}
-              <p id="workAddress">The previously selected address is no longer available. Please select an
-                alternative</p>
+              <p id="workAddress">The previously selected address is no longer available. Select an alternative</p>
             {% else %}
               <p id="no-address"></p>
             {% endif %}
 
             {% if manualAddressAllowed and warrantRiskAssessment.workAddress == null %}
-              <p id="AddAddressMessage">No reply address can be found for this Responsible Officer. Please add an
-                address by selecting the button below.</p>
+              <p id="AddAddressMessage">No reply address can be found for this responsible officer. Please add an address by selecting the button below.</p>
               {{ govukButton({
                 text: "Add address",
                 type: "submit",
@@ -122,7 +119,7 @@
                 id: "offenderAddressSelectOne",
                 fieldset: {
                   legend: {
-                    text: "Would you like to use the work location above for this warrant risk assessment?",
+                    text: "Would you like to use the work location above for this warrant risk assessment form?",
                     isPageHeading: false,
                     classes: "govuk-fieldset__legend--m"
                   }
@@ -154,7 +151,7 @@
             {% endif %}
           {% endif %}
 
-          <h2 class="govuk-heading-m">Phone Number</h2>
+          <h2 class="govuk-heading-m">Phone number</h2>
           <p id="name">{{ warrantRiskAssessment.responsibleOfficerTelephoneNumer }}</p>
 
           {% if warrantRiskAssessment.signature == null %}
@@ -174,12 +171,12 @@
               items: [
                 {
                   value: "responsibleOfficer",
-                  text: "Responsible Officer",
+                  text: "Responsible officer",
                   checked: warrantRiskAssessment.sheetSentBy === 'responsibleOfficer'
                 },
                 {
                   value: "userOnBehalf",
-                  text: "User on behalf of the Responsible Officer",
+                  text: "User on behalf of the responsible officer",
                   checked: warrantRiskAssessment.sheetSentBy === 'userOnBehalf'
                 }
               ]

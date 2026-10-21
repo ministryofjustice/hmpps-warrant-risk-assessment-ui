@@ -177,32 +177,32 @@ export default function addRoAddressRoutes(
       (!address.addressNumber || address.addressNumber.trim() === '')
     ) {
       errorMessages.identifier = {
-        text: 'At least 1 out of [Description, Building Name, Address Number] must be present',
+        text: 'At least 1 out of these fields [Description, Building name, Address number] must be present',
       }
     }
 
     if (!address.streetName || address.streetName.trim() === '') {
       errorMessages.streetName = {
-        text: 'Street Name : This is a required value, please enter a value',
+        text: 'Street name is a required field, please enter a value',
       }
     }
 
     if (!address.townCity || address.townCity.trim() === '') {
       errorMessages.townCity = {
-        text: 'Town/City : This is a required value, please enter a value',
+        text: 'Town/City is a required field, please enter a value',
       }
     }
 
     if (!address.postcode || address.postcode.trim() === '') {
       errorMessages.postcode = {
-        text: 'Postcode : This is a required value, please enter a value',
+        text: 'Postcode is a required field, please enter a value',
       }
     }
 
-    errorMessages = validateLength(address.officeDescription, 'officeDescription', 'Office Description', errorMessages)
-    errorMessages = validateLength(address.buildingName, 'buildingName', 'Building Name', errorMessages)
-    errorMessages = validateLength(address.addressNumber, 'addressNumber', 'Address Number', errorMessages)
-    errorMessages = validateLength(address.streetName, 'streetName', 'Street Name', errorMessages)
+    errorMessages = validateLength(address.officeDescription, 'officeDescription', 'Office description', errorMessages)
+    errorMessages = validateLength(address.buildingName, 'buildingName', 'Building name', errorMessages)
+    errorMessages = validateLength(address.addressNumber, 'addressNumber', 'Address number', errorMessages)
+    errorMessages = validateLength(address.streetName, 'streetName', 'Street name', errorMessages)
     errorMessages = validateLength(address.district, 'district', 'District', errorMessages)
     errorMessages = validateLength(address.townCity, 'townCity', 'Town or City', errorMessages)
     errorMessages = validateLength(address.county, 'county', 'County', errorMessages)
@@ -224,7 +224,7 @@ export default function addRoAddressRoutes(
       return {
         ...errorMessages,
         [fieldName]: {
-          text: `Please enter ${maxLength} characters or less for ${label}`,
+          text: `Enter ${maxLength} characters or less for ${label}`,
         },
       }
     }

@@ -2,7 +2,7 @@ context('Risk Summary page', () => {
   it('can see fields and radio buttons as blank on first visit', () => {
     cy.visit('/risk-summary/91cce5d0-1b63-49c2-8f95-0e2f3560ac11')
     cy.url().should('include', '/risk-summary')
-    cy.get('#page-title').should('contain.text', 'Risk Summary')
+    cy.get('#page-title').should('contain.text', 'Risk summary')
     cy.get('#publicDetails .govuk-details__summary-text')
       .should('be.visible')
       .should('contain.text', 'Information about risk to public')
@@ -46,7 +46,7 @@ context('Risk Summary page', () => {
   it('can see buttons', () => {
     cy.visit('/risk-summary/7a5d6c2f-43ab-4bf0-a95b-a93dbf13a8e4')
     cy.url().should('include', '/risk-summary')
-    cy.get('#page-title').should('contain.text', 'Risk Summary')
+    cy.get('#page-title').should('contain.text', 'Risk summary')
     cy.get('#continue-button').should('contain.text', 'Continue')
     cy.get('#close-button').should('contain.text', 'Save progress and close')
   })
@@ -54,7 +54,7 @@ context('Risk Summary page', () => {
   it('Information dropdowns should show None found when no information returned', () => {
     cy.visit('/risk-summary/c3f2d8a9-6f7c-4b13-9e82-5d8e72ab641a')
     cy.url().should('include', '/risk-summary')
-    cy.get('#page-title').should('contain.text', 'Risk Summary')
+    cy.get('#page-title').should('contain.text', 'Risk summary')
     cy.get('#publicDetails .govuk-details__summary-text').click()
     cy.get('#publicDetails .govuk-details__text').should('contain.text', 'None Found')
     cy.get('#officerDetails .govuk-details__summary-text').click()
@@ -66,7 +66,7 @@ context('Risk Summary page', () => {
   it('Radio buttons should always default to selection stored in DB', () => {
     cy.visit('/risk-summary/5f9a1d44-2c6e-4f87-9b12-0d53e4ac7f39')
     cy.url().should('include', '/risk-summary')
-    cy.get('#page-title').should('contain.text', 'Risk Summary')
+    cy.get('#page-title').should('contain.text', 'Risk summary')
     cy.get('input[name="publicRadio"][value="Low"]').should('not.be.checked')
     cy.get('input[name="publicRadio"][value="Medium"]').should('be.checked')
     cy.get('input[name="publicRadio"][value="High"]').should('not.be.checked')
@@ -82,7 +82,7 @@ context('Risk Summary page', () => {
     cy.intercept('POST', '/risk-summary/**').as('saveAndCloseRequest')
     cy.visit('/risk-summary/e8b7410d-3d25-4eec-97af-11dc9ab4e2b6')
     cy.url().should('include', '/risk-summary')
-    cy.get('#page-title').should('contain.text', 'Risk Summary')
+    cy.get('#page-title').should('contain.text', 'Risk summary')
     cy.get('#close-button').click()
     cy.wait('@saveAndCloseRequest').then(({ request }) => {
       const body = new URLSearchParams(request.body)
@@ -96,7 +96,7 @@ context('Risk Summary page', () => {
     cy.intercept('POST', '/risk-summary/**').as('formSubmit')
     cy.visit('/risk-summary/2ac0e93f-8b14-4d67-85ef-f2c0a1d9be73')
     cy.url().should('include', '/risk-summary')
-    cy.get('#page-title').should('contain.text', 'Risk Summary')
+    cy.get('#page-title').should('contain.text', 'Risk summary')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
     cy.url().should('include', '/warrant-execution/2ac0e93f-8b14-4d67-85ef-f2c0a1d9be73')
@@ -106,7 +106,7 @@ context('Risk Summary page', () => {
     cy.intercept('POST', '/risk-summary/**').as('formSubmit')
     cy.visit('/risk-summary/b4d82761-0f6a-4c52-bf8e-3a1d65e9c074?returnTo=check-your-answers')
     cy.url().should('include', '/risk-summary')
-    cy.get('#page-title').should('contain.text', 'Risk Summary')
+    cy.get('#page-title').should('contain.text', 'Risk summary')
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
     cy.url().should('include', '/check-your-answers/b4d82761-0f6a-4c52-bf8e-3a1d65e9c074')
