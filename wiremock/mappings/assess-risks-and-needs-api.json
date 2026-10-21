@@ -155,10 +155,8 @@
               "name": "Drug misuse",
               "riskOfHarm": false,
               "riskOfReoffending": false,
-              "severity": "SEVERE",
               "score": 3,
-              "oasysThreshold": 3,
-              "tierThreshold": 3
+              "oasysThreshold": 3
             }
           ],
           "notIdentifiedNeeds": [
@@ -167,10 +165,8 @@
               "name": "Drug misuse",
               "riskOfHarm": false,
               "riskOfReoffending": false,
-              "severity": "SEVERE",
               "score": 3,
-              "oasysThreshold": 3,
-              "tierThreshold": 3
+              "oasysThreshold": 3
             }
           ],
           "unansweredNeeds": [
@@ -179,10 +175,8 @@
               "name": "Drug misuse",
               "riskOfHarm": false,
               "riskOfReoffending": false,
-              "severity": "SEVERE",
               "score": 3,
-              "oasysThreshold": 3,
-              "tierThreshold": 3
+              "oasysThreshold": 3
             }
           ],
           "assessedOn": "2026-06-03T01:04:19"

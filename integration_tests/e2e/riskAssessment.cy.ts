@@ -79,7 +79,7 @@ context('Risk Assessment page', () => {
       .should('include', 'Name: Drug misuse')
       .and('include', 'Risk of Harm: No')
       .and('include', 'Risk of Reoffending: No')
-      .and('include', 'Severity: SEVERE')
+      .and('include', 'Score: 3')
     cy.get('input[name="drugMisuseRadio"][value="Yes"]').should('not.be.checked')
     cy.get('input[name="drugMisuseRadio"][value="No"]').should('not.be.checked')
   })
