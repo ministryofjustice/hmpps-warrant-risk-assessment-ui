@@ -28,7 +28,7 @@ export default function riskAssessmentRoutes(
   const currentPage = 'risk-assessment'
   const riskGroups = [
     { label: 'Risk to Children', group: 'Children' },
-    { label: 'Risk to Known Adult', group: 'Known adult' },
+    { label: 'Risk to Known Adult', group: 'Known Adult' },
     { label: 'Risk to Prisoners', group: 'Prisoners' },
     { label: 'Risk to Staff', group: 'Staff' },
     { label: 'Risk to Public', group: 'Public' },
