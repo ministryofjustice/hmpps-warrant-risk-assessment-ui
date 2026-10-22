@@ -170,29 +170,34 @@ export default function riskSummaryRoutes(
     warrantRiskAssessment.riskToPolice = req.body.policeRadio
     warrantRiskAssessment.riskSummarySaved = true
 
-    try {
-      await warrantRiskAssessmentApiClient.updateWarrantRiskAssessment(
-        req.params.id,
-        warrantRiskAssessment,
-        res.locals.user.username,
-      )
-      if (req.body.action === 'saveProgressAndClose') {
-        res.send(
-          `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
+    if (req.body.action === 'refreshFromNdelius') {
+      // redirect to force a reload
+      res.redirect(`/risk-summary/${warrantRiskAssessmentId}`)
+    } else {
+      try {
+        await warrantRiskAssessmentApiClient.updateWarrantRiskAssessment(
+          req.params.id,
+          warrantRiskAssessment,
+          res.locals.user.username,
         )
-      } else if (callingScreen && callingScreen === 'check-your-answers') {
-        res.redirect(`/check-your-answers/${req.params.id}`)
-      } else {
-        res.redirect(`/warrant-execution/${warrantRiskAssessmentId}`)
+        if (req.body.action === 'saveProgressAndClose') {
+          res.send(
+            `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
+          )
+        } else if (callingScreen && callingScreen === 'check-your-answers') {
+          res.redirect(`/check-your-answers/${req.params.id}`)
+        } else {
+          res.redirect(`/warrant-execution/${warrantRiskAssessmentId}`)
+        }
+      } catch (error) {
+        const errorMessages: ErrorMessages = handleIntegrationErrors(
+          error?.responseStatus,
+          error?.data?.userMessage,
+          'Warrant Risk Assessment',
+        )
+        const showEmbeddedError = true
+        res.render(`pages/risk-summary`, { errorMessages, showEmbeddedError })
       }
-    } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Warrant Risk Assessment',
-      )
-      const showEmbeddedError = true
-      res.render(`pages/risk-summary`, { errorMessages, showEmbeddedError })
     }
   })
 

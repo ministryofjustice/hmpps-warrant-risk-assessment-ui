@@ -2510,6 +2510,24 @@
         },
         "transformers": ["response-template"]
       }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/e1d6a76d-8b03-45af-bedf-90b55ac06e11",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "e1d6a76d-8b03-45af-bedf-90b55ac06e11",
+          "crn": "X000001",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
     }
   ]
 }

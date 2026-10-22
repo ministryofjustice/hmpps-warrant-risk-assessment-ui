@@ -48,6 +48,7 @@ context('Risk Summary page', () => {
     cy.url().should('include', '/risk-summary')
     cy.get('#page-title').should('contain.text', 'Risk summary')
     cy.get('#continue-button').should('contain.text', 'Continue')
+    cy.get('#refresh-from-ndelius--button').should('contain.text', 'Refresh from National Delius')
     cy.get('#close-button').should('contain.text', 'Save progress and close')
   })
 
@@ -110,6 +111,18 @@ context('Risk Summary page', () => {
     cy.get('#continue-button').click()
     cy.wait('@formSubmit')
     cy.url().should('include', '/check-your-answers/b4d82761-0f6a-4c52-bf8e-3a1d65e9c074')
+  })
+
+  it('refresh button performs a post request then reloads the screen', () => {
+    cy.intercept('POST', '/risk-summary/**').as('refreshRequest')
+    cy.visit('/risk-summary/e1d6a76d-8b03-45af-bedf-90b55ac06e11')
+    cy.url().should('include', '/risk-summary')
+    cy.get('#page-title').should('contain.text', 'Risk summary')
+    cy.get('#refresh-from-ndelius--button').click()
+    cy.wait('@refreshRequest')
+    cy.url().should('include', '/risk-summary/e1d6a76d-8b03-45af-bedf-90b55ac06e11')
+    cy.url().should('include', '/risk-summary')
+    cy.get('#page-title').should('contain.text', 'Risk summary')
   })
 
   it('should stay on page and show ARNS error message if 500 thrown from ARNS service', () => {
