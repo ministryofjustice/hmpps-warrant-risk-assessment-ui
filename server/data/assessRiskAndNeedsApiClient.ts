@@ -57,10 +57,8 @@ export interface AssessmentNeed {
   name: string
   riskOfHarm: boolean
   riskOfReoffending: boolean
-  severity: string
   score: number
   oasysThreshold: number
-  tierThreshold: number
 }
 
 export interface AssessmentOffence {

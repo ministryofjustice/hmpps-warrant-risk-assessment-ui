@@ -266,13 +266,13 @@ export default function riskAssessmentRoutes(
   })
 
   function generateDrugInformation(needs: AssessmentNeeds): DisplayField[] {
-    const drugAssessmentNeed = needs.identifiedNeeds?.find(need => need.section === 'DRUG_MISUSE')
+    const drugAssessmentNeed = needs?.identifiedNeeds?.find(need => need.section === 'DRUG_MISUSE')
     if (drugAssessmentNeed != null) {
       return [
         { label: 'Name', value: drugAssessmentNeed.name },
         { label: 'Risk of harm', value: drugAssessmentNeed.riskOfHarm ? 'Yes' : 'No' },
         { label: 'Risk of reoffending', value: drugAssessmentNeed.riskOfReoffending ? 'Yes' : 'No' },
-        { label: 'Severity', value: drugAssessmentNeed.severity },
+        { label: 'Score', value: String(drugAssessmentNeed.score ?? '') },
       ]
     }
     return []
