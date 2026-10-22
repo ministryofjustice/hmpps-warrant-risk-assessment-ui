@@ -166,6 +166,17 @@
               }
             }) }}
             {{ govukButton({
+              text: "Refresh from National Delius",
+              preventDoubleClick: "true",
+              type: "submit",
+              name: "action",
+              value: "refreshFromNdelius",
+              classes: "govuk-button--secondary",
+              attributes: {
+                id: "refresh-from-ndelius--button"
+              }
+            }) }}
+            {{ govukButton({
               text: "Save progress and close",
               type: "submit",
               name: "action",

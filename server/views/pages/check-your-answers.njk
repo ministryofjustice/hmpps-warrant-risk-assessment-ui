@@ -19,19 +19,19 @@
         {% include "partials/review-required.njk" %}
         {% if not showEmbeddedError %}
 
-          <h1 id="page-title" class="govuk-heading-l">Check Your Answers</h1>
+          <h1 id="page-title" class="govuk-heading-l">Check your answers</h1>
 
           <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
               <h2 class="govuk-summary-card__title">
-                Basic Details
+                Basic details
               </h2>
               <ul class="govuk-summary-card__actions">
                 <li class="govuk-summary-card__action">
                   {% if warrantRiskAssessment.basicDetailsSaved %}
                     <a id="change-basic-details" class="govuk-link"
                        href="/basic-details/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers">Change<span
-                        class="govuk-visually-hidden"> Basic Details</span></a>
+                        class="govuk-visually-hidden"> Basic details</span></a>
                   {% endif %}
                 </li>
               </ul>
@@ -62,14 +62,14 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Postal Address
+                    Postal address
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {% if warrantRiskAssessment.postalAddress == null and warrantRiskAssessment.basicDetailsSaved %}
                       <a id="cya-link-postal-address"
                          href="/basic-details/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
                          class="govuk-link">enter required
-                        information<span class="govuk-visually-hidden"> for Postal Address</span></a>
+                        information<span class="govuk-visually-hidden"> for postal address</span></a>
                     {% else %}
                       {% if warrantRiskAssessment.postalAddress.officeDescription != null %} {{ warrantRiskAssessment.postalAddress.officeDescription }}
                         <br> {% endif %}
@@ -95,14 +95,14 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Date of Birth
+                    Date of birth
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {% if warrantRiskAssessment.dateOfBirth == null and warrantRiskAssessment.basicDetailsSaved %}
                       <a id="cya-link-date-of-birth"
                          href="/basic-details/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
                          class="govuk-link">enter required
-                        information<span class="govuk-visually-hidden"> for Date of Birth</span></a>
+                        information<span class="govuk-visually-hidden"> for Date of birth</span></a>
                     {% else %}
                       {{ dateOfBirth }}
                     {% endif %}
@@ -118,7 +118,7 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Date of Last home Visit
+                    Date of last home visit
                   </dt>
                   <dd id="cya-last-home-visit" class="govuk-summary-list__value">
                     {{ lastHomeVisitDate }}
@@ -127,7 +127,7 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Other Addresses
+                    Other addresses
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {% for address in existingAddresses %}
@@ -154,7 +154,7 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Telephone Number
+                    Telephone number
                   </dt>
                   <dd id="cya-telephone-number" class="govuk-summary-list__value">
                     {{ warrantRiskAssessment.telephoneNumber }}
@@ -163,7 +163,7 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Mobile Number
+                    Mobile number
                   </dt>
                   <dd id="cya-mobile-number" class="govuk-summary-list__value">
                     {{ warrantRiskAssessment.mobileNumber }}
@@ -172,7 +172,7 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Email Address
+                    Email address
                   </dt>
                   <dd id="cya-email-address" class="govuk-summary-list__value">
                     {{ warrantRiskAssessment.emailAddress }}
@@ -181,7 +181,7 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Employer's Address
+                    Employer's address
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {% for employer in employers %}
@@ -214,14 +214,14 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    DWP Signing on office
+                    DWP signing-on office
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {% if warrantRiskAssessment.signOnOffice == null and warrantRiskAssessment.basicDetailsSaved %}
                       <a id="cya-link-dwp-address"
                          href="/basic-details/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
                          class="govuk-link">enter required
-                        information<span class="govuk-visually-hidden"> for DWP Signing on Office</span></a>
+                        information<span class="govuk-visually-hidden"> for DWP signing-on office</span></a>
                     {% else %}
                       {% if warrantRiskAssessment.signOnOffice.officeDescription %} {{ warrantRiskAssessment.signOnOffice.officeDescription }}
                         <br> {% endif %}
@@ -247,7 +247,7 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    National Insurance Number
+                    National insurance number
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {{ warrantRiskAssessment.nationalInsuranceNumber }}
@@ -261,14 +261,14 @@
           <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
               <h2 class="govuk-summary-card__title">
-                Risk Assessment
+                Risk assessment
               </h2>
               <ul class="govuk-summary-card__actions">
                 <li class="govuk-summary-card__action">
                   {% if warrantRiskAssessment.riskAssessmentSaved %}
                     <a id="change-risk-assessment" class="govuk-link"
                        href="/risk-assessment/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers">Change<span
-                        class="govuk-visually-hidden"> Risk Assessment</span></a>
+                        class="govuk-visually-hidden"> Risk assessment</span></a>
                   {% endif %}
                 </li>
               </ul>
@@ -471,14 +471,14 @@
           <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
               <h2 class="govuk-summary-card__title">
-                Risk Summary
+                Risk summary
               </h2>
               <ul class="govuk-summary-card__actions">
                 <li class="govuk-summary-card__action">
                   {% if warrantRiskAssessment.riskSummarySaved %}
                     <a id="change-risk-summary" class="govuk-link"
                        href="/risk-summary/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers">Change<span
-                        class="govuk-visually-hidden"> Risk Summary</span></a>
+                        class="govuk-visually-hidden"> Risk summary</span></a>
                   {% endif %}
                 </li>
               </ul>
@@ -510,14 +510,14 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    What is the risk to Enforcement Officers?
+                    What is the risk to enforcement officers?
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {% if warrantRiskAssessment.riskToEnforcementOfficers == null and warrantRiskAssessment.riskAssessmentSaved %}
                       <a id="cya-link-risk-to-enforcement-officers"
                          href="/risk-summary/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
                          class="govuk-link">enter required
-                        information<span class="govuk-visually-hidden"> for risk to Enforcement Officers</span></a>
+                        information<span class="govuk-visually-hidden"> for risk to enforcement officers</span></a>
                     {% else %}
                       {{ warrantRiskAssessment.riskToEnforcementOfficers }}
                     {% endif %}
@@ -533,14 +533,14 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    What is the risk to Police?
+                    What is the risk to police?
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {% if warrantRiskAssessment.riskToPolice == null and warrantRiskAssessment.riskAssessmentSaved %}
                       <a id="cya-link-risk-to-police"
                          href="/risk-summary/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
                          class="govuk-link">enter required
-                        information<span class="govuk-visually-hidden"> for risk to Police</span></a>
+                        information<span class="govuk-visually-hidden"> for risk to police</span></a>
                     {% else %}
                       {{ warrantRiskAssessment.riskToPolice }}
                     {% endif %}
@@ -561,14 +561,14 @@
           <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
               <h2 class="govuk-summary-card__title">
-                Warrant Execution and Sign off
+                Warrant execution and sign off
               </h2>
               <ul class="govuk-summary-card__actions">
                 <li class="govuk-summary-card__action">
                   {% if warrantRiskAssessment.signAndSendSaved %}
                     <a id="change-warrant-execution" class="govuk-link"
                        href="/warrant-execution/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers">Change<span
-                        class="govuk-visually-hidden"> Warrant Execution and Sign off</span></a>
+                        class="govuk-visually-hidden"> Warrant execution and sign off</span></a>
                   {% endif %}
                 </li>
               </ul>
@@ -586,14 +586,14 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Responsible Officer
+                    Responsible officer
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {% if warrantRiskAssessment.responsibleOfficerFullName == null and warrantRiskAssessment.signAndSendSaved %}
                       <a id="cya-link-responsible-officer"
                          href="/warrant-execution/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
                          class="govuk-link">enter required
-                        information<span class="govuk-visually-hidden"> for Responsible Officer</span></a>
+                        information<span class="govuk-visually-hidden"> for responsible officer</span></a>
                     {% else %}
                       {{ warrantRiskAssessment.responsibleOfficerFullName }}
                     {% endif %}
@@ -616,7 +616,7 @@
                       <a id="cya-link-probation-area"
                          href="/warrant-execution/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
                          class="govuk-link">enter required
-                        information<span class="govuk-visually-hidden"> for Probation Area</span></a>
+                        information<span class="govuk-visually-hidden"> for probation area</span></a>
                     {% else %}
                       {{ warrantRiskAssessment.probationArea }}
                     {% endif %}
@@ -632,7 +632,7 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Officer Work Address
+                    Officer work address
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {% if warrantRiskAssessment.workAddress != null %}
@@ -658,7 +658,7 @@
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Responsible Officer Telephone Number
+                    Responsible officer telephone number
                   </dt>
                   <dd id="cya-responsible-officer-telephone" class="govuk-summary-list__value">
                     {{ warrantRiskAssessment.responsibleOfficerTelephoneNumer }}
