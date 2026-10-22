@@ -22,11 +22,11 @@ export default function riskSummaryRoutes(
 ): Router {
   const currentPage = 'risk-summary'
   const riskGroups = [
-    { label: 'Risk to Children', group: 'Children' },
-    { label: 'Risk to Known Adult', group: 'Known Adult' },
-    { label: 'Risk to Prisoners', group: 'Prisoners' },
-    { label: 'Risk to Staff', group: 'Staff' },
-    { label: 'Risk to Public', group: 'Public' },
+    { label: 'Risk to children', group: 'Children' },
+    { label: 'Risk to known adult', group: 'Known Adult' },
+    { label: 'Risk to prisoners', group: 'Prisoners' },
+    { label: 'Risk to staff', group: 'Staff' },
+    { label: 'Risk to public', group: 'Public' },
   ]
 
   router.get('/risk-summary/:id', async (req, res) => {
@@ -199,7 +199,7 @@ export default function riskSummaryRoutes(
   function generateStaffInfo(risks: AllRoshRisk): DisplayField[] {
     const risk = risks.summary?.riskInCommunity
     if (risk != null) {
-      return generateRiskLevelFields(risk, ['Risk to Known Adult', 'Risk to Prisoners', 'Risk to Staff'])
+      return generateRiskLevelFields(risk, ['Risk to known Adult', 'Risk to prisoners', 'Risk to staff'])
     }
     return []
   }
