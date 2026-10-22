@@ -27,11 +27,11 @@ export default function riskAssessmentRoutes(
 ): Router {
   const currentPage = 'risk-assessment'
   const riskGroups = [
-    { label: 'Risk to Children', group: 'Children' },
-    { label: 'Risk to Known Adult', group: 'Known Adult' },
-    { label: 'Risk to Prisoners', group: 'Prisoners' },
-    { label: 'Risk to Staff', group: 'Staff' },
-    { label: 'Risk to Public', group: 'Public' },
+    { label: 'Risk to children', group: 'Children' },
+    { label: 'Risk to known adult', group: 'Known Adult' },
+    { label: 'Risk to prisoners', group: 'Prisoners' },
+    { label: 'Risk to staff', group: 'Staff' },
+    { label: 'Risk to public', group: 'Public' },
   ]
 
   router.get('/risk-assessment/:id', async (req, res) => {
@@ -269,9 +269,9 @@ export default function riskAssessmentRoutes(
     const drugAssessmentNeed = needs?.identifiedNeeds?.find(need => need.section === 'DRUG_MISUSE')
     if (drugAssessmentNeed != null) {
       return [
-        { label: 'Name', value: drugAssessmentNeed.name ?? '' },
-        { label: 'Risk of Harm', value: drugAssessmentNeed.riskOfHarm ? 'Yes' : 'No' },
-        { label: 'Risk of Reoffending', value: drugAssessmentNeed.riskOfReoffending ? 'Yes' : 'No' },
+        { label: 'Name', value: drugAssessmentNeed.name },
+        { label: 'Risk of harm', value: drugAssessmentNeed.riskOfHarm ? 'Yes' : 'No' },
+        { label: 'Risk of reoffending', value: drugAssessmentNeed.riskOfReoffending ? 'Yes' : 'No' },
         { label: 'Score', value: String(drugAssessmentNeed.score ?? '') },
       ]
     }
@@ -319,9 +319,9 @@ export default function riskAssessmentRoutes(
       return [
         { label: 'Risk', value: vulnerability.risk },
         { label: 'Previous', value: vulnerability.previous },
-        { label: 'Previous Concerns Notes', value: vulnerability.previousConcernsText },
+        { label: 'Previous concerns notes', value: vulnerability.previousConcernsText },
         { label: 'Current', value: vulnerability.current },
-        { label: 'Current Concerns Notes', value: vulnerability.currentConcernsText },
+        { label: 'Current concerns notes', value: vulnerability.currentConcernsText },
       ]
     }
     return []
@@ -330,7 +330,7 @@ export default function riskAssessmentRoutes(
   function generateAbscondInfo(risks: AllRoshRisk): DisplayField[] {
     const abscond = risks.otherRisks?.escapeOrAbscond
     if (abscond != null) {
-      return [{ label: 'Escape or Abscond risk', value: abscond }]
+      return [{ label: 'Escape or abscond risk', value: abscond }]
     }
     return []
   }
@@ -345,18 +345,18 @@ export default function riskAssessmentRoutes(
       displayFields.push(
         { label: 'Risk', value: selfHarm.risk },
         { label: 'Previous', value: selfHarm.previous },
-        { label: 'Previous Concerns Notes', value: selfHarm.previousConcernsText },
+        { label: 'Previous concerns notes', value: selfHarm.previousConcernsText },
         { label: 'Current', value: selfHarm.current },
-        { label: 'Current Concerns Notes', value: selfHarm.currentConcernsText },
+        { label: 'Current concerns notes', value: selfHarm.currentConcernsText },
       )
     }
 
     if (riskInCommunity != null) {
-      displayFields.push({ label: 'Risk in Community', value: '' }, ...generateRiskLevelFields(riskInCommunity))
+      displayFields.push({ label: 'Risk in community', value: '' }, ...generateRiskLevelFields(riskInCommunity))
     }
 
     if (riskInCustody != null) {
-      displayFields.push({ label: 'Risk in Custody', value: '' }, ...generateRiskLevelFields(riskInCustody))
+      displayFields.push({ label: 'Risk in custody', value: '' }, ...generateRiskLevelFields(riskInCustody))
     }
 
     return displayFields
@@ -374,7 +374,7 @@ export default function riskAssessmentRoutes(
     if (mappaRegistration != null) {
       const formattedDate = toFullUserDate(mappaRegistration.startDate)
       return [
-        { label: 'MAPPA Category', value: mappaRegistration.category?.description },
+        { label: 'MAPPA category', value: mappaRegistration.category?.description },
         { label: 'Date', value: formattedDate },
       ]
     }

@@ -22,11 +22,11 @@ export default function riskSummaryRoutes(
 ): Router {
   const currentPage = 'risk-summary'
   const riskGroups = [
-    { label: 'Risk to Children', group: 'Children' },
-    { label: 'Risk to Known Adult', group: 'Known Adult' },
-    { label: 'Risk to Prisoners', group: 'Prisoners' },
-    { label: 'Risk to Staff', group: 'Staff' },
-    { label: 'Risk to Public', group: 'Public' },
+    { label: 'Risk to children', group: 'Children' },
+    { label: 'Risk to known adult', group: 'Known Adult' },
+    { label: 'Risk to prisoners', group: 'Prisoners' },
+    { label: 'Risk to staff', group: 'Staff' },
+    { label: 'Risk to public', group: 'Public' },
   ]
 
   router.get('/risk-summary/:id', async (req, res) => {
@@ -170,36 +170,41 @@ export default function riskSummaryRoutes(
     warrantRiskAssessment.riskToPolice = req.body.policeRadio
     warrantRiskAssessment.riskSummarySaved = true
 
-    try {
-      await warrantRiskAssessmentApiClient.updateWarrantRiskAssessment(
-        req.params.id,
-        warrantRiskAssessment,
-        res.locals.user.username,
-      )
-      if (req.body.action === 'saveProgressAndClose') {
-        res.send(
-          `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
+    if (req.body.action === 'refreshFromNdelius') {
+      // redirect to force a reload
+      res.redirect(`/risk-summary/${warrantRiskAssessmentId}`)
+    } else {
+      try {
+        await warrantRiskAssessmentApiClient.updateWarrantRiskAssessment(
+          req.params.id,
+          warrantRiskAssessment,
+          res.locals.user.username,
         )
-      } else if (callingScreen && callingScreen === 'check-your-answers') {
-        res.redirect(`/check-your-answers/${req.params.id}`)
-      } else {
-        res.redirect(`/warrant-execution/${warrantRiskAssessmentId}`)
+        if (req.body.action === 'saveProgressAndClose') {
+          res.send(
+            `<p>You can now safely close this window</p><script nonce="${res.locals.cspNonce}">window.close()</script>`,
+          )
+        } else if (callingScreen && callingScreen === 'check-your-answers') {
+          res.redirect(`/check-your-answers/${req.params.id}`)
+        } else {
+          res.redirect(`/warrant-execution/${warrantRiskAssessmentId}`)
+        }
+      } catch (error) {
+        const errorMessages: ErrorMessages = handleIntegrationErrors(
+          error?.responseStatus,
+          error?.data?.userMessage,
+          'Warrant Risk Assessment',
+        )
+        const showEmbeddedError = true
+        res.render(`pages/risk-summary`, { errorMessages, showEmbeddedError })
       }
-    } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Warrant Risk Assessment',
-      )
-      const showEmbeddedError = true
-      res.render(`pages/risk-summary`, { errorMessages, showEmbeddedError })
     }
   })
 
   function generateStaffInfo(risks: AllRoshRisk): DisplayField[] {
     const risk = risks.summary?.riskInCommunity
     if (risk != null) {
-      return generateRiskLevelFields(risk, ['Risk to Known Adult', 'Risk to Prisoners', 'Risk to Staff'])
+      return generateRiskLevelFields(risk, ['Risk to known adult', 'Risk to prisoners', 'Risk to staff'])
     }
     return []
   }
