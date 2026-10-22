@@ -2,7 +2,7 @@ context('Check your answers data checks', () => {
   it('Basic Details not saved', () => {
     cy.visit(`/check-your-answers/9f3e2c7a-6c1d-4f58-9a12-5e7b3d2c8f41`)
     cy.url().should('include', '/check-your-answers')
-    cy.get('#page-title').should('contain.text', 'Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Check your answers')
     cy.get('#change-basic-details').should('not.exist')
     cy.get('#cya-link-title-and-name').should('not.exist')
     cy.get('#cya-link-postal-address').should('not.exist')
@@ -14,7 +14,7 @@ context('Check your answers data checks', () => {
   it('Basic Details not populated', () => {
     cy.visit(`/check-your-answers/1a7c5e92-3d44-4b61-8fe0-2c9d7a5b6e13`)
     cy.url().should('include', '/check-your-answers')
-    cy.get('#page-title').should('contain.text', 'Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Check your answers')
     cy.get('#change-basic-details').should('exist')
     cy.get('#change-risk-summary').should('not.exist')
     cy.get('#change-risk-assessment').should('not.exist')
@@ -40,7 +40,7 @@ context('Check your answers data checks', () => {
   it('Basic Details is populated', () => {
     cy.visit(`/check-your-answers/d3b8f1a4-7e22-4c9b-9351-6f0a2d8e4b77`)
     cy.url().should('include', '/check-your-answers')
-    cy.get('#page-title').should('contain.text', 'Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Check your answers')
     cy.get('#change-basic-details').should('exist')
     cy.get('#change-risk-summary').should('not.exist')
     cy.get('#change-risk-assessment').should('not.exist')
@@ -71,7 +71,7 @@ context('Check your answers data checks', () => {
   it('Risk Assessment not saved', () => {
     cy.visit('/check-your-answers/6c2f4e9a-1b73-4d88-9f20-3a5c7e1d4b6f')
     cy.url().should('include', '/check-your-answers')
-    cy.get('#page-title').should('contain.text', 'Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Check your answers')
     cy.get('#change-risk-assessment').should('not.exist')
     cy.get('#cya-link-mappa-procedures').should('not.exist')
     cy.get('#cya-link-high-risk-of-serious-harm').should('not.exist')
@@ -85,7 +85,7 @@ context('Check your answers data checks', () => {
   it('Risk Assessment not populated', () => {
     cy.visit('/check-your-answers/a1d9c3f7-5e24-4b68-8a91-2f6e3c7b4d10')
     cy.url().should('include', '/check-your-answers')
-    cy.get('#page-title').should('contain.text', 'Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Check your answers')
     cy.get('#change-risk-assessment').should('exist')
     cy.get('#change-risk-summary').should('not.exist')
     cy.get('#change-warrant-execution').should('not.exist')
@@ -122,7 +122,7 @@ context('Check your answers data checks', () => {
   it('Risk Assessment populated', () => {
     cy.visit('/check-your-answers/f4b8a2d6-9c31-4e75-b0a4-1d7f3c5e8a92')
     cy.url().should('include', '/check-your-answers')
-    cy.get('#page-title').should('contain.text', 'Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Check your answers')
     cy.get('#change-risk-assessment').should('exist')
     cy.get('#change-risk-summary').should('not.exist')
     cy.get('#change-warrant-execution').should('not.exist')
@@ -141,7 +141,7 @@ context('Check your answers data checks', () => {
   it('Risk Summary not saved', () => {
     cy.visit('/check-your-answers/7e1a4c9d-2b63-4f58-9a70-3d5c8e1b6f24')
     cy.url().should('include', '/check-your-answers')
-    cy.get('#page-title').should('contain.text', 'Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Check your answers')
     cy.get('#change-risk-summary').should('not.exist')
     cy.get('#cya-link-risk-to-public').should('not.exist')
     cy.get('#cya-link-risk-to-enforcement-officers').should('not.exist')
@@ -151,7 +151,7 @@ context('Check your answers data checks', () => {
   it('Risk Summary not populated', () => {
     cy.visit('/check-your-answers/c8f3d2a1-5e47-4b69-8c10-2a7d6e4f9b35')
     cy.url().should('include', '/check-your-answers')
-    cy.get('#page-title').should('contain.text', 'Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Check your answers')
     cy.get('#change-risk-summary').should('exist')
     cy.get('#change-warrant-execution').should('not.exist')
     cy.get('#cya-link-risk-to-public').should('exist')
@@ -171,7 +171,7 @@ context('Check your answers data checks', () => {
   it('Risk Summary populated', () => {
     cy.visit('/check-your-answers/2d6f9a3b-1c84-4e57-b290-5a7e3c1d8f46')
     cy.url().should('include', '/check-your-answers')
-    cy.get('#page-title').should('contain.text', 'Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Check your answers')
     cy.get('#change-risk-summary').should('exist')
     cy.get('#change-warrant-execution').should('not.exist')
     cy.get('#cya-link-risk-to-public').should('not.exist')
@@ -185,7 +185,7 @@ context('Check your answers data checks', () => {
   it('Warrant Execution not saved', () => {
     cy.visit('/check-your-answers/3b7d1e9a-6c24-4f58-8a10-2d5e7c9b4a31')
     cy.url().should('include', '/check-your-answers')
-    cy.get('#page-title').should('contain.text', 'Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Check your answers')
     cy.get('#change-warrant-execution').should('not.exist')
     cy.get('#cya-link-responsible-officer').should('not.exist')
     cy.get('#cya-link-probation-area').should('not.exist')
@@ -195,7 +195,7 @@ context('Check your answers data checks', () => {
   it('Warrant Execution not populated', () => {
     cy.visit('/check-your-answers/8a2f6c1d-4b73-49e5-9c20-1d7e3a5b6f42')
     cy.url().should('include', '/check-your-answers')
-    cy.get('#page-title').should('contain.text', 'Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Check your answers')
     cy.get('#change-warrant-execution').should('exist')
     cy.get('#cya-link-responsible-officer').should('exist')
     cy.get('#cya-link-probation-area').should('exist')
@@ -214,7 +214,7 @@ context('Check your answers data checks', () => {
   it('Warrant Execution populated', () => {
     cy.visit('/check-your-answers/5d9c2a7e-1f34-4b68-8e90-3a6d1c7f4b25')
     cy.url().should('include', '/check-your-answers')
-    cy.get('#page-title').should('contain.text', 'Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Check your answers')
     cy.get('#change-warrant-execution').should('exist')
     cy.get('#cya-link-responsible-officer').should('not.exist')
     cy.get('#cya-link-probation-area').should('not.exist')
@@ -280,7 +280,7 @@ context('Check your answers data checks', () => {
     cy.intercept('POST', '/check-your-answers/**').as('saveAndCloseRequest')
     cy.visit('/check-your-answers/8a2f6c1d-4b73-49e5-9c20-1d7e3a5b6f42')
     cy.url().should('include', '/check-your-answers')
-    cy.get('#page-title').should('contain.text', 'Check Your Answers')
+    cy.get('#page-title').should('contain.text', 'Check your answers')
     cy.get('#close').click()
     cy.wait('@saveAndCloseRequest').then(({ request }) => {
       const body = new URLSearchParams(request.body)

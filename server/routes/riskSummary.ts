@@ -199,7 +199,7 @@ export default function riskSummaryRoutes(
   function generateStaffInfo(risks: AllRoshRisk): DisplayField[] {
     const risk = risks.summary?.riskInCommunity
     if (risk != null) {
-      return generateRiskLevelFields(risk, ['Risk to known Adult', 'Risk to prisoners', 'Risk to staff'])
+      return generateRiskLevelFields(risk, ['Risk to known adult', 'Risk to prisoners', 'Risk to staff'])
     }
     return []
   }
