@@ -57,11 +57,11 @@ context('Risk Summary page', () => {
     cy.url().should('include', '/risk-summary')
     cy.get('#page-title').should('contain.text', 'Risk summary')
     cy.get('#publicDetails .govuk-details__summary-text').click()
-    cy.get('#publicDetails .govuk-details__text').should('contain.text', 'None Found')
+    cy.get('#publicDetails .govuk-details__text').should('contain.text', 'None found')
     cy.get('#officerDetails .govuk-details__summary-text').click()
-    cy.get('#officerDetails .govuk-details__text').should('contain.text', 'None Found')
+    cy.get('#officerDetails .govuk-details__text').should('contain.text', 'None found')
     cy.get('#policeDetails .govuk-details__summary-text').click()
-    cy.get('#policeDetails .govuk-details__text').should('contain.text', 'None Found')
+    cy.get('#policeDetails .govuk-details__text').should('contain.text', 'None found')
   })
 
   it('Radio buttons should always default to selection stored in DB', () => {
