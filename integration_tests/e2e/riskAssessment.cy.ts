@@ -59,7 +59,7 @@ context('Risk Assessment page', () => {
     cy.get('input[name="weaponRadio"][value="No"]').should('not.be.checked')
     cy.get('#policeDetails .govuk-details__summary-text')
       .should('be.visible')
-      .should('contain.text', 'Click here to view information')
+      .should('contain.text', 'Click here to view relevant information')
     cy.get('#policeDetails .govuk-details__summary-text').click()
     cy.get('#policeDetails .govuk-details__text')
       .cleanText()
