@@ -25,6 +25,3 @@ generic-service:
       - digital_staff_and_mojo
       - unilink_staff
       - moj_cloud_platform # for end-to-end testing
-
-generic-prometheus-alerts:
-  alertSeverity: hmpps-warrant-risk-assessment-notifications

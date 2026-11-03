@@ -2,8 +2,7 @@ generic-service:
   nameOverride: hmpps-warrant-risk-assessment-ui
   productId: 'HMPPS501' # productId for the product that this belongs too, i.e. DPS001, see README.md for details
 
-  # the IRSA service account name for accessing AWS resources
-  # serviceAccountName: "hmpps-warrant-risk-assessment-ui"
+  serviceAccountName: "hmpps-warrant-risk-assessment"
 
   replicaCount: 4
 
@@ -34,11 +33,6 @@ generic-service:
     AUDIT_SQS_REGION: 'eu-west-2'
     AUDIT_SERVICE_NAME: 'HMPPS501' # Your audit service name
 
-  # Pre-existing kubernetes secrets to load as environment variables in the deployment.
-  # namespace_secrets:
-  #   [name of kubernetes secret]:
-  #     [name of environment variable as seen by app]: [key of kubernetes secret to load]
-
   namespace_secrets:
     # These secrets are created by terraform.
     hmpps-warrant-risk-assessment-ui-client-creds:
@@ -46,7 +40,7 @@ generic-service:
       CLIENT_CREDS_CLIENT_SECRET: 'CLIENT_CREDS_CLIENT_SECRET'
     hmpps-warrant-risk-assessment-ui-auth-code:
       AUTH_CODE_CLIENT_ID: 'AUTH_CODE_CLIENT_ID'
-      AUTH_CODE_CLIENT_SECRET: 'AUTH_CODE_CLIENT_SECRET'    
+      AUTH_CODE_CLIENT_SECRET: 'AUTH_CODE_CLIENT_SECRET'
     hmpps-warrant-risk-assessment-ui-session-secret:
       SESSION_SECRET: 'SESSION_SECRET'
     hmpps-warrant-risk-assessment-ui-elasticache-redis:
@@ -56,14 +50,16 @@ generic-service:
       APPLICATIONINSIGHTS_CONNECTION_STRING: "APPLICATIONINSIGHTS_CONNECTION_STRING"
     os-datahub:
       OS_DATAHUB_API_KEY: "OS_DATAHUB_API_KEY"
-    # This secret will need to be created in your namespace (note it isn't in hmpps-templates-dev)
-    # IRSA configuration in your namespace will also be required, and then uncomment serviceAccountName above.
-    # sqs-hmpps-audit-secret:
-    #   AUDIT_SQS_QUEUE_URL: 'sqs_queue_url'
+    hmpps-audit:
+      AUDIT_SQS_QUEUE_URL: 'sqs_queue_url'
+      AUDIT_SQS_QUEUE_NAME: 'sqs_queue_name'
+    hmpps-domain-events:
+      HMPPS_DOMAIN_EVENTS_TOPIC_ARN: 'topic_arn'
 
   allowlist:
     groups:
       - internal
+      - unilink_staff
 
 generic-prometheus-alerts:
   targetApplication: hmpps-warrant-risk-assessment-ui

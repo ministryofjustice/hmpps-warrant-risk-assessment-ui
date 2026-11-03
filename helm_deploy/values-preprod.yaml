@@ -24,5 +24,3 @@ generic-service:
       - digital_staff_and_mojo
       - unilink_staff
 
-generic-prometheus-alerts:
-  alertSeverity: hmpps-warrant-risk-assessment-notifications
