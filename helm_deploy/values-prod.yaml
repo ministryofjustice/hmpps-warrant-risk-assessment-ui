@@ -6,7 +6,7 @@ generic-service:
     host: warrant-risk-assessment.hmpps.service.justice.gov.uk
 
   env:
-    INGRESS_URL: "https://warrant-risk-assessment-ui.hmpps.service.justice.gov.uk"
+    INGRESS_URL: "https://warrant-risk-assessment.hmpps.service.justice.gov.uk"
     HMPPS_AUTH_URL: "https://sign-in.hmpps.service.justice.gov.uk/auth"
     TOKEN_VERIFICATION_API_URL: "https://token-verification-api.prison.service.justice.gov.uk"
     NDELIUS_DEEPLINK_URL: "https://ndelius.probation.service.justice.gov.uk/NDelius-war/delius/JSP/deeplink.xhtml"
