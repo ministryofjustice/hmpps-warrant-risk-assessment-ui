@@ -3,7 +3,7 @@
 
 generic-service:
   ingress:
-    host: warrant-risk-assessment-ui.hmpps.service.justice.gov.uk
+    host: warrant-risk-assessment.hmpps.service.justice.gov.uk
 
   env:
     INGRESS_URL: "https://warrant-risk-assessment-ui.hmpps.service.justice.gov.uk"
