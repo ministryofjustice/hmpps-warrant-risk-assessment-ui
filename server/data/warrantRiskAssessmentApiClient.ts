@@ -165,7 +165,7 @@ export default class WarrantRiskAssessmentApiClient extends RestClient {
   async batchDeleteAddresses(addresses: Array<WarrantRiskAssessmentAddress>, username: string): Promise<void> {
     const promises = []
     for (const a of addresses) {
-      promises.push(this.deleteAddress(a.id, username))
+      promises.push(this.deleteAddress(a.id!, username))
     }
     await Promise.all(promises)
   }
@@ -182,7 +182,7 @@ export default class WarrantRiskAssessmentApiClient extends RestClient {
   async batchDeleteContacts(contacts: Array<WarrantRiskAssessmentContact>, username: string): Promise<void> {
     const promises = []
     for (const c of contacts) {
-      promises.push(this.deleteContact(c.id, username))
+      promises.push(this.deleteContact(c.id!, username))
     }
     await Promise.all(promises)
   }
@@ -203,17 +203,17 @@ export interface WarrantRiskAssessment {
   riskToEnforcementOfficers: string
   riskToPolice: string
   warrantExecutedBy: string
-  subjectOfMappaProcedures: boolean
-  highRiskOfSeriousHarm: boolean
-  highRiskOfAbsconding: boolean
-  vulnerable: boolean
-  carryOrUseWeapons: boolean
-  assaultingPolice: boolean
-  misuseDrugsAndAlcohol: boolean
-  postalAddress: WarrantRiskAssessmentAddress
-  dateOfBirth: string
+  subjectOfMappaProcedures: boolean | null
+  highRiskOfSeriousHarm: boolean | null
+  highRiskOfAbsconding: boolean | null
+  vulnerable: boolean | null
+  carryOrUseWeapons: boolean | null
+  assaultingPolice: boolean | null
+  misuseDrugsAndAlcohol: boolean | null
+  postalAddress: WarrantRiskAssessmentAddress | null | undefined
+  dateOfBirth: string | null | undefined
   prisonNumber: string
-  workAddress: WarrantRiskAssessmentAddress
+  workAddress: WarrantRiskAssessmentAddress | null
   basicDetailsSaved: boolean
   signAndSendSaved: boolean
   contactSaved: boolean
@@ -221,7 +221,7 @@ export interface WarrantRiskAssessment {
   reviewEvent: string
   mobileNumber: string
   emailAddress: string
-  lastHomeVisitDate: string
+  lastHomeVisitDate: string | null | undefined
   riskAssessmentSaved: boolean
   riskSummarySaved: boolean
   responsibleOfficerFullName: string
@@ -231,19 +231,19 @@ export interface WarrantRiskAssessment {
 }
 
 export interface WarrantRiskAssessmentAddress {
-  id?: string
-  warrantRiskAssessmentId: string
-  deliusAddressId: number
-  status: string
-  officeDescription?: string
-  buildingName: string
-  addressNumber: string
-  streetName: string
-  townCity: string
-  district: string
-  county: string
-  postcode: string
-  screen: string
+  id?: string | null | undefined
+  warrantRiskAssessmentId: string | null | undefined
+  deliusAddressId: number | null
+  status: string | null | undefined
+  officeDescription?: string | null | undefined
+  buildingName: string | null | undefined
+  addressNumber: string | null | undefined
+  streetName: string | null | undefined
+  townCity: string | null | undefined
+  district: string | null | undefined
+  county: string | null | undefined
+  postcode: string | null | undefined
+  screen: string | null | undefined
 }
 
 export interface WarrantRiskAssessmentContact {

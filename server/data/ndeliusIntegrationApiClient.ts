@@ -112,3 +112,10 @@ export interface Registration {
   startDate: string
   notes: string
 }
+
+export interface IntegrationError {
+  responseStatus?: number
+  data?: {
+    message?: string
+  }
+}

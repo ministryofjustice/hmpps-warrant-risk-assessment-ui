@@ -1,36 +1,35 @@
 import { jwtDecode } from 'jwt-decode'
 import express from 'express'
-import { UUID } from 'crypto'
 import { convertToTitleCase } from '../utils/utils'
 import logger from '../../logger'
 
 export default function setUpCurrentUser() {
   const router = express.Router()
 
-  router.use((req, res, next) => {
+  router.use((_req, res, next) => {
     try {
       const {
         name,
         user_id: userId,
-        user_uuid: userUuid,
         authorities: roles = [],
       } = jwtDecode(res.locals.user.token) as {
         name?: string
         user_id?: string
-        user_uuid?: UUID
         authorities?: string[]
       }
 
       res.locals.user = {
         ...res.locals.user,
         userId,
-        userUuid,
+        // @ts-expect-error: Should always have a name
         name,
+        // @ts-expect-error: Should always have a name
         displayName: convertToTitleCase(name),
         userRoles: roles.map(role => role.substring(role.indexOf('_') + 1)),
       }
 
       if (res.locals.user.authSource === 'nomis') {
+        // @ts-expect-error: Should always have a user
         res.locals.user.staffId = parseInt(userId, 10) || undefined
       }
 

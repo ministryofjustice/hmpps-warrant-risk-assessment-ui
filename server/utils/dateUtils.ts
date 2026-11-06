@@ -7,7 +7,7 @@ export function fromUserDate(str: string): string {
   return ''
 }
 
-export function toUserDate(str: string): string {
+export function toUserDate(str: string | null | undefined): string {
   if (str) {
     const timeStrippedString = str.includes('T') ? str.split('T')[0] : str
     return DateTimeFormatter.ofPattern('d/M/yyyy').format(DateTimeFormatter.ISO_LOCAL_DATE.parse(timeStrippedString))

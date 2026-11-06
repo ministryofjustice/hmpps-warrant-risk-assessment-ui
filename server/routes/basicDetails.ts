@@ -7,7 +7,11 @@ import WarrantRiskAssessmentApiClient, {
   WarrantRiskAssessmentAddress,
   WarrantRiskAssessmentContact,
 } from '../data/warrantRiskAssessmentApiClient'
-import NDeliusIntegrationApiClient, { BasicDetails, DeliusAddress } from '../data/ndeliusIntegrationApiClient'
+import NDeliusIntegrationApiClient, {
+  BasicDetails,
+  DeliusAddress,
+  IntegrationError,
+} from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
 import {
   findMainOrPostalAddressInAddressList,
@@ -32,10 +36,10 @@ export default function basicDetailsRoutes(
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const warrantRiskAssessmentId: string = req.params.id
-    let warrantRiskAssessment: WarrantRiskAssessment = null
-    let basicDetails: BasicDetails = null
+    let warrantRiskAssessment: WarrantRiskAssessment
+    let basicDetails: BasicDetails
     const callingScreen: string = req.query.returnTo as string
-    let existingContacts: WarrantRiskAssessmentContact[] = []
+    let existingContacts
 
     try {
       warrantRiskAssessment = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(
@@ -55,20 +59,16 @@ export default function basicDetailsRoutes(
         return
       }
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Warrant Risk Assessment',
-      )
-
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
+      const httpError: IntegrationError = error as unknown as IntegrationError
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -87,20 +87,16 @@ export default function basicDetailsRoutes(
         res.locals.user.username,
       )
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error.responseStatus,
-        error.data?.message,
-        'NDelius Integration',
-      )
-
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'NDelius Integration')
+      const httpError: IntegrationError = error as unknown as IntegrationError
       // take the user to detailed error page for 400 type errors
-      if (error.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // stay on the current page for 500 errors
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
         return
@@ -111,7 +107,7 @@ export default function basicDetailsRoutes(
 
     const formattedDob = toFullUserDate(basicDetails.dateOfBirth)
     const formattedHomeVisit = toFullUserDate(basicDetails.lastHomeVisitDate)
-    const defaultAddress: DeliusAddress = findMainOrPostalAddressInAddressList(basicDetails.addresses)
+    const defaultAddress = findMainOrPostalAddressInAddressList(basicDetails.addresses)
     const otherAddresses: DeliusAddress[] = basicDetails.addresses.filter(a => a.id !== defaultAddress?.id)
     const titleAndFullName: string = formatTitleAndFullName(basicDetails.title, basicDetails.name)
     const { mobileNumber, telephoneNumber, emailAddress, nationalInsuranceNumber, employers } = basicDetails
@@ -160,8 +156,8 @@ export default function basicDetailsRoutes(
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const warrantRiskAssessmentId: string = req.params.id
     const callingScreen: string = req.query.returnTo as string
-    let warrantRiskAssessment: WarrantRiskAssessment = null
-    let basicDetails: BasicDetails = null
+    let warrantRiskAssessment: WarrantRiskAssessment
+    let basicDetails: BasicDetails
     let existingAddresses: WarrantRiskAssessmentAddress[] = []
     let existingContacts: WarrantRiskAssessmentContact[] = []
 
@@ -187,20 +183,16 @@ export default function basicDetailsRoutes(
         return
       }
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Warrant Risk Assessment',
-      )
-
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
+      const httpError: IntegrationError = error as unknown as IntegrationError
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -219,20 +211,16 @@ export default function basicDetailsRoutes(
         res.locals.user.username,
       )
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error.responseStatus,
-        error.data?.message,
-        'NDelius Integration',
-      )
-
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'NDelius Integration')
+      const httpError: IntegrationError = error as unknown as IntegrationError
       // take the user to detailed error page for 400 type errors
-      if (error.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // stay on the current page for 500 errors
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
         return
@@ -241,7 +229,7 @@ export default function basicDetailsRoutes(
       return
     }
 
-    const defaultAddress: DeliusAddress = findMainOrPostalAddressInAddressList(basicDetails.addresses)
+    const defaultAddress = findMainOrPostalAddressInAddressList(basicDetails.addresses)
     const otherAddresses: DeliusAddress[] = basicDetails.addresses.filter(a => a.id !== defaultAddress?.id)
     warrantRiskAssessment.postalAddress = toWarrantRiskAssessmentAddress(defaultAddress, '', warrantRiskAssessmentId)
     warrantRiskAssessment.titleAndFullName = formatTitleAndFullName(basicDetails.title, basicDetails.name)
@@ -268,7 +256,7 @@ export default function basicDetailsRoutes(
       existingAddress => !otherAddresses.some(address => address.id === existingAddress.deliusAddressId),
     )
 
-    const contactsToCreate: WarrantRiskAssessmentContact[] = basicDetails.employers
+    const contactsToCreate = basicDetails.employers
       .filter(
         employer => !existingContacts?.some(c => c.contactLocation?.deliusAddressId === employer.employerAddress?.id),
       )
@@ -286,11 +274,11 @@ export default function basicDetailsRoutes(
 
     const otherAddressesById = new Map(otherAddresses.map(address => [address.id, address]))
     const addressesToUpdate: WarrantRiskAssessmentAddress[] = existingAddresses
-      .filter(existingAddress => otherAddressesById.has(existingAddress.deliusAddressId))
+      .filter(existingAddress => otherAddressesById.has(existingAddress.deliusAddressId!))
       .map(existingAddress => ({
         ...existingAddress,
         ...toWarrantRiskAssessmentAddress(
-          otherAddressesById.get(existingAddress.deliusAddressId),
+          otherAddressesById.get(existingAddress.deliusAddressId!),
           existingAddress.screen ?? 'basicDetails',
           warrantRiskAssessmentId,
         ),
@@ -299,20 +287,22 @@ export default function basicDetailsRoutes(
       }))
 
     const employersById = new Map(basicDetails.employers.map(employer => [employer.employerAddress?.id, employer]))
-    const contactsToUpdate: WarrantRiskAssessmentContact[] = existingContacts
-      .filter(existingContact => employersById.has(existingContact.contactLocation?.deliusAddressId))
+    const contactsToUpdate = existingContacts
+      // @ts-expect-error: Should
+      .filter(existingContact => employersById.has(existingContact.contactLocation.deliusAddressId))
       .map(existingContact => {
+        // @ts-expect-error: Should
         const linkedEmployer = employersById.get(existingContact.contactLocation?.deliusAddressId)
         return {
           ...existingContact,
-          contactPerson: formatTitleAndFullName('', linkedEmployer.employerName),
+          contactPerson: formatTitleAndFullName('', linkedEmployer?.employerName),
           contactLocation: toWarrantRiskAssessmentAddress(
-            linkedEmployer.employerAddress,
+            linkedEmployer?.employerAddress,
             existingContact.contactLocation?.screen ?? '',
             warrantRiskAssessmentId,
           ),
-          mobileNumber: linkedEmployer.mobileNumber,
-          telephoneNumber: linkedEmployer.telephoneNumber,
+          mobileNumber: linkedEmployer?.mobileNumber,
+          telephoneNumber: linkedEmployer?.telephoneNumber,
           id: existingContact.id,
           warrantRiskAssessmentId,
         }
@@ -324,6 +314,7 @@ export default function basicDetailsRoutes(
       res.redirect(`/basic-details/${warrantRiskAssessmentId}`)
     } else {
       if (addressesToCreate.length > 0) {
+        // @ts-expect-error: should have values
         await warrantRiskAssessmentApiClient.batchCreateAddresses(addressesToCreate, res.locals.user.username)
       }
       if (addressesToUpdate.length > 0) {
@@ -333,9 +324,11 @@ export default function basicDetailsRoutes(
         await warrantRiskAssessmentApiClient.batchDeleteAddresses(addressesToDelete, res.locals.user.username)
       }
       if (contactsToCreate.length > 0) {
+        // @ts-expect-error: should have values
         await warrantRiskAssessmentApiClient.batchCreateContacts(contactsToCreate, res.locals.user.username)
       }
       if (contactsToUpdate.length > 0) {
+        // @ts-expect-error: should have values
         await warrantRiskAssessmentApiClient.batchUpdateContacts(contactsToUpdate, res.locals.user.username)
       }
       if (contactsToDelete.length > 0) {
