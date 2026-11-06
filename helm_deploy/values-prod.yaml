@@ -3,14 +3,14 @@
 
 generic-service:
   ingress:
-    host: warrant-risk-assessment-ui.hmpps.service.justice.gov.uk
+    host: warrant-risk-assessment.hmpps.service.justice.gov.uk
 
   env:
-    INGRESS_URL: "https://warrant-risk-assessment-ui.hmpps.service.justice.gov.uk"
+    INGRESS_URL: "https://warrant-risk-assessment.hmpps.service.justice.gov.uk"
     HMPPS_AUTH_URL: "https://sign-in.hmpps.service.justice.gov.uk/auth"
     TOKEN_VERIFICATION_API_URL: "https://token-verification-api.prison.service.justice.gov.uk"
     NDELIUS_DEEPLINK_URL: "https://ndelius.probation.service.justice.gov.uk/NDelius-war/delius/JSP/deeplink.xhtml"
-    WARRANT_RISK_ASSESSMENT_API_URL: 'https://warrant-risk-assesssment-api.hmpps.service.justice.gov.uk'
+    WARRANT_RISK_ASSESSMENT_API_URL: 'https://warrant-risk-assessment-api.hmpps.service.justice.gov.uk'
     NDELIUS_INTEGRATION_URL: "https://warrant-risk-assessment-and-delius.hmpps.service.justice.gov.uk"
     ASSESS_RISKS_AND_NEEDS_API_URL: "https://arns-assessment-view-api.hmpps.service.justice.gov.uk"
     OS_PLACES_API_URL: "https://api.os.uk/search/places/v1"
@@ -21,6 +21,3 @@ generic-service:
       - digital_staff_and_mojo
       - unilink_staff
       - probation # for production staff
-
-generic-prometheus-alerts:
-  alertSeverity: hmpps-warrant-risk-assessment-notifications
