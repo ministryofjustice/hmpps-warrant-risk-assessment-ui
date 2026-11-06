@@ -9,6 +9,7 @@ import WarrantRiskAssessmentApiClient, {
   WarrantRiskAssessment,
   WarrantRiskAssessmentAddress,
 } from '../data/warrantRiskAssessmentApiClient'
+import { IntegrationError } from '../data/ndeliusIntegrationApiClient'
 
 export default function addDwpAddressRoutes(
   router: Router,
@@ -22,7 +23,7 @@ export default function addDwpAddressRoutes(
     await auditService.logPageView(Page.ADD_DWP_ADDRESS, { who: res.locals.user.username, correlationId: req.id })
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
     const warrantRiskAssessmentId: string = req.params.id
-    let warrantRiskAssessment: WarrantRiskAssessment = null
+    let warrantRiskAssessment: WarrantRiskAssessment
 
     try {
       warrantRiskAssessment = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(
@@ -38,20 +39,18 @@ export default function addDwpAddressRoutes(
         return
       }
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Warrant Risk Assessment',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
+
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -74,7 +73,7 @@ export default function addDwpAddressRoutes(
   router.post('/add-dwp-address/:id', async (req, res) => {
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
     const warrantRiskAssessmentId: string = req.params.id
-    let warrantRiskAssessment: WarrantRiskAssessment = null
+    let warrantRiskAssessment: WarrantRiskAssessment
 
     try {
       warrantRiskAssessment = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(
@@ -90,20 +89,16 @@ export default function addDwpAddressRoutes(
         return
       }
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Warrant Risk Assessment',
-      )
-
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
+      const httpError: IntegrationError = error as unknown as IntegrationError
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -151,11 +146,7 @@ export default function addDwpAddressRoutes(
         )
         res.redirect(`/basic-details/${req.params.id}`)
       } catch (error) {
-        const integrationErrorMessages = handleIntegrationErrors(
-          error.status,
-          error.data?.message,
-          'Warrant Risk Assessment',
-        )
+        const integrationErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
         const showEmbeddedError = true
         res.render(`pages/add-dwp-address`, { errorMessages, showEmbeddedError, integrationErrorMessages })
       }
@@ -212,7 +203,7 @@ export default function addDwpAddressRoutes(
   }
 
   function validateLength(
-    fieldValue: string,
+    fieldValue: string | null | undefined,
     fieldName: keyof typeof FIELD_LIMITS,
     label: string,
     errorMessages: ErrorMessages,

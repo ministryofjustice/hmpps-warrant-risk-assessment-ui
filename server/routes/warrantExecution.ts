@@ -15,6 +15,7 @@ import {
 } from '../utils/utils'
 import NDeliusIntegrationApiClient, {
   DeliusAddress,
+  IntegrationError,
   SignAndSendDetails,
   UserDetails,
 } from '../data/ndeliusIntegrationApiClient'
@@ -43,8 +44,8 @@ export default function warrantExecutionRoutes(
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const callingScreen: string = req.query.returnTo as string
-    let warrantRiskAssessment: WarrantRiskAssessment = null
-    let signAndSendDetails: SignAndSendDetails = null
+    let warrantRiskAssessment: WarrantRiskAssessment
+    let signAndSendDetails: SignAndSendDetails
     let errorMessages: ErrorMessages = {}
 
     try {
@@ -60,20 +61,17 @@ export default function warrantExecutionRoutes(
         return
       }
     } catch (error) {
-      errorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Warrant Risk Assessment',
-      )
+      errorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -92,16 +90,18 @@ export default function warrantExecutionRoutes(
         res.locals.user.username,
       )
     } catch (error) {
-      errorMessages = handleIntegrationErrors(error.responseStatus, error.data?.message, 'NDelius Integration')
+      errorMessages = handleIntegrationErrors(error, 'NDelius Integration')
+
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // take the user to detailed error page for 400 type errors
-      if (error.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // stay on the current page for 500 errors
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
         return
@@ -156,8 +156,8 @@ export default function warrantExecutionRoutes(
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
     const ndeliusIntegrationApiClient = new NDeliusIntegrationApiClient(authenticationClient)
     const callingScreen: string = req.query.returnTo as string
-    let warrantRiskAssessment: WarrantRiskAssessment = null
-    let signAndSendDetails: SignAndSendDetails = null
+    let warrantRiskAssessment: WarrantRiskAssessment
+    let signAndSendDetails: SignAndSendDetails
     let errorMessages: ErrorMessages = {}
 
     try {
@@ -173,20 +173,18 @@ export default function warrantExecutionRoutes(
         return
       }
     } catch (error) {
-      errorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Warrant Risk Assessment',
-      )
+      errorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
+
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -205,16 +203,16 @@ export default function warrantExecutionRoutes(
         res.locals.user.username,
       )
     } catch (error) {
-      errorMessages = handleIntegrationErrors(error.responseStatus, error.data?.message, 'NDelius Integration')
-
+      errorMessages = handleIntegrationErrors(error, 'NDelius Integration')
+      const httpError: IntegrationError = error as unknown as IntegrationError
       // take the user to detailed error page for 400 type errors
-      if (error.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // stay on the current page for 500 errors
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/basic-details`, { errorMessages, showEmbeddedError })
         return
@@ -224,7 +222,9 @@ export default function warrantExecutionRoutes(
     }
 
     if (req.body.action === 'clear-signature') {
+      // @ts-expect-error: Should
       warrantRiskAssessment.signature = null
+      // @ts-expect-error: Should
       warrantRiskAssessment.sheetSentBy = null
       await warrantRiskAssessmentApiClient.updateWarrantRiskAssessment(
         req.params.id,
@@ -302,17 +302,15 @@ export default function warrantExecutionRoutes(
         warrantRiskAssessment.probationArea = signAndSendDetails.responsibleOfficer.probationArea.description
       }
 
-      const { warrantRiskAssessment: preparedWarrantRiskAssessment, errorMessages: preparedErrorMessages } =
-        await prepareWorkAddressContext(
-          warrantRiskAssessment,
-          signAndSendDetails,
-          warrantRiskAssessmentId,
-          warrantRiskAssessmentApiClient,
-          res.locals.user.username,
-          errorMessages,
-        )
+      const { warrantRiskAssessment: preparedWarrantRiskAssessment } = await prepareWorkAddressContext(
+        warrantRiskAssessment,
+        signAndSendDetails,
+        warrantRiskAssessmentId,
+        warrantRiskAssessmentApiClient,
+        res.locals.user.username,
+        errorMessages,
+      )
       warrantRiskAssessment = preparedWarrantRiskAssessment
-      errorMessages = preparedErrorMessages
 
       warrantRiskAssessment = handleSelectedAddress(warrantRiskAssessment, signAndSendDetails, req)
 
@@ -334,11 +332,7 @@ export default function warrantExecutionRoutes(
           res.redirect(`/check-your-answers/${warrantRiskAssessmentId}`)
         }
       } catch (error) {
-        errorMessages = handleIntegrationErrors(
-          error?.responseStatus,
-          error?.data?.userMessage,
-          'Warrant Risk Assessment',
-        )
+        errorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
         const showEmbeddedError = true
         res.render(`pages/warrant-execution`, { errorMessages, showEmbeddedError })
       }
@@ -348,7 +342,7 @@ export default function warrantExecutionRoutes(
   function addressListToSelectItemList(
     addresses: DeliusAddress[],
     breachNoticeSaved: boolean,
-    selectedAddressId: number,
+    selectedAddressId: number | null | undefined,
   ): SelectItem[] {
     const returnAddressList: SelectItem[] = [
       {
@@ -488,7 +482,7 @@ export default function warrantExecutionRoutes(
     return signature
   }
 
-  function getSelectedAddress(addressList: DeliusAddress[], addressIdentifier: string): DeliusAddress {
+  function getSelectedAddress(addressList: DeliusAddress[], addressIdentifier: string) {
     if (addressIdentifier && addressIdentifier.length > 0) {
       const addressIdentifierNumber: number = +addressIdentifier
       if (addressList && Object.keys(addressList).length > 0) {

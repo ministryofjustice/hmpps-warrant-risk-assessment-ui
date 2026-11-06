@@ -4,6 +4,7 @@ import AuditService, { Page } from '../services/auditService'
 import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
 import WarrantRiskAssessmentApiClient from '../data/warrantRiskAssessmentApiClient'
+import { IntegrationError } from '../data/ndeliusIntegrationApiClient'
 
 export default function confirmDeleteRoutes(
   router: Router,
@@ -39,14 +40,11 @@ export default function confirmDeleteRoutes(
           res.locals.user.username,
         )
       } catch (error) {
-        const errorMessages: ErrorMessages = handleIntegrationErrors(
-          error.status,
-          error.data?.message,
-          'Warrant Risk Assessment',
-        )
+        const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
         const showEmbeddedError = true
+        const httpError: IntegrationError = error as unknown as IntegrationError
         // take the user to detailed error page for 404
-        if (error.responseStatus === 404 || error.status === 404) {
+        if (httpError.responseStatus === 404) {
           res.render(`pages/detailed-error`, { errorMessages })
           return
         }

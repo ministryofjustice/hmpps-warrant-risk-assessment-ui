@@ -8,6 +8,7 @@ import WarrantRiskAssessmentApiClient, { WarrantRiskAssessment } from '../data/w
 import AssessRiskAndNeedsApiClient, { AllRoshRisk } from '../data/assessRiskAndNeedsApiClient'
 import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
+import { IntegrationError } from '../data/ndeliusIntegrationApiClient'
 
 interface DisplayField {
   label: string
@@ -35,8 +36,8 @@ export default function riskSummaryRoutes(
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
     const arnsApiClient = new AssessRiskAndNeedsApiClient(authenticationClient)
     const callingScreen: string = req.query.returnTo as string
-    let warrantRiskAssessment: WarrantRiskAssessment = null
-    let arnsRiskAssessment: AllRoshRisk = null
+    let warrantRiskAssessment: WarrantRiskAssessment
+    let arnsRiskAssessment: AllRoshRisk
 
     try {
       warrantRiskAssessment = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(
@@ -52,20 +53,17 @@ export default function riskSummaryRoutes(
         return
       }
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Warrant Risk Assessment',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -78,16 +76,17 @@ export default function riskSummaryRoutes(
     try {
       arnsRiskAssessment = await arnsApiClient.getRisks(warrantRiskAssessment.crn, res.locals.user.username)
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(error.responseStatus, error.data?.message, 'ARNS')
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'ARNS')
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // take the user to detailed error page for 400 type errors
-      if (error.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // stay on the current page for 500 errors
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/risk-assessment`, { errorMessages, showEmbeddedError })
         return
@@ -123,7 +122,7 @@ export default function riskSummaryRoutes(
     const warrantRiskAssessmentId: string = req.params.id
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
     const callingScreen: string = req.query.returnTo as string
-    let warrantRiskAssessment: WarrantRiskAssessment = null
+    let warrantRiskAssessment: WarrantRiskAssessment
 
     try {
       warrantRiskAssessment = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(
@@ -139,20 +138,18 @@ export default function riskSummaryRoutes(
         return
       }
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Warrant Risk Assessment',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
+
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -190,11 +187,7 @@ export default function riskSummaryRoutes(
           res.redirect(`/warrant-execution/${warrantRiskAssessmentId}`)
         }
       } catch (error) {
-        const errorMessages: ErrorMessages = handleIntegrationErrors(
-          error?.responseStatus,
-          error?.data?.userMessage,
-          'Warrant Risk Assessment',
-        )
+        const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
         const showEmbeddedError = true
         res.render(`pages/risk-summary`, { errorMessages, showEmbeddedError })
       }
@@ -225,7 +218,7 @@ export default function riskSummaryRoutes(
       .filter(({ label }) => labels.includes(label))
       .map(({ label, group }) => ({
         label,
-        value: toRiskValueString(Object.entries(risk).find(([_, people]) => people.includes(group))?.[0]),
+        value: toRiskValueString(Object.entries(risk).find(([_, people]) => people?.includes(group))?.[0]),
       }))
   }
 
