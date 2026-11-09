@@ -40,11 +40,7 @@ export default function eventTerminatedRoutes(
         }
         await warrantRiskAssessmentApiClient.deleteWarrantRiskAssessment(id as string, res.locals.user.username)
       } catch (error) {
-        const errorMessages: ErrorMessages = handleIntegrationErrors(
-          error.responseStatus,
-          error.data?.message,
-          'Warrant Risk Assessment',
-        )
+        const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
         const showEmbeddedError = true
         res.render(`pages/detailed-error`, { errorMessages, showEmbeddedError })
         return

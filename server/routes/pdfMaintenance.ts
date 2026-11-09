@@ -34,11 +34,7 @@ export default function pdfMaintenanceRoutes(
       )
       res.send(stream)
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error.status,
-        error.data?.message,
-        'NDelius Integration',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'NDelius Integration')
 
       res.render(`pages/pdf-generation-failed`, { errorMessages })
     }

@@ -7,6 +7,7 @@ import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
 import WarrantRiskAssessmentApiClient, { WarrantRiskAssessment } from '../data/warrantRiskAssessmentApiClient'
 import { OSPlacesAPIClient, OSPlacesFindResponse, OSPlacesResult } from '../data/osPlacesApiClient'
+import { IntegrationError } from '../data/ndeliusIntegrationApiClient'
 
 export default function addressSearchRoutes(
   router: Router,
@@ -21,7 +22,7 @@ export default function addressSearchRoutes(
     await auditService.logPageView(Page.ADDRESS_SEARCH, { who: res.locals.user.username, correlationId: req.id })
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
     const warrantRiskAssessmentId: string = req.params.id
-    let warrantRiskAssessment: WarrantRiskAssessment = null
+    let warrantRiskAssessment: WarrantRiskAssessment
 
     try {
       warrantRiskAssessment = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(
@@ -37,20 +38,18 @@ export default function addressSearchRoutes(
         return
       }
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Warrant Risk Assessment',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
+
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -73,8 +72,8 @@ export default function addressSearchRoutes(
   router.post('/address-search/:id', async (req, res) => {
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
     const warrantRiskAssessmentId: string = req.params.id
-    let warrantRiskAssessment: WarrantRiskAssessment = null
-    let searchResults: OSPlacesFindResponse = null
+    let warrantRiskAssessment: WarrantRiskAssessment
+    let searchResults: OSPlacesFindResponse
 
     try {
       warrantRiskAssessment = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(
@@ -90,20 +89,16 @@ export default function addressSearchRoutes(
         return
       }
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Warrant Risk Assessment',
-      )
-
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
+      const httpError: IntegrationError = error as unknown as IntegrationError
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -121,7 +116,7 @@ export default function addressSearchRoutes(
     if (req.body.action === 'search') {
       try {
         let addressRadioItems: { value: string; text: string }[]
-        let filteredResults: OSPlacesResult[]
+        let filteredResults: OSPlacesResult[] = []
         if (req.body.searchTerm && req.body.searchTerm.trim() !== '') {
           searchResults = await osPlacesApiClient.find(`jobcentre plus, ${req.body.searchTerm}`)
           const normalisedSearchTerm = String(req.body.searchTerm || '')
@@ -160,7 +155,7 @@ export default function addressSearchRoutes(
         })
       } catch (error) {
         const showEmbeddedError = true
-        errorMessages = handleIntegrationErrors(error?.responseStatus, error?.data?.userMessage, 'OS Places API')
+        errorMessages = handleIntegrationErrors(error, 'OS Places API')
         res.render('pages/address-search', { errorMessages, showEmbeddedError, warrantRiskAssessmentId, currentPage })
       }
       return
@@ -169,19 +164,19 @@ export default function addressSearchRoutes(
     const filteredResults: OSPlacesResult[] = req.body.filteredResults ? JSON.parse(req.body.filteredResults) : []
 
     if (req.body.addressRadio) {
-      const matchingAddress = filteredResults.find(addr => req.body.addressRadio === addr.DPA.UPRN)
+      const matchingAddress = filteredResults.find(addr => req.body.addressRadio === addr?.DPA?.UPRN)
       warrantRiskAssessment.signOnOffice = {
         deliusAddressId: null,
-        buildingName: matchingAddress.DPA.BUILDING_NAME,
-        addressNumber: matchingAddress.DPA.BUILDING_NUMBER?.toString() ?? null,
-        officeDescription: matchingAddress.DPA.ORGANISATION_NAME,
+        buildingName: matchingAddress?.DPA?.BUILDING_NAME,
+        addressNumber: matchingAddress?.DPA?.BUILDING_NUMBER?.toString() ?? null,
+        officeDescription: matchingAddress?.DPA?.ORGANISATION_NAME,
         // county: matchingAddress.DPA.LOCAL_CUSTODIAN_CODE_DESCRIPTION?.replace(/county$/i, '').trim() ?? null,
         county: null,
         status: null,
-        streetName: matchingAddress.DPA.THOROUGHFARE_NAME,
+        streetName: matchingAddress?.DPA?.THOROUGHFARE_NAME,
         district: null,
-        postcode: matchingAddress.DPA.POSTCODE,
-        townCity: matchingAddress.DPA.POST_TOWN,
+        postcode: matchingAddress?.DPA?.POSTCODE,
+        townCity: matchingAddress?.DPA?.POST_TOWN,
         warrantRiskAssessmentId,
         screen: '',
       }
@@ -193,11 +188,7 @@ export default function addressSearchRoutes(
         )
         res.redirect(`/add-dwp-address/${req.params.id}`)
       } catch (error) {
-        const integrationErrorMessages = handleIntegrationErrors(
-          error.status,
-          error.data?.message,
-          'Warrant Risk Assessment',
-        )
+        const integrationErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
         const showEmbeddedError = true
         res.render(`pages/address-search`, { errorMessages, showEmbeddedError, integrationErrorMessages })
       }

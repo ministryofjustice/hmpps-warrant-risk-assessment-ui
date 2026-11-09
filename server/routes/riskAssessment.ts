@@ -3,7 +3,7 @@ import { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import AuditService, { Page } from '../services/auditService'
 
 import WarrantRiskAssessmentApiClient, { WarrantRiskAssessment } from '../data/warrantRiskAssessmentApiClient'
-import NDeliusIntegrationApiClient, { RiskAssessment } from '../data/ndeliusIntegrationApiClient'
+import NDeliusIntegrationApiClient, { IntegrationError, RiskAssessment } from '../data/ndeliusIntegrationApiClient'
 import { ErrorMessages } from '../data/uiModels'
 import { handleIntegrationErrors } from '../utils/utils'
 import CommonUtils from '../services/commonUtils'
@@ -15,8 +15,8 @@ import AssessRiskAndNeedsApiClient, {
 import { toFullUserDate } from '../utils/dateUtils'
 
 interface DisplayField {
-  label: string
-  value: string
+  label: string | null | undefined
+  value: string | null | undefined
 }
 
 export default function riskAssessmentRoutes(
@@ -41,11 +41,11 @@ export default function riskAssessmentRoutes(
     const arnsApiClient = new AssessRiskAndNeedsApiClient(authenticationClient)
     const warrantRiskAssessmentId: string = req.params.id
     const callingScreen: string = req.query.returnTo as string
-    let warrantRiskAssessment: WarrantRiskAssessment = null
-    let arnsRiskAssessment: AllRoshRisk = null
-    let arnsAssessmentOffence: AssessmentOffence = null
-    let arnsNeeds: AssessmentNeeds = null
-    let deliusRiskAssessment: RiskAssessment = null
+    let warrantRiskAssessment: WarrantRiskAssessment
+    let arnsRiskAssessment: AllRoshRisk
+    let arnsAssessmentOffence: AssessmentOffence
+    let arnsNeeds: AssessmentNeeds
+    let deliusRiskAssessment: RiskAssessment
 
     try {
       warrantRiskAssessment = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(
@@ -61,20 +61,16 @@ export default function riskAssessmentRoutes(
         return
       }
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Warrant Risk Assessment',
-      )
-
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
+      const httpError: IntegrationError = error as unknown as IntegrationError
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -92,16 +88,17 @@ export default function riskAssessmentRoutes(
       )
       arnsNeeds = await arnsApiClient.getNeeds(warrantRiskAssessment.crn, res.locals.user.username)
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(error.responseStatus, error.data?.message, 'ARNS')
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'ARNS')
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // take the user to detailed error page for 400 type errors
-      if (error.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // stay on the current page for 500 errors
-      if (error.responseStatus === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/risk-assessment`, { errorMessages, showEmbeddedError })
         return
@@ -118,18 +115,16 @@ export default function riskAssessmentRoutes(
       )
     } catch (error) {
       // get risk assessment from assess risk and needs service
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error.status,
-        error.data?.message,
-        'NDelius Integration',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'NDelius Integration')
+
+      const httpError: IntegrationError = error as unknown as IntegrationError
       // take the user to detailed error page for 400 type errors
-      if (error.status === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
       // stay on the current page for 500 errors
-      if (error.status === 500) {
+      if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/information`, { errorMessages, showEmbeddedError })
         return
@@ -183,7 +178,7 @@ export default function riskAssessmentRoutes(
     const warrantRiskAssessmentApiClient = new WarrantRiskAssessmentApiClient(authenticationClient)
     const warrantRiskAssessmentId: string = req.params.id
     const callingScreen: string = req.query.returnTo as string
-    let warrantRiskAssessment: WarrantRiskAssessment = null
+    let warrantRiskAssessment: WarrantRiskAssessment
 
     try {
       warrantRiskAssessment = await warrantRiskAssessmentApiClient.getWarrantRiskAssessmentById(
@@ -199,20 +194,18 @@ export default function riskAssessmentRoutes(
         return
       }
     } catch (error) {
-      const errorMessages: ErrorMessages = handleIntegrationErrors(
-        error?.responseStatus,
-        error?.data?.userMessage,
-        'Warrant Risk Assessment',
-      )
+      const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'Warrant Risk Assessment')
+
+      const httpError: IntegrationError = error as unknown as IntegrationError
 
       // Navigate to the detailed error page on 400
-      if (error?.responseStatus === 400) {
+      if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
 
       // Navigate to the detailed error page on 404
-      if (error?.responseStatus === 404) {
+      if (httpError.responseStatus === 404) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
       }
@@ -365,7 +358,7 @@ export default function riskAssessmentRoutes(
   function generateRiskLevelFields(risk: Partial<Record<string, string[]>>): DisplayField[] {
     return riskGroups.map(({ label, group }) => ({
       label,
-      value: toRiskValueString(Object.entries(risk).find(([_, people]) => people.includes(group))?.[0]),
+      value: toRiskValueString(Object.entries(risk).find(([_, people]) => people?.includes(group))?.[0]),
     }))
   }
 

@@ -9,7 +9,6 @@ import type { Services } from '../../services'
 import AuditService from '../../services/auditService'
 import { HmppsUser } from '../../interfaces/hmppsUser'
 import setUpWebSession from '../../middleware/setUpWebSession'
-import type { ApplicationInfo } from '../../applicationInfo'
 
 jest.mock('../../services/auditService')
 
@@ -23,15 +22,6 @@ export const user: HmppsUser = {
   authSource: 'nomis',
   staffId: 1234,
   userRoles: [],
-}
-
-const applicationInfo: ApplicationInfo = {
-  applicationName: 'hmpps-warrant-risk-assessment-ui',
-  buildNumber: '1',
-  gitRef: 'https://github.com/ministryofjustice/hmpps-warrant-risk-assessment-ui',
-  gitShortHash: 'a3ca835',
-  productId: 'WRA',
-  branchName: 'main',
 }
 
 export const flashProvider = jest.fn()
@@ -51,13 +41,15 @@ function appSetup(services: Services, production: boolean, userSupplier: () => H
     }
     next()
   })
+
   app.use((req, res, next) => {
     req.id = randomUUID()
     next()
   })
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
-  app.use(routes({ applicationInfo, ...services } as Services))
+  app.use(routes(services))
+
   app.use((req, res, next) => next(new NotFound()))
   app.use(errorHandler(production))
 
@@ -67,6 +59,7 @@ function appSetup(services: Services, production: boolean, userSupplier: () => H
 export function appWithAllRoutes({
   production = false,
   services = {
+    // @ts-expect-error: Should always have everything required
     auditService: new AuditService(null) as jest.Mocked<AuditService>,
   },
   userSupplier = () => user,

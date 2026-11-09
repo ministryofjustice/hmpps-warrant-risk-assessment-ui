@@ -1,4 +1,3 @@
-/* eslint-disable import/first */
 /*
  * Do appinsights first as it does some magic instrumentation work, i.e. it affects other 'require's
  * In particular, applicationinsights automatically collects bunyan logs
@@ -6,13 +5,13 @@
 import { AuthenticationClient, InMemoryTokenStore, RedisTokenStore } from '@ministryofjustice/hmpps-auth-clients'
 import applicationInfoSupplier from '../applicationInfo'
 
-const applicationInfo = applicationInfoSupplier()
-
 import { createRedisClient } from './redisClient'
 import config from '../config'
 import HmppsAuditClient from './hmppsAuditClient'
 import { OSPlacesAPIClient } from './osPlacesApiClient'
 import logger from '../../logger'
+
+const applicationInfo = applicationInfoSupplier()
 
 export const dataAccess = () => {
   const hmppsAuthClient = new AuthenticationClient(

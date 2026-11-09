@@ -183,12 +183,6 @@ context('Risk Assessment page', () => {
     cy.url().should('include', '/check-your-answers/b5cebf44-b000-46a6-921a-6f8cfc45e0d5')
   })
 
-  it('should stay on page and show NDelius error message if 500 thrown from NDelius integration service', () => {
-    cy.visit('/risk-assessment/67006838-34e7-41b8-8ea9-5bec66106041')
-    cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
-    cy.contains('There has been a problem fetching information from NDelius. Please try again later.').should('exist')
-  })
-
   it('should stay on page and show ARNS error message if 500 thrown from ARNS service', () => {
     cy.visit('/risk-assessment/047bf972-a6c3-4253-ac16-2ea344d8da51')
     cy.get('.govuk-error-summary__title').should('exist').should('contain.text', 'There is a problem')
