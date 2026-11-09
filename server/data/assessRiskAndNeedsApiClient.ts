@@ -1,4 +1,4 @@
-import { asSystem, RestClient } from '@ministryofjustice/hmpps-rest-client'
+import { asUser, RestClient } from '@ministryofjustice/hmpps-rest-client'
 import type { AuthenticationClient } from '@ministryofjustice/hmpps-auth-clients'
 import config from '../config'
 import logger from '../../logger'
@@ -8,39 +8,39 @@ export default class AssessRiskAndNeedsApiClient extends RestClient {
     super('Assess Risks and Needs API', config.apis.assessRisksAndNeeds, logger, authenticationClient)
   }
 
-  async getRisksFullText(crn: string, username: string): Promise<AllRoshRisk> {
+  async getRisksFullText(crn: string, token: string): Promise<AllRoshRisk> {
     return this.get(
       {
         path: `/risks/crn/${crn}/fulltext`,
       },
-      asSystem(username),
+      asUser(token),
     )
   }
 
-  async getAssessmentOffences(crn: string, username: string): Promise<AssessmentOffence> {
+  async getAssessmentOffences(crn: string, token: string): Promise<AssessmentOffence> {
     return this.get(
       {
         path: `/assessments/crn/${crn}/offence`,
       },
-      asSystem(username),
+      asUser(token),
     )
   }
 
-  async getNeeds(crn: string, username: string): Promise<AssessmentNeeds> {
+  async getNeeds(crn: string, token: string): Promise<AssessmentNeeds> {
     return this.get(
       {
         path: `/needs/crn/${crn}`,
       },
-      asSystem(username),
+      asUser(token),
     )
   }
 
-  async getRisks(crn: string, username: string): Promise<AllRoshRisk> {
+  async getRisks(crn: string, token: string): Promise<AllRoshRisk> {
     return this.get(
       {
         path: `/risks/crn/${crn}`,
       },
-      asSystem(username),
+      asUser(token),
     )
   }
 }

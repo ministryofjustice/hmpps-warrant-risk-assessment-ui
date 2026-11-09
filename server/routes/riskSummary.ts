@@ -74,7 +74,7 @@ export default function riskSummaryRoutes(
     }
 
     try {
-      arnsRiskAssessment = await arnsApiClient.getRisks(warrantRiskAssessment.crn, res.locals.user.username)
+      arnsRiskAssessment = await arnsApiClient.getRisks(warrantRiskAssessment.crn, res.locals.user.token)
     } catch (error) {
       const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'ARNS')
       const httpError: IntegrationError = error as unknown as IntegrationError
