@@ -81,12 +81,12 @@ export default function riskAssessmentRoutes(
     }
 
     try {
-      arnsRiskAssessment = await arnsApiClient.getRisksFullText(warrantRiskAssessment.crn, res.locals.user.username)
+      arnsRiskAssessment = await arnsApiClient.getRisksFullText(warrantRiskAssessment.crn, res.locals.user.token)
       arnsAssessmentOffence = await arnsApiClient.getAssessmentOffences(
         warrantRiskAssessment.crn,
-        res.locals.user.username,
+        res.locals.user.token,
       )
-      arnsNeeds = await arnsApiClient.getNeeds(warrantRiskAssessment.crn, res.locals.user.username)
+      arnsNeeds = await arnsApiClient.getNeeds(warrantRiskAssessment.crn, res.locals.user.token)
     } catch (error) {
       const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'ARNS')
       const httpError: IntegrationError = error as unknown as IntegrationError
