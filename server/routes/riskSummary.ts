@@ -79,20 +79,19 @@ export default function riskSummaryRoutes(
       const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'ARNS')
       const httpError: IntegrationError = error as unknown as IntegrationError
 
-      // take the user to detailed error page for 400 type errors
-      if (httpError.responseStatus === 400) {
+      if (httpError.responseStatus === 404) {
+        arnsRiskAssessment = {} as AllRoshRisk
+      } else if (httpError.responseStatus === 400) {
         res.render(`pages/detailed-error`, { errorMessages })
         return
-      }
-
-      // stay on the current page for 500 errors
-      if (httpError.responseStatus === 500) {
+      } else if (httpError.responseStatus === 500) {
         const showEmbeddedError = true
         res.render(`pages/risk-assessment`, { errorMessages, showEmbeddedError })
         return
+      } else {
+        res.render(`pages/detailed-error`, { errorMessages })
+        return
       }
-      res.render(`pages/detailed-error`, { errorMessages })
-      return
     }
 
     if (await commonUtils.redirectRequired(warrantRiskAssessment, warrantRiskAssessmentId, res, authenticationClient))
