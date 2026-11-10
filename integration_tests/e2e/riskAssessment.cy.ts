@@ -216,4 +216,28 @@ context('Risk Assessment page', () => {
       'An unexpected 400 type error has occurred. Please contact the service desk and report this error.',
     ).should('exist')
   })
+
+  it('should display page with no errors if 404 error returned from ARNS service', () => {
+    cy.visit('/risk-assessment/8eb7596e-a8b2-4fd4-a517-68ec2e26fdb7')
+    cy.url().should('include', '/risk-assessment')
+    cy.get('.govuk-error-summary__title').should('not.exist')
+    cy.contains(
+      'There has been a problem fetching information from Assess Risk and Needs Service. Please try again later.',
+    ).should('not.exist')
+    cy.get('#page-title').should('contain.text', 'Risk assessment')
+    cy.get('#mappaDetails .govuk-details__summary-text').click()
+    cy.get('#mappaDetails .govuk-details__text').should('contain.text', 'None found')
+    cy.get('#seriousHarmDetails .govuk-details__summary-text').click()
+    cy.get('#seriousHarmDetails .govuk-details__text').should('contain.text', 'None found')
+    cy.get('#abscondingDetails .govuk-details__summary-text').click()
+    cy.get('#abscondingDetails .govuk-details__text').should('contain.text', 'None found')
+    cy.get('#vulnerabilityDetails .govuk-details__summary-text').click()
+    cy.get('#vulnerabilityDetails .govuk-details__text').should('contain.text', 'None found')
+    cy.get('#weaponDetails .govuk-details__summary-text').click()
+    cy.get('#weaponDetails .govuk-details__text').should('contain.text', 'None found')
+    cy.get('#policeDetails .govuk-details__summary-text').click()
+    cy.get('#policeDetails .govuk-details__text').should('contain.text', 'None found')
+    cy.get('#drugDetails .govuk-details__summary-text').click()
+    cy.get('#drugDetails .govuk-details__text').should('contain.text', 'None found')
+  })
 })

@@ -113,26 +113,28 @@
           "lastHomeVisitDate": "2025-03-17",
           "dateOfBirth": "1980-03-17",
           "addresses": [],
-          "employers": {
-            "employerName": {
-              "forename": "Not",
-              "middleName": "Nice",
-              "surname": "Officer"
-            },
-            "telephoneNumber": "01332453294",
-            "mobileNumber": "07707123456",
-            "employerAddress": {
-              "id": 5,
-              "status": "Main",
-              "buildingName": null,
-              "buildingNumber": "19",
-              "streetName": "Employer Street",
-              "townCity": "Employer City",
-              "district": "Emptrict",
-              "county": "Emplounty",
-              "postcode": "EM07 YER"
+          "employers": [
+            {
+              "employerName": {
+                "forename": "Not",
+                "middleName": "Nice",
+                "surname": "Officer"
+              },
+              "telephoneNumber": "01332453294",
+              "mobileNumber": "07707123456",
+              "employerAddress": {
+                "id": 5,
+                "status": "Main",
+                "buildingName": null,
+                "buildingNumber": "19",
+                "streetName": "Employer Street",
+                "townCity": "Employer City",
+                "district": "Emptrict",
+                "county": "Emplounty",
+                "postcode": "EM07 YER"
+              }
             }
-          }
+          ]
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"
@@ -398,6 +400,71 @@
         "status": 400,
         "jsonBody": {
           "message": "CRN not found"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/basic-details/Z000004",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "title": "Mr",
+          "nationalInsuranceNumber": "XX000000X",
+          "emailAddress": "test@test.com",
+          "mobileNumber": "07707123456",
+          "telephoneNumber": "01912525252",
+          "name": {
+            "forename": "Billy",
+            "middleName": "The",
+            "surname": "Kid"
+          },
+          "lastHomeVisitDate": "2025-03-17",
+          "dateOfBirth": "1980-03-17",
+          "addresses": [],
+          "employers": [
+            {
+              "employerName": {
+                "forename": "Not",
+                "middleName": "Nice",
+                "surname": "Officer"
+              },
+              "telephoneNumber": "01332453294",
+              "mobileNumber": "07707123456",
+              "employerAddress": {
+                "id": 5,
+                "status": "Main",
+                "buildingName": null,
+                "buildingNumber": "19",
+                "streetName": "Employer Street",
+                "townCity": "Employer City",
+                "district": "Emptrict",
+                "county": "Emplounty",
+                "postcode": "EM07 YER"
+              }
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/mappa-information/Z000004",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "subjectOfMappaProcedures": true,
+          "mappaRegistration": null
         },
         "headers": {
           "Content-Type": "application/json;charset=UTF-8"

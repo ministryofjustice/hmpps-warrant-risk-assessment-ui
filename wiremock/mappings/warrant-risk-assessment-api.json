@@ -2528,6 +2528,42 @@
         },
         "transformers": ["response-template"]
       }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/8eb7596e-a8b2-4fd4-a517-68ec2e26fdb7",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "8eb7596e-a8b2-4fd4-a517-68ec2e26fdb7",
+          "crn": "Z000004",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
+    },
+    {
+      "request": {
+        "url": "/warrant-risk-assessment-api/warrant-risk-assessment/5e37396c-134d-4abf-a67a-054d46002a64",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": "5e37396c-134d-4abf-a67a-054d46002a64",
+          "crn": "Z000004",
+          "completedDate": null
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        "transformers": ["response-template"]
+      }
     }
   ]
 }
