@@ -673,7 +673,7 @@
                     Responsible officer telephone number
                   </dt>
                   <dd class="govuk-summary-list__value">
-                    {% if warrantRiskAssessment.responsibleOfficerTelephoneNumer == null and warrantRiskAssessment.signAndSendSaved %}
+                    {% if not warrantRiskAssessment.responsibleOfficerTelephoneNumer and warrantRiskAssessment.signAndSendSaved %}
                       <a id="cya-link-responsible-officer-telephone"
                          href="/warrant-execution/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
                          class="govuk-link">enter required
@@ -685,7 +685,7 @@
                     {% endif %}
                   </dd>
                   <dd class="govuk-summary-list__actions">
-                    {% if warrantRiskAssessment.responsibleOfficerTelephoneNumer == null %}
+                    {% if not warrantRiskAssessment.responsibleOfficerTelephoneNumer %}
                       <span class="govuk-tag--light-blue">
                             Required
                       </span>

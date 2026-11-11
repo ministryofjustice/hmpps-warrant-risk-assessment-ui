@@ -403,6 +403,50 @@
           "Content-Type": "application/json;charset=UTF-8"
         }
       }
+    },
+    {
+      "request": {
+        "urlPattern": "/ndelius/sign-and-send/X000005/(.*?)",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "userDetails": {
+            "forenames": "UserSignForename UserSignMiddle",
+            "surname": "UserSignSurname"
+          },
+          "responsibleOfficer": {
+            "name": {
+              "forename": "NotSo",
+              "middleName": "Nice",
+              "surname": "Officer"
+            },
+            "telephoneNumber": null,
+            "probationArea": {
+              "code": "N01",
+              "description": "Northumbria"
+            },
+            "replyAddresses": [
+              {
+                "id": 42,
+                "status": "Main",
+                "officeDescription": "Other Work Location",
+                "buildingName": "Other Building",
+                "buildingNumber": "2",
+                "streetName": "Other Street",
+                "townCity": "Other Town",
+                "district": "Other District",
+                "county": "Other County",
+                "postcode": "OT2 2BB"
+              }
+            ]
+          }
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
     }
   ]
 }

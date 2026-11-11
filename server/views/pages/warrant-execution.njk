@@ -10,10 +10,12 @@
   {% from "govuk/components/button/macro.njk" import govukButton %}
   {% from "govuk/components/select/macro.njk" import govukSelect %}
   {% from "govuk/components/radios/macro.njk" import govukRadios %}
+  {% from "govuk/components/input/macro.njk" import govukInput %}
 
   <form method="post">
     {% set errorList =[
       { text: errorMessages.sentByResponsibleOfficerOrUser.text, href: "#whoIsSendingTheForm" } if errorMessages.sentByResponsibleOfficerOrUser else None,
+      { text: errorMessages.phoneNumber.text, href: "#phoneNumber" } if errorMessages.phoneNumber else None,
       { text: errorMessages.missingPreviouslySelectedAddress.text, href: "#workAddressHeading" } if errorMessages.missingPreviouslySelectedAddress else None,
       { text: errorMessages.genericErrorMessage.text, href: "#" } if errorMessages.genericErrorMessage else None
     ] | reject("undefined") %}
@@ -149,8 +151,26 @@
             {% endif %}
           {% endif %}
 
-          <h2 class="govuk-heading-m">Phone number</h2>
-          <p id="name">{{ warrantRiskAssessment.responsibleOfficerTelephoneNumer }}</p>
+
+          {% if displayCustomNumber %}
+            {{ govukInput({
+              label: {
+                text: "Telephone number",
+                classes: "govuk-label--m",
+                isPageHeading: false
+              },
+              id: "telephoneNumberInput",
+              value: warrantRiskAssessment.responsibleOfficerTelephoneNumer,
+              classes: "govuk-input--width-30",
+              name: "telephoneNumberInput",
+              errorMessage: {
+                text: errorMessages.phoneNumber.text
+              } if errorMessages.phoneNumber
+            }) }}
+            {% else %}
+              <h2 class="govuk-heading-m">Telephone number</h2>
+              <p id="telephoneNumber">{{ warrantRiskAssessment.responsibleOfficerTelephoneNumer }}</p>
+          {% endif %}
 
           {% if warrantRiskAssessment.signature == null %}
             {{ govukRadios({
