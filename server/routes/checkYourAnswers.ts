@@ -100,6 +100,8 @@ export default function checkYourAnswersRoutes(
       warrantRiskAssessment.riskToPolice?.trim().length > 0 &&
       warrantRiskAssessment.responsibleOfficerFullName?.trim().length > 0 &&
       warrantRiskAssessment.probationArea?.trim().length > 0 &&
+      warrantRiskAssessment.responsibleOfficerTelephoneNumer?.trim().length > 0 &&
+      warrantRiskAssessment.workAddress != null &&
       warrantRiskAssessment.signature?.trim().length > 0
     )
   }
