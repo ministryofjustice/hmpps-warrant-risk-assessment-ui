@@ -32,7 +32,7 @@ context('Warrant Execution Page', () => {
     cy.contains('NotSo Nice Officer').should('exist')
     cy.contains('Provider').should('exist')
     cy.contains('Northumbria').should('exist')
-    cy.contains('Phone number').should('exist')
+    cy.contains('Telephone number').should('exist')
     cy.contains('07707123456').should('exist')
   })
 
@@ -182,5 +182,38 @@ context('Warrant Execution Page', () => {
     cy.contains(
       'An unexpected 400 type error has occurred. Please contact the service desk and report this error.',
     ).should('exist')
+  })
+
+  it('telephone number should display when a number is returned from the API', () => {
+    cy.visit('/warrant-execution/5335a6b2-4ef4-419a-ab9a-a22bbe92d813')
+    cy.get('#page-title').should('contain.text', 'Warrant execution and sign off')
+    cy.get('#telephoneNumber').should('exist')
+    cy.get('#telephoneNumber').should('contain.text', '07707123456')
+    cy.get('#telephoneNumberInput').should('not.exist')
+  })
+
+  it('telephone number should display input field when no number is returned from the API and populate with existing WRA field', () => {
+    cy.visit('/warrant-execution/4e39253c-c566-449c-9128-b84582b0ffc7')
+    cy.get('#page-title').should('contain.text', 'Warrant execution and sign off')
+    cy.get('#telephoneNumber').should('not.exist')
+    cy.get('#telephoneNumberInput').should('exist')
+    cy.get('#telephoneNumberInput').should('have.value', '07912345678')
+  })
+
+  it('validation error should display when telephone number is too long', () => {
+    cy.visit('/warrant-execution/685fc149-72d2-4832-8e04-6689560394d4')
+    cy.get('#telephoneNumberInput').type('1234567890123456789012345678901234567890')
+    cy.get('#continue-button').click()
+    cy.get('.govuk-error-summary__title').should('contain.text', 'There is a problem')
+    cy.contains('Please enter a value that is less than or equal to 35 characters for Telephone number').should('exist')
+  })
+
+  it('telephone number should save correctly when entered and continue is clicked', () => {
+    cy.intercept('POST', '/warrant-execution/**').as('formSubmit')
+    cy.visit('/warrant-execution/1ec0d4cc-34a4-4370-96e5-767a7e6021ff')
+    cy.get('#telephoneNumberInput').type('12345678901')
+    cy.get('#continue-button').click()
+    cy.wait('@formSubmit')
+    cy.url().should('include', '/check-your-answers/1ec0d4cc-34a4-4370-96e5-767a7e6021ff')
   })
 })

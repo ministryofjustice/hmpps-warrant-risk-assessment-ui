@@ -635,7 +635,12 @@
                     Office
                   </dt>
                   <dd class="govuk-summary-list__value">
-                    {% if warrantRiskAssessment.workAddress != null %}
+                    {% if warrantRiskAssessment.workAddress == null and warrantRiskAssessment.signAndSendSaved %}
+                    <a id="cya-link-officer-work-address"
+                       href="/warrant-execution/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                       class="govuk-link">enter required
+                      information<span class="govuk-visually-hidden"> for officer work address</span></a>
+                    {% else %}
                       <p id="cya-officer-work-address">
                         {% if warrantRiskAssessment.workAddress.officeDescription %} {{ warrantRiskAssessment.workAddress.officeDescription }}
                           <br />{% endif %}
@@ -654,14 +659,37 @@
                       </p>
                     {% endif %}
                   </dd>
+                  <dd class="govuk-summary-list__actions">
+                    {% if warrantRiskAssessment.workAddress == null %}
+                      <span class="govuk-tag--light-blue">
+                            Required
+                      </span>
+                    {% endif %}
+                  </dd>
                 </div>
 
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
                     Responsible officer telephone number
                   </dt>
-                  <dd id="cya-responsible-officer-telephone" class="govuk-summary-list__value">
-                    {{ warrantRiskAssessment.responsibleOfficerTelephoneNumer }}
+                  <dd class="govuk-summary-list__value">
+                    {% if not warrantRiskAssessment.responsibleOfficerTelephoneNumer and warrantRiskAssessment.signAndSendSaved %}
+                      <a id="cya-link-responsible-officer-telephone"
+                         href="/warrant-execution/{{ warrantRiskAssessmentId }}?returnTo=check-your-answers"
+                         class="govuk-link">enter required
+                        information<span class="govuk-visually-hidden"> for responsible officer telephone number</span></a>
+                    {% else %}
+                      <span id="cya-responsible-officer-telephone">
+                          {{ warrantRiskAssessment.responsibleOfficerTelephoneNumer }}
+                      </span>
+                    {% endif %}
+                  </dd>
+                  <dd class="govuk-summary-list__actions">
+                    {% if not warrantRiskAssessment.responsibleOfficerTelephoneNumer %}
+                      <span class="govuk-tag--light-blue">
+                            Required
+                      </span>
+                    {% endif %}
                   </dd>
                 </div>
 
