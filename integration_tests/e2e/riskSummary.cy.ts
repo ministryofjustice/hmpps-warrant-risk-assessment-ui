@@ -148,4 +148,19 @@ context('Risk Summary page', () => {
       'An unexpected 400 type error has occurred. Please contact the service desk and report this error.',
     ).should('exist')
   })
+
+  it('should display page with no errors if 404 error returned from ARNS service', () => {
+    cy.visit('/risk-summary/5e37396c-134d-4abf-a67a-054d46002a64')
+    cy.get('.govuk-error-summary__title').should('not.exist')
+    cy.contains(
+      'There has been a problem fetching information from Assess Risk and Needs Service. Please try again later.',
+    ).should('not.exist')
+    cy.get('#page-title').should('contain.text', 'Risk summary')
+    cy.get('#publicDetails .govuk-details__summary-text').click()
+    cy.get('#publicDetails .govuk-details__text').should('contain.text', 'None found')
+    cy.get('#officerDetails .govuk-details__summary-text').click()
+    cy.get('#officerDetails .govuk-details__text').should('contain.text', 'None found')
+    cy.get('#policeDetails .govuk-details__summary-text').click()
+    cy.get('#policeDetails .govuk-details__text').should('contain.text', 'None found')
+  })
 })

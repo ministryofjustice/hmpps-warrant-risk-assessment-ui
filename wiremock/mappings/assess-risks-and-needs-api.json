@@ -536,6 +536,68 @@
           "Content-Type": "application/json;charset=UTF-8"
         }
       }
+    },
+    {
+      "request": {
+        "urlPattern": "/assess-risks-and-needs/risks/crn/Z000004/fulltext",
+        "method": "GET"
+      },
+      "response": {
+        "status": 404,
+        "jsonBody": {
+          "message": "None found"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "/assess-risks-and-needs/assessments/crn/Z000004/offence"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "crn": "X000002",
+          "limitedAccessOffender": false,
+          "assessments": []
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/assess-risks-and-needs/needs/crn/Z000004",
+        "method": "GET"
+      },
+      "response": {
+        "status": 404,
+        "jsonBody": {
+          "message": "None found"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    },
+    {
+      "request": {
+        "urlPattern": "/assess-risks-and-needs/risks/crn/Z000004",
+        "method": "GET"
+      },
+      "response": {
+        "status": 404,
+        "jsonBody": {
+          "message": "None found"
+        },
+        "headers": {
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
     }
   ]
 }
