@@ -147,6 +147,7 @@ export default function warrantExecutionRoutes(
       errorMessages,
       ...workAddressContext,
       signAndSendDetails,
+      displayCustomNumber: signAndSendDetails?.responsibleOfficer.telephoneNumber == null,
     })
   })
 
@@ -221,6 +222,68 @@ export default function warrantExecutionRoutes(
       return
     }
 
+    const displayCustomNumber = signAndSendDetails?.responsibleOfficer.telephoneNumber == null
+    const phoneNumber = req.body.telephoneNumberInput ?? warrantRiskAssessment.responsibleOfficerTelephoneNumer
+    if (displayCustomNumber) {
+      if (phoneNumber?.length > 35) {
+        errorMessages.phoneNumber = {
+          text: 'Please enter a value that is less than or equal to 35 characters for Telephone number',
+        }
+      }
+    } else if (signAndSendDetails?.responsibleOfficer.telephoneNumber != null) {
+      warrantRiskAssessment.responsibleOfficerTelephoneNumer = signAndSendDetails.responsibleOfficer.telephoneNumber
+    }
+    if (signAndSendDetails?.responsibleOfficer.name != null) {
+      warrantRiskAssessment.responsibleOfficerFullName = formatTitleAndFullName(
+        '',
+        signAndSendDetails.responsibleOfficer.name,
+      )
+    }
+    if (signAndSendDetails?.responsibleOfficer.probationArea != null) {
+      warrantRiskAssessment.probationArea = signAndSendDetails.responsibleOfficer.probationArea.description
+    }
+
+    if (req.body.action === 'sign' && req.body.whoIsSendingTheForm == null) {
+      errorMessages.sentByResponsibleOfficerOrUser = {
+        text: 'Please select who is sending this document before pressing "Sign Now"',
+      }
+    }
+
+    if (Object.keys(errorMessages).length > 0) {
+      const workAddressContext = await prepareWorkAddressContext(
+        warrantRiskAssessment,
+        signAndSendDetails,
+        warrantRiskAssessmentId,
+        warrantRiskAssessmentApiClient,
+        res.locals.user.username,
+        errorMessages,
+      )
+      if (displayCustomNumber) {
+        workAddressContext.warrantRiskAssessment.responsibleOfficerTelephoneNumer = phoneNumber
+      }
+      if (req.body.alternateAddress != null) {
+        workAddressContext.alternateAddressOptions = workAddressContext.alternateAddressOptions.map(option => ({
+          ...option,
+          selected: option.value === req.body.alternateAddress,
+        }))
+      }
+      res.render('pages/warrant-execution', {
+        ...workAddressContext,
+        warrantRiskAssessmentId,
+        currentPage,
+        callingScreen,
+        signAndSendDetails,
+        displayCustomNumber,
+        offenderAddressSelectOne: req.body.offenderAddressSelectOne,
+        whoIsSendingTheForm: req.body.whoIsSendingTheForm,
+      })
+      return
+    }
+
+    if (displayCustomNumber) {
+      warrantRiskAssessment.responsibleOfficerTelephoneNumer = phoneNumber
+    }
+
     if (req.body.action === 'clear-signature') {
       // @ts-expect-error: Should
       warrantRiskAssessment.signature = null
@@ -233,75 +296,18 @@ export default function warrantExecutionRoutes(
       )
       res.redirect(`/warrant-execution/${req.params.id}`)
     } else if (req.body.action === 'sign') {
-      if (req.body.whoIsSendingTheForm != null) {
-        warrantRiskAssessment.sheetSentBy = req.body.whoIsSendingTheForm
-        warrantRiskAssessment.signature = createSignatureString(
-          signAndSendDetails.userDetails,
-          req.body.whoIsSendingTheForm,
-        )
-        await warrantRiskAssessmentApiClient.updateWarrantRiskAssessment(
-          req.params.id,
-          warrantRiskAssessment,
-          res.locals.user.username,
-        )
-        res.redirect(`/warrant-execution/${req.params.id}`)
-      } else {
-        errorMessages.sentByResponsibleOfficerOrUser = {
-          text: 'Please select who is sending this document before pressing "Sign Now"',
-        }
-
-        if (signAndSendDetails?.responsibleOfficer.telephoneNumber != null) {
-          warrantRiskAssessment.responsibleOfficerTelephoneNumer = signAndSendDetails.responsibleOfficer.telephoneNumber
-        }
-        if (signAndSendDetails?.responsibleOfficer.name != null) {
-          warrantRiskAssessment.responsibleOfficerFullName = formatTitleAndFullName(
-            '',
-            signAndSendDetails.responsibleOfficer.name,
-          )
-        }
-        if (signAndSendDetails?.responsibleOfficer.probationArea != null) {
-          warrantRiskAssessment.probationArea = signAndSendDetails.responsibleOfficer.probationArea.description
-        }
-
-        const {
-          warrantRiskAssessment: preparedWarrantRiskAssessment,
-          errorMessages: preparedErrorMessages,
-          ...workAddressContext
-        } = await prepareWorkAddressContext(
-          warrantRiskAssessment,
-          signAndSendDetails,
-          warrantRiskAssessmentId,
-          warrantRiskAssessmentApiClient,
-          res.locals.user.username,
-          errorMessages,
-        )
-        warrantRiskAssessment = preparedWarrantRiskAssessment
-        errorMessages = preparedErrorMessages
-
-        res.render('pages/warrant-execution', {
-          warrantRiskAssessment,
-          warrantRiskAssessmentId,
-          currentPage,
-          callingScreen,
-          errorMessages,
-          ...workAddressContext,
-          signAndSendDetails,
-        })
-      }
+      warrantRiskAssessment.sheetSentBy = req.body.whoIsSendingTheForm
+      warrantRiskAssessment.signature = createSignatureString(
+        signAndSendDetails.userDetails,
+        req.body.whoIsSendingTheForm,
+      )
+      await warrantRiskAssessmentApiClient.updateWarrantRiskAssessment(
+        req.params.id,
+        warrantRiskAssessment,
+        res.locals.user.username,
+      )
+      res.redirect(`/warrant-execution/${req.params.id}`)
     } else {
-      if (signAndSendDetails?.responsibleOfficer.telephoneNumber != null) {
-        warrantRiskAssessment.responsibleOfficerTelephoneNumer = signAndSendDetails.responsibleOfficer.telephoneNumber
-      }
-      if (signAndSendDetails?.responsibleOfficer.name != null) {
-        warrantRiskAssessment.responsibleOfficerFullName = formatTitleAndFullName(
-          '',
-          signAndSendDetails.responsibleOfficer.name,
-        )
-      }
-      if (signAndSendDetails?.responsibleOfficer.probationArea != null) {
-        warrantRiskAssessment.probationArea = signAndSendDetails.responsibleOfficer.probationArea.description
-      }
-
       const { warrantRiskAssessment: preparedWarrantRiskAssessment } = await prepareWorkAddressContext(
         warrantRiskAssessment,
         signAndSendDetails,
