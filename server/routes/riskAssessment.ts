@@ -80,13 +80,36 @@ export default function riskAssessmentRoutes(
       return
     }
 
+    const handleArns404 = <T>(error: unknown, fallback: T): T => {
+      const httpError = error as IntegrationError
+      if (httpError.responseStatus === 404) {
+        return fallback
+      }
+      throw error
+    }
+
     try {
-      arnsRiskAssessment = await arnsApiClient.getRisksFullText(warrantRiskAssessment.crn, res.locals.user.token)
-      arnsAssessmentOffence = await arnsApiClient.getAssessmentOffences(
-        warrantRiskAssessment.crn,
-        res.locals.user.token,
+      arnsRiskAssessment = await arnsApiClient
+        .getRisksFullText(warrantRiskAssessment.crn, res.locals.user.token)
+        .catch(error => handleArns404(error, {} as AllRoshRisk))
+
+      arnsAssessmentOffence = await arnsApiClient
+        .getAssessmentOffences(warrantRiskAssessment.crn, res.locals.user.token)
+        .catch(error =>
+          handleArns404(error, {
+            crn: warrantRiskAssessment.crn,
+            limitedAccessOffender: false,
+            assessments: [],
+          } as AssessmentOffence),
+        )
+
+      arnsNeeds = await arnsApiClient.getNeeds(warrantRiskAssessment.crn, res.locals.user.token).catch(error =>
+        handleArns404(error, {
+          identifiedNeeds: [],
+          notIdentifiedNeeds: [],
+          unansweredNeeds: [],
+        } as AssessmentNeeds),
       )
-      arnsNeeds = await arnsApiClient.getNeeds(warrantRiskAssessment.crn, res.locals.user.token)
     } catch (error) {
       const errorMessages: ErrorMessages = handleIntegrationErrors(error, 'ARNS')
       const httpError: IntegrationError = error as unknown as IntegrationError
