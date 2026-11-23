@@ -105,7 +105,7 @@ context('Add RO Address page', () => {
     { selector: '#houseNumber', label: 'Address number', max: 35 },
     { selector: '#streetName', label: 'Street name', max: 80 },
     { selector: '#district', label: 'District', max: 80 },
-    { selector: '#townCity', label: 'Town or City', max: 35 },
+    { selector: '#townCity', label: 'Town or city', max: 35 },
     { selector: '#county', label: 'County', max: 35 },
     { selector: '#postcode', label: 'Postcode', max: 8 },
   ]

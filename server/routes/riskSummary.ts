@@ -230,10 +230,11 @@ export default function riskSummaryRoutes(
       HIGH: 'High',
       MEDIUM: 'Medium',
       LOW: 'Low',
-      VERY_HIGH: 'Very High',
+      VERY_HIGH: 'Very high',
     }
 
-    return riskValueMap[riskValue] ?? riskValue
+    const sentenceCase = riskValue.charAt(0).toUpperCase() + riskValue.slice(1).toLowerCase()
+    return riskValueMap[riskValue] ?? sentenceCase
   }
 
   return router
