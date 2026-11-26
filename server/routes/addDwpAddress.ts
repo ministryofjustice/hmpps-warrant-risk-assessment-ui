@@ -180,7 +180,7 @@ export default function addDwpAddressRoutes(
 
     if (!address.townCity || address.townCity.trim() === '') {
       errorMessages.townCity = {
-        text: 'Town/City is a required field, please enter a value',
+        text: 'Town or city is a required field, please enter a value',
       }
     }
 
@@ -195,7 +195,7 @@ export default function addDwpAddressRoutes(
     errorMessages = validateLength(address.addressNumber, 'addressNumber', 'Address number', errorMessages)
     errorMessages = validateLength(address.streetName, 'streetName', 'Street name', errorMessages)
     errorMessages = validateLength(address.district, 'district', 'District', errorMessages)
-    errorMessages = validateLength(address.townCity, 'townCity', 'Town or City', errorMessages)
+    errorMessages = validateLength(address.townCity, 'townCity', 'Town or city', errorMessages)
     errorMessages = validateLength(address.county, 'county', 'County', errorMessages)
     errorMessages = validateLength(address.postcode, 'postcode', 'Postcode', errorMessages)
 
