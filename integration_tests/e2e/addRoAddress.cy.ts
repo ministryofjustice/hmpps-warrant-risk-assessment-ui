@@ -78,7 +78,7 @@ context('Add RO Address page', () => {
       .should('contain.text', 'Street name is a required field, please enter a value')
     cy.get('#townCity-error')
       .should('exist')
-      .should('contain.text', 'Town/City is a required field, please enter a value')
+      .should('contain.text', 'Town or city is a required field, please enter a value')
     cy.get('#postcode-error')
       .should('exist')
       .should('contain.text', 'Postcode is a required field, please enter a value')
